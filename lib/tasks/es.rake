@@ -31,7 +31,7 @@ namespace :es do
 
   task :start do
     puts "Starting elasticsearch"
-    system("#{File.dirname(__FILE__)}/../../bin/elasticsearch-1.0.0/bin/elasticsearch -r")
+    system("#{File.dirname(__FILE__)}/../../bin/elasticsearch/bin/elasticsearch")
   end
 
 end
