@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="cs">
+	<translation id="5361580517659708024" key="MSG_HELLO_WORLD" source="../www/js/hello/hello.js" desc="Hello World !">Hello World !</translation>
+</translationbundle>

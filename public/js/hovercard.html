@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<!--
+Copyright 2010 The Closure Library Authors. All Rights Reserved.
+
+Use of this source code is governed by the Apache License, Version 2.0.
+See the COPYING file for details.
+-->
+<head>
+  <title>goog.ui.HoverCard</title>
+  <script src="/js-closure/closure/goog/base.js"></script>
+  <script src="/js/app-deps.js"></script>
+  <script>
+    goog.require('goog.debug.DivConsole');
+    goog.require('goog.debug.LogManager');
+    goog.require('goog.log');
+    goog.require('goog.positioning.AnchoredPosition');
+    goog.require('goog.positioning.Corner');
+    goog.require('goog.ui.Component.EventType');
+    goog.require('goog.ui.HoverCard');
+  </script>
+  <link rel="stylesheet" href="/js-closure/closure/goog/demos/css/demo.css">
+  <link rel="stylesheet" href="/js-closure/closure/goog/css/hovercard.css">
+  <style>
+    #personEmail {
+      font-style: italic;
+    }
+    .anchor {
+      font: bold;
+      color: white;
+      background-color: gray;
+      padding: 20px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <br><br><br>
+
+  <span class="anchor" email="tom@gmail.com">Tom Smith</span>
+
+  <div id='profileCard' style="display:none;position:absolute">
+    <div style="position:relative;left:2px;z-index:100">
+    EEE
+    </div>
+  </div>
+
+    <script>
+      // Initialize hovercard object.
+      var hc;
+      //hc = new goog.ui.HoverCard({SPAN: 'email'});
+      hc = new goog.ui.HoverCard(function (){return true;});
+      hc.setElement(goog.dom.getElement('profileCard'));
+
+      hc.className = 'goog-hovercard';
+
+  </script>
+
+
+</body>
+</html>
