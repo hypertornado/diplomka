@@ -15,7 +15,6 @@
     <textarea class="goog-splitpane-first-container" id="text-input" spellcheck="false">
     </textarea>
     <div class="goog-splitpane-second-container" id="split-second">
-      <div id="tooltip-container"><div><h1>Here</h1></div></div>
 
       <div id="tags-container">
         <div></div><br>
@@ -33,11 +32,11 @@
  */
 {template .images}
 
-<b>{$images.response.hits.total} hits</b><br>
+<b>{$images.hits.total} hits</b><br>
 
-{foreach $hit in $images.response.hits.hits}
+{foreach $hit in $images.hits.hits}
   <a href="http://www.profimedia.cz/image/detail/{$hit._id}" target="_blank">
-	 <img src="http://mufin.fi.muni.cz/profimedia/images/{$hit._id}" height="86" class="img-result">
+	 <img src="http://www.profimedia.cz/image/dynamicPreview/{$hit._id}" height="200" class="img-result">
   </a>
 {/foreach}
 

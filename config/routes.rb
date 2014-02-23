@@ -7,7 +7,7 @@ Diplomka::Application.routes.draw do
 
   resources :api do
     collection do
-      get 'status'
+      post 'images'
     end
   end
 

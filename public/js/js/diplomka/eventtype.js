@@ -7,7 +7,6 @@ goog.provide("oo.diplomka.EventType");
  */
  oo.diplomka.EventType = {
  	TEXT_CHANGE: "TEXT_CHANGE",
- 	RECEIVE_TAGS: "RECEIVE_TAGS",
- 	RECEIVE_IMAGES: "RECEIVE_IMAGES",
+  TAGS_CHANGE: "TAGS_CHANGE",
  	GET_IMAGES: "GET_IMAGES"
  }

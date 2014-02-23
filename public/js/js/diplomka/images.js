@@ -18,9 +18,7 @@ goog.inherits(oo.diplomka.Images, goog.ui.Component);
 oo.diplomka.Images.prototype.renderImages = function (data) {
 	window.console.log(data);
 
-	//console.log(this.getElement());
-
-	if (data.response.hits) {
-		goog.soy.renderElement(this.getElement(), oo.diplomka.templates.images,{"images": data});
+	if (data.images.hits) {
+		goog.soy.renderElement(this.getElement(), oo.diplomka.templates.images,{"images": data.images});
 	}
 }

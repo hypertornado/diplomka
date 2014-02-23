@@ -21,11 +21,11 @@ oo.diplomka.StockPhotoFinder = function() {
 
   document.title = "Stock Photo Finder - created by Ondřej Odcházel"
 
-  var hc = new goog.ui.HoverCard(function(){window.console.log("eee");return true;});
-  hc.setElement(goog.dom.getElement('tooltip-container'));
-  hc.className = 'goog-hovercard';
+  //var hc = new goog.ui.HoverCard(function(){window.console.log("eee");return true;});
+  //hc.setElement(goog.dom.getElement('tooltip-container'));
+  //hc.className = 'goog-hovercard';
 
-  goog.events.listen(hc, goog.ui.HoverCard.EventType.TRIGGER, onTrigger);
+  //goog.events.listen(hc, goog.ui.HoverCard.EventType.TRIGGER, onTrigger);
 
 
   function onTrigger(event) {

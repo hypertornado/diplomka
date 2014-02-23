@@ -25,7 +25,7 @@ oo.diplomka.templates.helloWorld = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 oo.diplomka.templates.skeleton = function(opt_data, opt_ignored) {
-  return '<div id="split-container" class="goog-splitpane"><textarea class="goog-splitpane-first-container" id="text-input" spellcheck="false"></textarea><div class="goog-splitpane-second-container" id="split-second"><div id="tooltip-container"><div><h1>Here</h1></div></div><div id="tags-container"><div></div><br><input></div><div id="images-container"></div></div><div class="goog-splitpane-handle" id="split-handle"></div></div>';
+  return '<div id="split-container" class="goog-splitpane"><textarea class="goog-splitpane-first-container" id="text-input" spellcheck="false"></textarea><div class="goog-splitpane-second-container" id="split-second"><div id="tags-container"><div></div><br><input></div><div id="images-container"></div></div><div class="goog-splitpane-handle" id="split-handle"></div></div>';
 };
 
 
@@ -36,12 +36,12 @@ oo.diplomka.templates.skeleton = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 oo.diplomka.templates.images = function(opt_data, opt_ignored) {
-  var output = '<b>' + soy.$$escapeHtml(opt_data.images.response.hits.total) + ' hits</b><br>';
-  var hitList12 = opt_data.images.response.hits.hits;
+  var output = '<b>' + soy.$$escapeHtml(opt_data.images.hits.total) + ' hits</b><br>';
+  var hitList12 = opt_data.images.hits.hits;
   var hitListLen12 = hitList12.length;
   for (var hitIndex12 = 0; hitIndex12 < hitListLen12; hitIndex12++) {
     var hitData12 = hitList12[hitIndex12];
-    output += '<a href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(hitData12._id) + '" target="_blank"><img src="http://mufin.fi.muni.cz/profimedia/images/' + soy.$$escapeHtml(hitData12._id) + '" height="86" class="img-result"></a>';
+    output += '<a href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(hitData12._id) + '" target="_blank"><img src="http://www.profimedia.cz/image/dynamicPreview/' + soy.$$escapeHtml(hitData12._id) + '" height="200" class="img-result"></a>';
   }
   return output;
 };
