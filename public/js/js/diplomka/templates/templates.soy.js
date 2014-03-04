@@ -25,7 +25,7 @@ oo.diplomka.templates.helloWorld = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 oo.diplomka.templates.skeleton = function(opt_data, opt_ignored) {
-  return '<div id="split-container" class="goog-splitpane"><textarea class="goog-splitpane-first-container" id="text-input" spellcheck="false"></textarea><div class="goog-splitpane-second-container" id="split-second"><div id="tags-container"><div></div><br><input></div><div id="images-container"></div></div><div class="goog-splitpane-handle" id="split-handle"></div></div>';
+  return '<div id="split-container" class="goog-splitpane"><textarea class="goog-splitpane-first-container" id="text-input" spellcheck="false"></textarea><div class="goog-splitpane-second-container" id="split-second"><div id="tags-container"><div id="tags"></div><input id="tags-input" placeholder="Add tags..."><b>Suggested tags: </b> <span id="suggested-tags"></span></div><div id="images-container"></div></div><div class="goog-splitpane-handle" id="split-handle"></div></div>';
 };
 
 
@@ -41,7 +41,7 @@ oo.diplomka.templates.images = function(opt_data, opt_ignored) {
   var hitListLen12 = hitList12.length;
   for (var hitIndex12 = 0; hitIndex12 < hitListLen12; hitIndex12++) {
     var hitData12 = hitList12[hitIndex12];
-    output += '<a href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(hitData12._id) + '" target="_blank"><img src="http://www.profimedia.cz/image/dynamicPreview/' + soy.$$escapeHtml(hitData12._id) + '" height="200" class="img-result"></a>';
+    output += '<a href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(hitData12._id) + '" target="_blank"><img src="/http://www.profimedia.cz/image/dynamicPreview/' + soy.$$escapeHtml(hitData12._id) + '" height="200" alt="' + soy.$$escapeHtml(hitData12._source.keywords) + '" class="img-result"></a>';
   }
   return output;
 };
@@ -55,17 +55,29 @@ oo.diplomka.templates.images = function(opt_data, opt_ignored) {
  */
 oo.diplomka.templates.tags = function(opt_data, opt_ignored) {
   var output = '';
-  var tagList20 = opt_data.ownTags;
-  var tagListLen20 = tagList20.length;
-  for (var tagIndex20 = 0; tagIndex20 < tagListLen20; tagIndex20++) {
-    var tagData20 = tagList20[tagIndex20];
-    output += '<span data-tag="' + soy.$$escapeHtml(tagData20) + '" class="tag tag-own">' + soy.$$escapeHtml(tagData20) + '</span><span> </span>';
+  var tagList22 = opt_data.tags;
+  var tagListLen22 = tagList22.length;
+  for (var tagIndex22 = 0; tagIndex22 < tagListLen22; tagIndex22++) {
+    var tagData22 = tagList22[tagIndex22];
+    output += '<span data-tag="' + soy.$$escapeHtml(tagData22) + '" class="tag tag-own">' + soy.$$escapeHtml(tagData22) + '</span>';
   }
-  var tagList27 = opt_data.suggestedTags.tags;
-  var tagListLen27 = tagList27.length;
-  for (var tagIndex27 = 0; tagIndex27 < tagListLen27; tagIndex27++) {
-    var tagData27 = tagList27[tagIndex27];
-    output += '<span data-tag="' + soy.$$escapeHtml(tagData27) + '" class="tag tag-suggested">' + soy.$$escapeHtml(tagData27) + '</span><span> </span>';
+  return output;
+};
+
+
+/**
+ * @param {Object.<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @return {string}
+ * @notypecheck
+ */
+oo.diplomka.templates.suggestedTags = function(opt_data, opt_ignored) {
+  var output = '';
+  var tagList30 = opt_data.tags;
+  var tagListLen30 = tagList30.length;
+  for (var tagIndex30 = 0; tagIndex30 < tagListLen30; tagIndex30++) {
+    var tagData30 = tagList30[tagIndex30];
+    output += '<span data-tag="' + soy.$$escapeHtml(tagData30) + '" class="tag tag-suggested">' + soy.$$escapeHtml(tagData30) + '</span>';
   }
   return output;
 };

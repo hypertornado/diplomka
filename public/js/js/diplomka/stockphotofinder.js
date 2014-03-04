@@ -21,6 +21,9 @@ oo.diplomka.StockPhotoFinder = function() {
 
   document.title = "Stock Photo Finder - created by Ondřej Odcházel"
 
+  this.ws.text_ = "usa";
+  this.ws.getImages();
+
   //var hc = new goog.ui.HoverCard(function(){window.console.log("eee");return true;});
   //hc.setElement(goog.dom.getElement('tooltip-container'));
   //hc.className = 'goog-hovercard';

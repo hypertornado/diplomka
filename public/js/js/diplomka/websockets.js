@@ -8,7 +8,6 @@ oo.diplomka.WebSockets = function(events) {
   this.events = events;
   this.events.listen(oo.diplomka.EventType.TEXT_CHANGE, this.textChange_, this);
   this.events.listen(oo.diplomka.EventType.TAGS_CHANGE, this.tagsChange_, this);
-  this.getImages();
   this.text_ = "";
   this.tags_ = [];
 }
@@ -36,7 +35,6 @@ oo.diplomka.WebSockets.prototype.textChange_ = function(text) {
 }
 
 oo.diplomka.WebSockets.prototype.tagsChange_ = function(tags) {
-  console.log("tags", tags);
   this.tags_ = tags;
   this.getImages();
 }

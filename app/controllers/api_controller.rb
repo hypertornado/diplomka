@@ -9,21 +9,47 @@ class ApiController < ApplicationController
 
   def images
     data = JSON.parse(request.body.read)
-    puts data
-
-    images = ["i1", "i2"]
-    es_client = Elasticsearch::Client.new
 
     result = {}
+    result['images'] = search(data["text"], data["tags"])
+    result['suggested_tags'] = ["hello", "world"]
 
-    result['images'] = es_client.search index: "diplomka", body: {
-      query: { match: { keywords: data["text"] } }
-    }
     render text: result.to_json
   end
 
   def text
 
+  end
+
+  private
+
+  def search(text, tags)
+    es_client = Elasticsearch::Client.new
+
+    should = []
+
+    tags.each do |tag|
+      term = {
+        term: {
+          keywords: tag
+        }
+      }
+      should.push term
+    end
+
+    ret = es_client.search index: "diplomka", body: {
+      query: {
+        bool: {
+          must: should,
+          should: {
+            match: {keywords: text}
+          }
+        }
+      }
+    }
+
+    # match: { keywords: text },
+    return ret
   end
   
 end
