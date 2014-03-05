@@ -1,21 +1,36 @@
 
+
+textarea {
+  background: #DFDED4;
+}
+
+body, textarea, div, a {
+  color: #432F21;
+}
+
 textarea {
   border: none;
+  resize: none;
+}
+
+input {
+  border: none;
+  width: 100%;
+  margin:  10px 0px !important;
+}
+
+*:focus {
+    outline: 0;
 }
 
 #split-container {
   width: 100%;
 }
 
-.goog-splitpane {
-  /*height: 200px;
-  width: 300px;*/
-}
-
 .goog-splitpane-handle {
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  background: #ccc;
+  border-left: 1px solid #cdcab9;
+  border-right: 1px solid #cdcab9;
+  background: #cdcab9;
   position: absolute;
 }
 
@@ -33,75 +48,83 @@ textarea {
   position: absolute;
 }
 
-
-
-
-
-/*
- * Copyright 2008 The Closure Library Authors. All Rights Reserved.
- *
- * Use of this source code is governed by the Apache License, Version 2.0.
- * See the COPYING file for details.
- */
-
-/* Author: larrypo@google.com (Larry Powelson) */
-
-.goog-hovercard div {
-  border: solid 5px #69748C;
-  width: 300px;
-  height: 115px;
-  background-color: white;
-  font-family: arial, sans-serif;
-}
-
-.goog-hovercard .goog-shadow {
-  border: transparent;
-  background-color: black;
-  filter: alpha(Opacity=1);
-  opacity: 0.01;
-  -moz-opacity: 0.01;
-}
-
-.goog-hovercard table {
-  border-collapse: collapse;
-  border-spacing: 0px;
-}
-
-.goog-hovercard-icons td {
-  border-bottom: 1px solid #ccc;
-  padding: 0px;
-  margin: 0px;
-  text-align: center;
-  height: 19px;
-  width: 100px;
-  font-size: 90%;
-}
-
-.goog-hovercard-icons td + td {
-  border-left: 1px solid #ccc;
-}
-
-.goog-hovercard-content {
-  border-collapse: collapse;
-}
-
-.goog-hovercard-content td {
-  padding-left: 15px;
+.goog-splitpane-second-container {
+  background: #d6d3c4;
 }
 
 
-.img-result {
+#images-container {
+  padding: 5px;
+}
+
+.img-container {
+  display: inline-block;
+  font-size: 8px;
   margin: 5px;
 }
 
-.tag {
-  background: rgb(233, 233, 233);
+@-webkit-keyframes myfirst
+{
+  0%   {-webkit-transform:scale(1); box-shadow: 0px 0px 0px black;}
+  100% {-webkit-transform:scale(1.05); box-shadow: 0px 0px 10px black;}
+}
+
+@keyframes myfirst
+{
+  0%   {-webkit-transform:scale(1);}
+  100% {-webkit-transform:scale(1.05);}
+}
+
+.img-container:hover {
+  animation: myfirst 0.2s;
+  -webkit-animation: myfirst 0.2s;
+  -webkit-transform:scale(1.05);
+  box-shadow: 0px 0px 10px black;
+  border-radius: 0px;
+  border: 5px solid #cdcab9;
   margin: 0px;
+}
+
+.img-metadata {
+  display: none;
+  background: rgba(205, 202, 185, 0.8);
+  position: absolute;
+  color: #432F21;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
   padding: 5px;
-  border-radius: 20px;
+}
+
+.img-name {
+  font-weight: bold;
+  display: block;
+  opacity: 1;
+}
+
+.img-container:hover .img-metadata {
+  display: inline;
+}
+
+#tags-container {
+  background: #cdcab9;
+  padding: 5px;
+}
+
+#tags {
+  line-height: 30px;
+}
+
+.tag {
+  background: #432F21;
+  color: #DFDED4;
+  margin: 2px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .tag-own {
   /* border: 1px solid black; */
-  background: rgb(170, 170, 170);
+  background: #ca171b;
+  color: #DFDED4;
 }

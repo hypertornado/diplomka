@@ -18,7 +18,7 @@
 
       <div id="tags-container">
         <div id="tags"></div>
-        <input id="tags-input" placeholder="Add tags...">
+        <input id="tags-input" placeholder="Add tags..." spellcheck="false">
         <b>Suggested tags: </b> <span id="suggested-tags"></span>
       </div>
       <div id="images-container">
@@ -36,8 +36,12 @@
 <b>{$images.hits.total} hits</b><br>
 
 {foreach $hit in $images.hits.hits}
-  <a href="http://www.profimedia.cz/image/detail/{$hit._id}" target="_blank">
-	 <img src="/http://www.profimedia.cz/image/dynamicPreview/{$hit._id}" height="200" alt="{$hit._source.keywords}" class="img-result">
+  <a href="http://www.profimedia.cz/image/detail/{$hit._id}" target="_blank" class="img-container">
+	 <img data-src="/image.jpg" src="http://www.profimedia.cz/image/dynamicPreview/{$hit._id}" height="200" alt="{$hit._source.keywords}">
+  <span class="img-metadata">
+    <span class="img-name">{$hit._source.title}</span>
+    <span class="img-tags">{$hit._source.keywords}</span>
+  </span>
   </a>
 {/foreach}
 
@@ -48,7 +52,7 @@
  */
 {template .tags}
   {foreach $tag in $tags}
-    <span data-tag="{$tag}" class="tag tag-own">{$tag}</span>
+    <span data-tag="{$tag}" class="tag tag-own">{$tag}</span><span> </span>
   {/foreach}
 {/template}
 
