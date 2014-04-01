@@ -14,6 +14,8 @@ goog.require('oo.diplomka.Tags');
 oo.diplomka.SplitPane = function(events) {
   this.events = events;
 
+
+
   this.textArea = new oo.diplomka.Textarea(events);
   this.imagesComponent = new oo.diplomka.Images(events);
   this.tagsComponent = new oo.diplomka.Tags(events);
@@ -24,6 +26,8 @@ oo.diplomka.SplitPane = function(events) {
     new goog.ui.Component(),
     goog.ui.SplitPane.Orientation.HORIZONTAL
   );
+
+  this.setInitialSize(300);
 
   this.container = document.getElementById('split-container');
   this.decorate(this.container);

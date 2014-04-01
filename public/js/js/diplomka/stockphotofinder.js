@@ -21,21 +21,20 @@ oo.diplomka.StockPhotoFinder = function() {
 
   document.title = "Stock Photo Finder - created by Ondřej Odcházel"
 
-  this.ws.text_ = "usa obama russia";
-  this.ws.getImages();
+  //this.ws.text_ = "usa obama russia";
+  //this.ws.getImages();
 
   //var hc = new goog.ui.HoverCard(function(){window.console.log("eee");return true;});
   //hc.setElement(goog.dom.getElement('tooltip-container'));
   //hc.className = 'goog-hovercard';
 
   //goog.events.listen(hc, goog.ui.HoverCard.EventType.TRIGGER, onTrigger);
+  //
+  //SCROLL
+  
 
-
-  function onTrigger(event) {
-    window.console.log(event);
-    hc.setPosition(goog.positioning.Corner.TOP_RIGHT);
-    return true;
-  }
+  //this.splitPane.textArea.setValue("Grand Horizon has a bold sign, Teheran Tours, above its shop front on a busy commercial street. Nearby, a store sold Middle Eastern carpets, Buddha statues and paintings of Arab men.");
+  //this.splitPane.tagsComponent.addTag("car");
 
 };
 
@@ -48,6 +47,7 @@ oo.diplomka.StockPhotoFinder.prototype.generateUI = function() {
   goog.soy.renderElement(element, oo.diplomka.templates.skeleton);
 
   goog.dom.insertChildAt(goog.dom.getDocument().body, element, 0);
+
 }
 
 oo.diplomka.StockPhotoFinder.prototype.monitorResize = function () {

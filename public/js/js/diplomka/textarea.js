@@ -16,6 +16,7 @@ goog.inherits(oo.diplomka.Textarea, goog.ui.Component);
 
 oo.diplomka.Textarea.prototype.setValue = function(value) {
 	this.getElement().value = value;
+  this.valueChanged_();
 }
 
 oo.diplomka.Textarea.prototype.getValue = function() {

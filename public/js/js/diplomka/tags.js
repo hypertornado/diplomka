@@ -82,6 +82,10 @@ oo.diplomka.Tags.prototype.suggestionClick_ = function (event) {
 oo.diplomka.Tags.prototype.handleTagShortcut = function () {
 	var value = this.inputPanel.value;
 	this.inputPanel.value = "";
+	this.addTag(value);
+}
+
+oo.diplomka.Tags.prototype.addTag = function (value) {
 	this.ownTags.push(value);
 	this.renderTags();
 	this.valueChanged_();

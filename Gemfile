@@ -34,6 +34,8 @@ end
 
 gem 'elasticsearch', '~> 1'
 
+gem "unicode_utils"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

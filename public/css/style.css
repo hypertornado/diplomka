@@ -85,6 +85,14 @@ input {
   margin: 0px;
 }
 
+.img-container .image {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+}
+
 .img-metadata {
   display: none;
   background: rgba(205, 202, 185, 0.8);
