@@ -36,6 +36,8 @@ gem 'elasticsearch', '~> 1'
 
 gem "unicode_utils"
 
+gem "stemmify"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
