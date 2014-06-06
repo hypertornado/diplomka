@@ -1,12 +1,24 @@
 \contentsline {chapter}{\IeC {\'U}vod}{2}{chapter*.2}
-\contentsline {chapter}{\numberline {1}N\IeC {\'a}zev prvn\IeC {\'\i } kapitoly}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}N\IeC {\'a}zev prvn\IeC {\'\i } podkapitoly v prvn\IeC {\'\i } kapitole}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}N\IeC {\'a}zev druh\IeC {\'e} podkapitoly v prvn\IeC {\'\i } kapitole}{3}{section.1.2}
-\contentsline {chapter}{\numberline {2}N\IeC {\'a}zev druh\IeC {\'e} kapitoly}{4}{chapter.2}
-\contentsline {section}{\numberline {2.1}N\IeC {\'a}zev prvn\IeC {\'\i } podkapitoly v druh\IeC {\'e} kapitole}{4}{section.2.1}
-\contentsline {section}{\numberline {2.2}N\IeC {\'a}zev druh\IeC {\'e} podkapitoly v druh\IeC {\'e} kapitole}{4}{section.2.2}
-\contentsline {chapter}{Z\IeC {\'a}v\IeC {\v e}r}{5}{chapter*.3}
-\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{6}{chapter*.4}
-\contentsline {chapter}{Seznam tabulek}{7}{chapter*.5}
-\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{8}{chapter*.6}
-\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }lohy}{9}{chapter*.7}
+\contentsline {chapter}{\numberline {1}Teorie: Jak naj\IeC {\'\i }t vhodn\IeC {\'e} obr\IeC {\'a}zky}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Popis datov\IeC {\'e} sady}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Teoretick\IeC {\'e} c\IeC {\'\i }le}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}Re\IeC {\v s}er\IeC {\v s}e, vhodn\IeC {\'e} algoritmy}{3}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}TF-IDF}{4}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Extrakce bez korpusu}{4}{subsection.1.3.2}
+\contentsline {section}{\numberline {1.4}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i }: jak\IeC {\'e} algoritmy zvoleny, z\IeC {\'\i }sk\IeC {\'a}n\IeC {\'\i } tr\IeC {\'e}ninkov\IeC {\'y}ch dat}{5}{section.1.4}
+\contentsline {section}{\numberline {1.5}Evaluace v\IeC {\'y}sledk\IeC {\r u}}{5}{section.1.5}
+\contentsline {chapter}{\numberline {2}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st: Implementace modern\IeC {\'\i } webov\IeC {\'e} aplikace}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}Datab\IeC {\'a}ze: jak ulo\IeC {\v z}it 20M metadat obr\IeC {\'a}zk\IeC {\r u}}{6}{section.2.1}
+\contentsline {section}{\numberline {2.2}Backend a \IeC {\'u}prava dat: Komunikace s datab\IeC {\'a}z\IeC {\'\i }, implementace algoritm\IeC {\r u}}{6}{section.2.2}
+\contentsline {section}{\numberline {2.3}Frontend: AJAXov\IeC {\'a} aplikace na zobrazov\IeC {\'a}n\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{6}{section.2.3}
+\contentsline {section}{\numberline {2.4}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{6}{section.2.4}
+\contentsline {section}{\numberline {2.5}N\IeC {\'a}vod k pou\IeC {\v z}it\IeC {\'\i }}{6}{section.2.5}
+\contentsline {chapter}{\numberline {3}Evaluace v\IeC {\'y}sledk\IeC {\r u}}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Metodika}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}V\IeC {\'y}sledky}{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}Mo\IeC {\v z}n\IeC {\'a} zlep\IeC {\v s}en\IeC {\'\i }}{7}{section.3.3}
+\contentsline {chapter}{Z\IeC {\'a}v\IeC {\v e}r}{8}{chapter*.3}
+\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{9}{chapter*.4}
+\contentsline {chapter}{Seznam tabulek}{10}{chapter*.5}
+\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{11}{chapter*.6}
+\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }lohy}{12}{chapter*.7}

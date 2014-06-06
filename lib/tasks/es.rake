@@ -174,6 +174,41 @@ namespace :es do
     system("#{File.dirname(__FILE__)}/../../bin/elasticsearch/bin/elasticsearch -f")
   end
 
+  task :keywords => :environment do
+    #text = "Liverpool, Manchester United and Manchester City are among clubs that have already shown a lot of interest and enthusiasm for a new league for B teams, FA chairman Greg Dyke told a news conference. According to the review, headed by Dyke, only 32% of starters qualified to play for England in the 2012-13 Premier League season, compared to 69% 20 years ago. The commission's proposals set an ambitious but realistic target of increasing the number of English players in the Premier League to 45% by 2022."
+      
+    text = "hello worlds"
+
+    #text = "farhan gunplay"
+    Api.keywords text
+  end
+
+  task :test => :environment do
+
+    correct = 0
+
+    1.upto(10) do |n|
+      name = (1000 + n).to_s[1,3]
+      #"#{File.dirname(__FILE__)}/../../train_data/"
+      text = File.read("#{File.dirname(__FILE__)}/../../train_data/#{name}.txt")
+      test_keywords = File.read("#{File.dirname(__FILE__)}/../../train_data/#{name}.keywords").split("\n")
+      puts "#{name}---"
+      keywords = Api.keywords text
+
+      keywords.map! {|w| w.stem}
+      test_keywords.map! {|w| w.stem}
+
+      puts test_keywords.join(" ")
+      puts keywords.join(" ")
+
+      puts (keywords & test_keywords).join(" ")
+      
+      correct += 5 - (test_keywords - keywords).size
+    end
+
+    puts "CORRECT: #{correct}"
+  end
+
 end
 
 def clear_type client, index, type
