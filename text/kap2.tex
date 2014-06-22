@@ -24,3 +24,28 @@ Jak lze v Ruby on Rails vyrobit jednoduše anotační rozhraní s uživateli a s
 
 Popis prvků. Screenshoty aplikace.
 
+\section{Poznamky}
+
+Pouziji data z wiki dumpu.
+
+Cesky dump:
+http://dumps.wikimedia.org/cswiki/20140612/ a cswiki-20140612-pages-articles-multistream.xml.bz2
+/data/wiki_dump_cs.xml
+rake es:extract_words_from_wiki[cs]
+extrakce do id 50000 > 60 MB textu
+cestina obsahuje na zacatku hodne kratkych vygenerovanych clanku typu >1. leden<
+
+Anglicky dump:
+torrent z piratebay http://thepiratebay.se/torrent/8114722/Wikipedia_2013_English_DUMP
+/data/wiki_dump_en.xml
+rake es:extract_words_from_wiki[en]
+extrakce do id 10000 > 70 MB textu
+
+application.rb obsahuje konstanty aplikace
+
+vyrobim nejcastejsi trigramy pro cestinu a anglictinu z wiki dat pomoci:
+rake es:extract_most_frequent_trigrams
+
+
+
+

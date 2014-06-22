@@ -15,15 +15,32 @@ class ImportLine
     #puts @keywords if @locator.match("736665")
   end
 
-  def es_import client, index
+  def es_import client, index, translator
+
     client.index index: index, type: "image", id: @locator, body: {
       locator: @locator,
+      lang: "en",
       title: @title,
       description: @description,
       keywords: @keywords,
       stems: get_stems()
     }
 
+    client.index index: index, type: "image", id: @locator, body: {
+      locator: @locator,
+      lang: "cs",
+      title: translator.translate(@title),
+      description: translator.translate(@description),
+      keywords: translator.translate(@keywords),
+      stems: translator.translate_and_stem("#{@title} #{@keywords}")
+    }
+
+  end
+
+  def get_stems_cs translator
+    text = "#{@title} #{@keywords}"
+    text = translator.translate(text)
+    return StemmerApi.stem_czech(text)
   end
 
   def get_stems
@@ -62,6 +79,16 @@ class ImportLine
         vocabulary[stem] = entry
       end
       used_words[stem] = 1
+    end
+  end
+
+  def import_words_plain vocabulary
+
+    words = @keywords.split(" ")
+    words += @title.split(" ")
+    words.each do |word|
+      word.downcase!
+      vocabulary[word] = true
     end
   end
 

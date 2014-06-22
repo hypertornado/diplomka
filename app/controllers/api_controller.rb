@@ -9,10 +9,10 @@ class ApiController < ApplicationController
 
   def images
     data = JSON.parse(request.body.read)
-    result = {}
-    result['images'] = Api.search(data["text"], data["tags"], data["from"], data["size"])
-    result['suggested_tags'] = Api.suggestions data["text"], data["tags"]
-    render text: result.to_json
+
+    api = Api.new data["text"], data["tags"]
+
+    render text: api.get_result(data["from"], data["size"]).to_json
   end
 
   def text

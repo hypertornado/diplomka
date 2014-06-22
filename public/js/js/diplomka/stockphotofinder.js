@@ -8,6 +8,7 @@ goog.require('goog.dom');
 goog.require('goog.dom.ViewportSizeMonitor');
 goog.require("oo.diplomka.Events");
 goog.require("goog.ui.HoverCard");
+goog.require("oo.diplomka.Languages.Trigrams");
 
 /**
  * @constructor

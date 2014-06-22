@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+ES_INDEX = "diplomka"
+SUPPORTED_LANGUAGES = ["cs", "en"]
+
 module Diplomka
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

@@ -1,42 +1,27 @@
 class Api
 
+  def initialize text, tags
+    @text = text
+    @tags = tags
+    @keywords = Api.keywords @text
+  end
+
+  def get_result from, size
+    result = {}
+    result['images'] = search(from, size)
+
+    suggested_tags = @keywords.map {|v| v[0]}
+    suggested_tags = suggested_tags - @tags
+
+    result['suggested_tags'] = suggested_tags[0, 5]
+    return result
+  end
+
   def self.tokenize text
     ret = UnicodeUtils.downcase(text)
     ret = ret.split(/[[[:punct:]][[:space:]]0-9]+/)
     ret.select! {|w| w.size > 2}
     return ret
-  end
-
-  def self.suggestions text, tags
-
-    #ret = ApiController.tf_idf text
-    ret = Api.keywords_old text
-    ret.map! {|v| v[0]}
-    ret = ret - tags
-    ret = ret[0, 5]
-    return ret
-
-  end
-
-  def self.keywords_old text
-    tf = ApiController.term_frequency text
-
-    document_count = ApiController.num_of_documents
-
-    max_tf = 0
-    tf.each do |k, v|
-      max_tf  = [max_tf, v].max
-    end
-
-    result = {}
-    tf.each do |k, v|
-      result[k] = (0.5 + (0.5 * (v.to_f / max_tf.to_f))) * Math.log(ApiController.document_frequency(k).to_f / document_count.to_f)
-    end
-
-    sorted = result.sort_by {|k, v| -v}
-
-    return sorted
-
   end
 
   def self.keywords text
@@ -59,25 +44,11 @@ class Api
       #puts "#{score} #{stem} #{dictionary[stem]} #{tf[stem]} #{stats["tf"]} #{stats["df"]} #{stats["wiki"]}"
     end
 
-    #puts "---"
-
     sorted = results.sort_by { |k,v|  v}
 
     sorted.reverse!
 
-    ret = []
-
-    sorted = sorted[0, 5]
-    
-    sorted.each do |s|
-      ret.push dictionary[s[0]]
-      #puts "#{dictionary[s[0]]} #{s[1]}"
-    end
-
-    #puts stats
-
-    #puts ret
-    return ret
+    return sorted
 
   end
 
@@ -99,16 +70,25 @@ class Api
     return ret
   end
 
-  def self.search(text, tags, from, size)
+  def search(from, size)
 
     es_client = Elasticsearch::Client.new
 
-    should = []
-
-    tags.each do |tag|
+    must = []
+    @tags.each do |tag|
       term = {
         term: {
           keywords: tag
+        }
+      }
+      must.push term
+    end
+
+    should = []
+    @keywords[0, 10].each do |kw|
+      term = {
+        term: {
+          keywords: kw[0]
         }
       }
       should.push term
@@ -119,15 +99,13 @@ class Api
       from: from,
       query: {
         bool: {
-          must: should,
-          should: {
-            match: {keywords: text}
-          }
+          must: must,
+          should: should
         }
       }
     }
 
-    # match: { keywords: text },
+    #match: {keywords: @text}
     return ret
   end
 

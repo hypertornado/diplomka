@@ -1,41 +1,101 @@
 require_relative "import_line.rb"
 
-ES_INDEX = "diplomka"
-
 namespace :es do
 
-  #extract first cca 10000 articles
-  #words: 9231894
-  task :extract_words_from_wiki do
-    system("rm -rf #{File.dirname(__FILE__)}/../../data/wiki")
-    system("cat #{File.dirname(__FILE__)}/../../data/wiki_dump.xml | python #{File.dirname(__FILE__)}/../WikiExtractor.py -b 250K -o #{File.dirname(__FILE__)}/../../data/wiki")
+  #extract first cca 10000 english articles
+  #cca 20000 articles in czech
+  #words: 9231894 in english
+  task :extract_words_from_wiki, [:language] => :environment do |t, args|
+    language = args[:language].to_s
+    raise "not supported language #{language}" unless SUPPORTED_LANGUAGES.include?(language)
+    puts "extracting wiki data for #{language} language"
+    system("rm -rf #{File.dirname(__FILE__)}/../../data/wiki_#{language}")
+    system("cat #{File.dirname(__FILE__)}/../../data/wiki_dump_#{language}.xml | python #{File.dirname(__FILE__)}/../WikiExtractor.py -b 250K -o #{File.dirname(__FILE__)}/../../data/wiki_#{language}")
+  end
+
+  task :extract_most_frequent_trigrams do
+
+    limit = 300
+
+    SUPPORTED_LANGUAGES.each do |language|
+      trigrams = Hash.new(0)
+
+      Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}").each do |dirname|
+        if dirname[0] != "."
+          Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}").each do |file|
+            if file[0] != "."
+              export_trigrams trigrams, "#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}/#{file}"
+            end
+          end
+        end
+      end
+
+
+      sorted = trigrams.sort_by {|k, v| v}
+      sorted.reverse!
+      sorted = sorted[0, limit]
+      sorted.map! {|k, v| k}
+
+      content = sorted.join("\n")
+
+      File.open("#{File.dirname(__FILE__)}/../../data/most_frequent_trigrams_#{language}.txt", "w").write(content)
+
+    end
+
+  end
+
+  task :trigrams_to_javascript_classes do
+
+    js_content = "goog.provide(\"oo.diplomka.Languages.TrigramsData\");\n\n";
+
+    SUPPORTED_LANGUAGES.each do |language|
+      lines = File.readlines("#{File.dirname(__FILE__)}/../../data/most_frequent_trigrams_#{language}.txt")
+      lines.map! {|v| v.chomp!}
+      lines.select! {|v| v.to_s.size == 3}
+
+      lines.map! {|v| v.to_s.gsub("\"", "\\\"")}
+
+      content = lines.join('","')
+
+      puts content
+
+      js_content += "oo.diplomka.Languages.TrigramsData.#{language} = [\"#{content}\"];" + "\n\n"
+
+    end
+
+    File.open("#{File.dirname(__FILE__)}/../../public/js/js/diplomka/languages/trigramsdata.js", "w").write(js_content)
+
+
   end
 
   task :frequency_list_from_wiki do
 
-    words = Hash.new(0)
+    #TODO, make czech here
+    ["en"].each do |language|
 
-    Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki").each do |dirname|
-      if dirname[0] != "."
-        Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki/#{dirname}").each do |file|
-          if file[0] != "."
-            export_wiki_words words, "#{File.dirname(__FILE__)}/../../data/wiki/#{dirname}/#{file}"
+      words = Hash.new(0)
+
+      Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}").each do |dirname|
+        if dirname[0] != "."
+          Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}").each do |file|
+            if file[0] != "."
+              export_wiki_words words, "#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}/#{file}"
+            end
           end
         end
       end
+
+      out_file = File.open("#{File.dirname(__FILE__)}/../../data/wiki_freq_list_#{language}.txt", "w")
+
+      sum = 0
+
+      words.each do |k,v|
+        out_file.write("#{k}\t#{v}\n")
+        sum += v
+      end
+      puts "Total number of words #{language}: #{sum}"
+
     end
-
-    out_file = File.open("#{File.dirname(__FILE__)}/../../data/wiki_freq_list.txt", "w")
-
-    sum = 0
-
-    words.each do |k,v|
-      #puts "#{k} #{v}"
-      out_file.write("#{k}\t#{v}\n")
-      sum += v
-    end
-    puts "Total number of words: #{sum}"
-
   end
 
   task :import_profimedia_words do
@@ -74,10 +134,12 @@ namespace :es do
 
   end
 
-  task :import do
+  task :import => :environment do
     #around 20 M images
     path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
     #path = "#{File.dirname(__FILE__)}/../../data/tiny"
+
+    translator = Translator.new
 
     puts "Importing data to elasticsearch - #{Time.now}"
     src_encoding = "Windows-1252"
@@ -87,12 +149,23 @@ namespace :es do
     #clear_type(es_client, ES_INDEX, "image")
 
     i = 0
+    timestamp = Time.now
+    eta = ""
     File.open(path).each do |line|
-      print "\r#{i}"
+      if (i % 1000 == 0)
+        new_timestamp = Time.now
+        diff = (new_timestamp - timestamp) * 1000.0
+        remaining = 20000000.to_f - i
+        eta = (remaining / 1000.0) * diff
+        eta = (eta / 1000).to_i
+        eta = Time.at(eta).gmtime.strftime('%R:%S')
+        timestamp = new_timestamp
+      end
+      print "\r#{i} #{eta}"
       line = line.encode(target_encoding, src_encoding)
       i += 1
       if ImportLine.valid? line
-        ImportLine.new(line).es_import(es_client, ES_INDEX)
+        ImportLine.new(line).es_import(es_client, ES_INDEX, translator)
       end
     end
     es_client.indices.refresh
@@ -183,6 +256,88 @@ namespace :es do
     Api.keywords text
   end
 
+  task :export_profimedia_words_for_translation do
+    #system("cat #{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia.txt | cut -f 1 > #{File.dirname(__FILE__)}/../../data/word_list.txt")
+    path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
+    #path = "#{File.dirname(__FILE__)}/../../data/tiny"
+
+    src_encoding = "Windows-1252"
+    target_encoding = "utf-8"
+
+    vocabulary = {}
+
+    i = 0
+    File.open(path).each do |line|
+      print "\r#{i}"
+      line = line.encode(target_encoding, src_encoding)
+
+      if ImportLine.valid? line
+        ImportLine.new(line).import_words_plain(vocabulary)
+      end
+
+      i += 1
+    end
+    print "\r"
+
+    file = File.open("#{File.dirname(__FILE__)}/../../data/word_list.txt", "w")
+
+    i = 0
+    vocabulary.each do |k, v|
+      line = "#{k}\n"
+      print "\rwriting #{i}"
+      file.write(line)
+      i += 1
+    end
+
+    print "\r"
+  end
+
+  task :create_en_cs_vocabulary => :environment do
+
+    #33265 words untranslated
+    #google poznal named entities
+    #musel jsem pouzit memsource
+    #preklad na webu googlu prelozil jen 10 procent slov
+    #google translator tools ma omezeni na 1 MB
+    #musel jsem zrušit kapitalizeci, google napriklad vracel psČ;odstÁvČata, chovnÍ bĚhouni
+    #odstranění interpunkce
+    #obcas byla pomichana diakritika z jineho kodovani "boles?aw boles? aw", polske 'l'
+
+    path_en = "#{File.dirname(__FILE__)}/../../data/word_list.txt"
+    path_cs = "#{File.dirname(__FILE__)}/../../data/word_list_translated.txt"
+
+    dictionary_path = "#{File.dirname(__FILE__)}/../../data/word_dictionary.txt"
+    write_file = File.open(dictionary_path, "w")
+
+    lines_en = File.readlines(path_en)
+    lines_cs = File.readlines(path_cs)
+
+    puts lines_en.size
+    puts lines_cs.size
+
+    0.upto(lines_cs.size - 1) do |i|
+      en_word = lines_en[i].chomp
+      cs_word = lines_cs[i].chomp
+
+      cs_word = en_word if cs_word.size == 0
+
+      cs_word = UnicodeUtils.downcase(cs_word, :cs)
+
+      cs_word.gsub!(/[[:punct:]]/, "")
+      cs_word.strip!
+
+      line = "#{en_word}\t#{cs_word}\n"
+
+      write_file.write(line)
+    end
+  end
+
+  task :stemify_czech_words do
+    puts "Stemify"
+    command = "cat #{File.dirname(__FILE__)}/../../data/word_list_translated.txt | LC_ALL=UTF-8 CLASSPATH=#{File.dirname(__FILE__)}/../../lib/czech_stemmer java CzechStemmer light > #{File.dirname(__FILE__)}/../../data/word_list_translated_stemmed.txt"
+    system(command)
+  end
+
   task :test => :environment do
 
     correct = 0
@@ -215,6 +370,21 @@ def clear_type client, index, type
   client.indices.delete index: index, type: type if client.indices.exists index: index
   #client.indices.create index: index
   client.indices.refresh
+end
+
+def export_trigrams trigrams, filepath
+  puts filepath
+  File.open(filepath, 'r:utf-8').each do |line|
+    if (!line.start_with?("<doc") and !line.start_with?("</doc"))
+      line = UnicodeUtils.downcase(line, :cs)
+      line.chomp!
+      line = " #{line} "
+      0.upto(line.size - 3) do |i|
+        trigram = "#{line[i]}#{line[i+1]}#{line[i+2]}"
+        trigrams[trigram] += 1 if trigram.size == 3
+      end
+    end
+  end
 end
 
 def export_wiki_words words, filepath
