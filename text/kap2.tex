@@ -24,6 +24,38 @@ Jak lze v Ruby on Rails vyrobit jednoduše anotační rozhraní s uživateli a s
 
 Popis prvků. Screenshoty aplikace.
 
+\section{Preklad}
+
+Dva postupy jak pouzit anglicka data v jinych jazycich. Bud je mozne prelozit vzdy zadany cesky dotaz do ciloveho jazyka. Nebo je mozne prelozit vsechna data u fotek. Pak je nutne pouzit pro kazdy jazyk nejaky lemmatizer, nebo stemmer. Pro cestinu jsme nakonec zvolili druhou variantu.
+
+Jak prelozit 20 milionu popisku? Jednou moznosti je preklad slovo od slova. Pouzit pouze slovnik. Preklad pomoci google je drahy. Stalo to zhruba 1300Kc. Preklad celych frazi by byl lepsi (automaticky objevi fraze), ale pomoci google velmi drahy. Rozchodil jsem tedy prekladovy nastroj Moses s modelem prilozenym ve verzi 2.1 (http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/). Po nekolikahodinovem nacitani se model nacetl (i kdyz mam SSD disk). Preklady v prolozenem modelu jsou velmi pomale (jeden segment trva priblizne 3s). Preklad neni idealni a mam spustu |UNK slov.
+
+Preklad popisku prvniho obrazku:
+"0000000003","little baby smiling","","child children baby babies infants kids childhood single faces body naked nake facial expressions smile smiling viewing watching laying fun amusing amusement amused amuse dallying frolicing playing wantoning open"^M
+
+Moses:
+"0000000003","little|UNK|UNK|UNK dítě smiling","","child|UNK|UNK|UNK dětí , dětské děti kojence děti dětství jednotného čelí orgán nahé nake|UNK|UNK|UNK pořídili vyjádření usmívat usmívá odůvodněním , která zábavné sledovat zábavné zábavných i pobavena tím amuse|UNK|UNK|UNK dallying|UNK|UNK|UNK frolicing|UNK|UNK|UNK hrát wantoning|UNK|UNK|UNK open"^M|UNK|UNK|UNK
+
+Google:
+"0000000003", "malé dítě s úsměvem", "", "dítě děti dítě děti kojenci děti dětství jednotlivé plochy těla nahá nake výrazy obličeje, úsměvu, usměvavý sledování sledování kterým zábava zábavné zábavní pobavený pobavit laškoval frolicing hrát wantoning otevřený" ^ M
+
+Preklad jineho obrazku:
+"0000000102","young woman cleaning teeth","","single faces people humans young youth hands indoors interiors woman women females blond fair young adult s girls close view beauty home home dental bathrooms person portrait adult years half length portrait open mouth hygiene teeth dental care years cleaning toothbrush underwear bras"^M
+
+Moses:
+"0000000102","young|UNK|UNK|UNK žena čištění teeth","","single|UNK|UNK|UNK čelí mladí lidé , lidé mládež rukou uvnitř interiors|UNK|UNK|UNK žena žen , žen , blonďák spravedlivé mladé dívky zavřít dospělé s cílem krásy vnitřní vnitřní stomatologické koupelny portrét dlouhé roky polovina dospělé osoby portrét otevřené úst hygienické zuby zubní kartáček prádlo bras"^M|UNK|UNK|UNK péče let čištění
+
+Google Translate:
+"0000000102", "Mladá žena čištění zubů", "", "jednotlivé tváře lidí, lidé younge mládeží ruce interiéry ženě ženám ženy ženskému blond fair mladý dospělý s dívek close view krása domov domácí zubní koupelny osoba portrét dospělý let poloviční délka portrét otevřená ústa hygienické zubů zubní péče roky čistící kartáček na zuby spodní prádlo podprsenky "^ M
+
+
+Detekovane fraze:
+http://mufin.fi.muni.cz/~xbatko/keyword-clean-phrase-export.csv.gz
+mail: https://mail.google.com/mail/u/0/#search/pecina+%C3%BAkoly+ze+sch%C5%AFzky/144dfd220249382b
+
+
+
+
 \section{Poznamky}
 
 Pouziji data z wiki dumpu.

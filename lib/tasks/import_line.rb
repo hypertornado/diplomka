@@ -6,7 +6,7 @@ class ImportLine
 
     raise "line not valid: " unless ImportLine.valid? line
 
-    fields = split_fields line
+    fields = ImportLine.split_fields line
     @locator = fields[0]
     @title = fields[1]
     @description = fields[2]
@@ -56,6 +56,21 @@ class ImportLine
     return stems.join(" ")
   end
 
+  def self.get_phrases line
+    fields = ImportLine.split_fields(line)
+    keywords = fields[2]
+    candidates = keywords.split(",")
+    return [] if candidates.size <= 1
+    ret = []
+    candidates.each do |c|
+      c.strip!
+      if c.include? " " and c.split(" ").size <= 4
+        ret.push(c)
+      end
+    end
+    return ret
+  end
+
   def import_words vocabulary
 
     used_words = {}
@@ -92,12 +107,13 @@ class ImportLine
     end
   end
 
-  def split_fields line
+  def self.split_fields line
     ret = line.scan(/"[^"]*"/)
     #remove first and last '"' chars
-    ret.map do |el|
+    ret.map! do |el|
       el.chop[1..-1]
     end
+    return ret
   end
 
   def self.valid? line

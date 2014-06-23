@@ -292,6 +292,45 @@ namespace :es do
     print "\r"
   end
 
+  task :export_profimedia_phrases_for_translation => :environment do
+    #system("cat #{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia.txt | cut -f 1 > #{File.dirname(__FILE__)}/../../data/word_list.txt")
+    path = "#{File.dirname(__FILE__)}/../../data/keyword-clean-phrase-export.csv"
+    #path = "#{File.dirname(__FILE__)}/../../data/tiny"
+
+    src_encoding = "Windows-1252"
+    target_encoding = "utf-8"
+
+    vocabulary = {}
+
+    i = 0
+    File.open(path).each do |line|
+      print "\r#{i}"
+      #line = line.encode(target_encoding, src_encoding)
+      line = UnicodeUtils.downcase(line, :cs)
+
+      if ImportLine.valid? line
+        phrases = ImportLine.get_phrases(line)
+        #puts phrases if phrases.length > 1
+        phrases.each {|p| vocabulary[p] = true}
+      end
+
+      i += 1
+    end
+    print "\r"
+
+    file = File.open("#{File.dirname(__FILE__)}/../../data/phrases_list.txt", "w")
+
+    i = 0
+    vocabulary.each do |k, v|
+      line = "#{k}\n"
+      print "\rwriting #{i}"
+      file.write(line)
+      i += 1
+    end
+
+    print "\r"
+  end
+
   task :create_en_cs_vocabulary => :environment do
 
     #33265 words untranslated
