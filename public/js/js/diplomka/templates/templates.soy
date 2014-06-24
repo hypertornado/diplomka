@@ -11,9 +11,18 @@
 *
 */
 {template .skeleton}
+  <div id="menu-panel">
+    <span id="logo">Stock Photo Finder</span>
+    <span id="menu-right">
+      <span id="options-panel"></span>
+      <span id="hits-container"></span>
+    </span>
+  </div>
+
   <div id="split-container" class="goog-splitpane">
-    <textarea class="goog-splitpane-first-container" id="text-input" spellcheck="false">
-    </textarea>
+    <div class="goog-splitpane-first-container" id="split-first">
+      <textarea id="text-input" spellcheck="false"></textarea>
+    </div>
     <div class="goog-splitpane-second-container" id="split-second">
 
       <div id="tags-container">
@@ -22,7 +31,6 @@
         <b>Suggested tags: </b> <span id="suggested-tags"></span>
       </div>
       <div id="images-container">
-        <div id="hits-container"></div>
         <div id="images"></div>
       </div>
     </div>
@@ -62,6 +70,24 @@
   {foreach $tag in $tags}
     <span data-tag="{$tag}" class="tag tag-suggested">{$tag}</span>
   {/foreach}
+{/template}
+
+/**
+ * @param languages
+ * @param languageNames
+ * @param selectedLanguage
+ * @param wordCount
+ */
+{template .optionsPane}
+  {$wordCount} words in 
+    <select id="language-select">
+    {foreach $language in $languages}
+      <option value="{$language}" {if $selectedLanguage == $language}
+        selected
+      {/if}>{$languageNames[$language]}</option>
+    {/foreach}
+    </select>
+     language
 {/template}
 
 

@@ -1,13 +1,10 @@
 goog.provide("oo.diplomka.Languages.Trigrams");
 
-goog.require("oo.diplomka.Languages.TrigramsData");
+goog.require("oo.diplomka.Languages.Model");
 
-oo.diplomka.Languages.Trigrams = function () {
+oo.diplomka.Languages.Trigrams = function (opt_languageModel) {
+  this.model_ = opt_languageModel || new oo.diplomka.Languages.Model();
 
-  this.lang_ = {};
-
-  this.lang_["cs"] = oo.diplomka.Languages.TrigramsData.cs;
-  this.lang_["en"] = oo.diplomka.Languages.TrigramsData.en;
 }
 
 oo.diplomka.Languages.Trigrams.prototype.detect = function(text) {
@@ -25,7 +22,24 @@ oo.diplomka.Languages.Trigrams.prototype.detect = function(text) {
   for (var trigram in trigrams) sorted.push([trigram, trigrams[trigram]]);
 
   sorted = sorted.sort(function(a, b) {return b[1] - a[1]});
-  
-  console.log(sorted);
+  sorted = sorted.slice(0, this.model_.getTrigramMaxPenalty());
+
+  var hash = {};
+  for (var i = 0; i < sorted.length; i++) {
+    hash[sorted[i][0]] = i;
+  }
+
+  var results = [];
+  this.model_.getLanguages().forEach(function (langCode) {
+    var diffValue = 0;
+    for (var trigram in hash) {
+      diffValue += Math.abs(hash[trigram] - this.model_.getTrigramOrder(langCode, trigram));
+    }
+    results.push([langCode, diffValue]);
+  }, this);
+
+  results = results.sort(function(a, b) {return a[1] - b[1]});
+  return results[0][0];
+
 }
 

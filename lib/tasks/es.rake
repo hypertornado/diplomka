@@ -2,17 +2,6 @@ require_relative "import_line.rb"
 
 namespace :es do
 
-  #extract first cca 10000 english articles
-  #cca 20000 articles in czech
-  #words: 9231894 in english
-  task :extract_words_from_wiki, [:language] => :environment do |t, args|
-    language = args[:language].to_s
-    raise "not supported language #{language}" unless SUPPORTED_LANGUAGES.include?(language)
-    puts "extracting wiki data for #{language} language"
-    system("rm -rf #{File.dirname(__FILE__)}/../../data/wiki_#{language}")
-    system("cat #{File.dirname(__FILE__)}/../../data/wiki_dump_#{language}.xml | python #{File.dirname(__FILE__)}/../WikiExtractor.py -b 250K -o #{File.dirname(__FILE__)}/../../data/wiki_#{language}")
-  end
-
   task :extract_most_frequent_trigrams do
 
     limit = 300
@@ -46,7 +35,18 @@ namespace :es do
 
   task :trigrams_to_javascript_classes do
 
-    js_content = "goog.provide(\"oo.diplomka.Languages.TrigramsData\");\n\n";
+    js_content = "goog.provide(\"oo.diplomka.Languages.Data\");\n\noo.diplomka.Languages.Data = function() {\n";
+
+    js_content += "this.languages = [\"#{SUPPORTED_LANGUAGES.join("\",\"")}\"];\n\n";
+
+    js_content += "this.languageNames = {\n";
+    0.upto(SUPPORTED_LANGUAGES.size - 1).each do |i|
+      js_content += ",\n" if i != 0
+      js_content += "  \"#{SUPPORTED_LANGUAGES[i]}\":\"#{LANGUAGE_NAMES[i]}\""
+    end
+    js_content += "\n};\n\n";
+
+    js_content += "this.trigrams = {};\n";
 
     SUPPORTED_LANGUAGES.each do |language|
       lines = File.readlines("#{File.dirname(__FILE__)}/../../data/most_frequent_trigrams_#{language}.txt")
@@ -57,45 +57,50 @@ namespace :es do
 
       content = lines.join('","')
 
-      puts content
-
-      js_content += "oo.diplomka.Languages.TrigramsData.#{language} = [\"#{content}\"];" + "\n\n"
+      js_content += "this.trigrams[\"#{language}\"] = [\"#{content}\"];" + "\n"
 
     end
 
-    File.open("#{File.dirname(__FILE__)}/../../public/js/js/diplomka/languages/trigramsdata.js", "w").write(js_content)
+    js_content += "\n}";
+
+    File.open("#{File.dirname(__FILE__)}/../../public/js/js/diplomka/languages/data.js", "w").write(js_content)
 
 
   end
 
-  task :frequency_list_from_wiki do
 
-    #TODO, make czech here
-    ["en"].each do |language|
+  task :export_profimedia_words_for_translation do
+    path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
 
-      words = Hash.new(0)
+    src_encoding = "Windows-1252"
+    target_encoding = "utf-8"
 
-      Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}").each do |dirname|
-        if dirname[0] != "."
-          Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}").each do |file|
-            if file[0] != "."
-              export_wiki_words words, "#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}/#{file}"
-            end
-          end
-        end
+    vocabulary = {}
+
+    i = 0
+    File.open(path).each do |line|
+      print "\r#{i}"
+      line = line.encode(target_encoding, src_encoding)
+
+      if ImportLine.valid? line
+        ImportLine.new(line).import_words_plain(vocabulary)
       end
 
-      out_file = File.open("#{File.dirname(__FILE__)}/../../data/wiki_freq_list_#{language}.txt", "w")
-
-      sum = 0
-
-      words.each do |k,v|
-        out_file.write("#{k}\t#{v}\n")
-        sum += v
-      end
-      puts "Total number of words #{language}: #{sum}"
-
+      i += 1
     end
+    print "\r"
+
+    file = File.open("#{File.dirname(__FILE__)}/../../data/word_list.txt", "w")
+
+    i = 0
+    vocabulary.each do |k, v|
+      line = "#{k}\n"
+      print "\rwriting #{i}"
+      file.write(line)
+      i += 1
+    end
+
+    print "\r"
   end
 
   task :import_profimedia_words do
@@ -242,56 +247,6 @@ namespace :es do
     es_client.indices.create index: ES_INDEX
   end
 
-  task :start do
-    puts "Starting elasticsearch"
-    system("#{File.dirname(__FILE__)}/../../bin/elasticsearch/bin/elasticsearch -f")
-  end
-
-  task :keywords => :environment do
-    #text = "Liverpool, Manchester United and Manchester City are among clubs that have already shown a lot of interest and enthusiasm for a new league for B teams, FA chairman Greg Dyke told a news conference. According to the review, headed by Dyke, only 32% of starters qualified to play for England in the 2012-13 Premier League season, compared to 69% 20 years ago. The commission's proposals set an ambitious but realistic target of increasing the number of English players in the Premier League to 45% by 2022."
-      
-    text = "hello worlds"
-
-    #text = "farhan gunplay"
-    Api.keywords text
-  end
-
-  task :export_profimedia_words_for_translation do
-    #system("cat #{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia.txt | cut -f 1 > #{File.dirname(__FILE__)}/../../data/word_list.txt")
-    path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
-    #path = "#{File.dirname(__FILE__)}/../../data/tiny"
-
-    src_encoding = "Windows-1252"
-    target_encoding = "utf-8"
-
-    vocabulary = {}
-
-    i = 0
-    File.open(path).each do |line|
-      print "\r#{i}"
-      line = line.encode(target_encoding, src_encoding)
-
-      if ImportLine.valid? line
-        ImportLine.new(line).import_words_plain(vocabulary)
-      end
-
-      i += 1
-    end
-    print "\r"
-
-    file = File.open("#{File.dirname(__FILE__)}/../../data/word_list.txt", "w")
-
-    i = 0
-    vocabulary.each do |k, v|
-      line = "#{k}\n"
-      print "\rwriting #{i}"
-      file.write(line)
-      i += 1
-    end
-
-    print "\r"
-  end
-
   task :export_profimedia_phrases_for_translation => :environment do
     #system("cat #{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia.txt | cut -f 1 > #{File.dirname(__FILE__)}/../../data/word_list.txt")
     path = "#{File.dirname(__FILE__)}/../../data/keyword-clean-phrase-export.csv"
@@ -401,6 +356,11 @@ namespace :es do
     end
 
     puts "CORRECT: #{correct}"
+  end
+
+  task :start do
+    puts "Starting elasticsearch"
+    system("#{File.dirname(__FILE__)}/../../bin/elasticsearch/bin/elasticsearch -f")
   end
 
 end

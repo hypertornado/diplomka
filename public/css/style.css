@@ -8,9 +8,45 @@ body, textarea, div, a {
   color: #432F21;
 }
 
-textarea {
+#text-input {
   border: none;
   resize: none;
+  width: 100%;
+  height: 100%;
+}
+
+#menu-panel {
+  background: #cdcab9;
+  width: 100%;
+  height: 25px;
+  padding-left: 5px;
+}
+
+#menu-right {
+  float: right;
+  padding-right: 5px;
+  margin-top: 2px;
+}
+
+#options-panel {
+  
+}
+
+#options-panel select {
+  margin-right: 5px;
+  margin-left: 5px;
+  background: inherit;
+  border: 2px solid #432F21;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+#logo {
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 18px;
+  text-shadow: -1px -1px 0px #eee;
 }
 
 input {

@@ -8,7 +8,7 @@ goog.require('goog.dom');
 goog.require('goog.dom.ViewportSizeMonitor');
 goog.require("oo.diplomka.Events");
 goog.require("goog.ui.HoverCard");
-goog.require("oo.diplomka.Languages.Trigrams");
+goog.require("oo.diplomka.OptionsPane");
 
 /**
  * @constructor
@@ -19,23 +19,9 @@ oo.diplomka.StockPhotoFinder = function() {
   this.splitPane = new oo.diplomka.SplitPane(this.events);
   this.monitorResize();
   this.ws = new oo.diplomka.WebSockets(this.events);
+  this.optionsPane = new oo.diplomka.OptionsPane(this.events);
 
   document.title = "Stock Photo Finder - created by Ondřej Odcházel"
-
-  //this.ws.text_ = "usa obama russia";
-  //this.ws.getImages();
-
-  //var hc = new goog.ui.HoverCard(function(){window.console.log("eee");return true;});
-  //hc.setElement(goog.dom.getElement('tooltip-container'));
-  //hc.className = 'goog-hovercard';
-
-  //goog.events.listen(hc, goog.ui.HoverCard.EventType.TRIGGER, onTrigger);
-  //
-  //SCROLL
-  
-
-  //this.splitPane.textArea.setValue("Grand Horizon has a bold sign, Teheran Tours, above its shop front on a busy commercial street. Nearby, a store sold Middle Eastern carpets, Buddha statues and paintings of Arab men.");
-  //this.splitPane.tagsComponent.addTag("car");
 
 };
 
@@ -59,5 +45,5 @@ oo.diplomka.StockPhotoFinder.prototype.monitorResize = function () {
 
 oo.diplomka.StockPhotoFinder.prototype.resizeEvent = function () {
   var height = goog.dom.getViewportSize().height;
-  this.splitPane.resize(height);
+  this.splitPane.resize(height - 25);
 }

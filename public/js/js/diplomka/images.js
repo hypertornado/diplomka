@@ -4,6 +4,7 @@ goog.provide('oo.diplomka.Images');
 goog.require('goog.ui.Component');
 goog.require('oo.diplomka.templates');
 goog.require('goog.array');
+goog.require('goog.i18n.NumberFormat');
 
 /*
 * @constructor
@@ -11,6 +12,8 @@ goog.require('goog.array');
 */
 oo.diplomka.Images = function(events) {
 	this.events = events;
+
+  this.numberFormater_ = new goog.i18n.NumberFormat(goog.i18n.NumberFormat.Format.DECIMAL);
 	this.events.listen(oo.diplomka.EventType.RECEIVE_IMAGES, this.renderImages, this);
   this.events.listen(oo.diplomka.EventType.CLEAR_IMAGES, this.clearImages, this);
 
@@ -18,13 +21,6 @@ oo.diplomka.Images = function(events) {
   this.hitsContainer_ = goog.dom.getElement("hits-container");
 
   this.lastData = null;
-
-  /*this.getHandler().
-      listen(goog.dom.getElement("load-more"),
-        [goog.events.EventType.CLICK],
-        this.loadMore_, false, this);
-  */
-
 
   this.getHandler().listen(goog.dom.getElement("split-second"), goog.events.EventType.SCROLL, this.scrollEvent_, false, this);
 
@@ -47,7 +43,7 @@ oo.diplomka.Images.prototype.renderImages = function (data) {
 }
 
 oo.diplomka.Images.prototype.renderImagesFirst_ = function(data) {
-  this.hitsContainer_.textContent = data.images.hits.total + " hits";
+  this.hitsContainer_.textContent = " — " + this.numberFormater_.format(data.images.hits.total) + " images found";
   this.imagesDiv_.innerHTML = "";
   this.renderImagesAppend_(data);
 }
@@ -78,7 +74,6 @@ oo.diplomka.Images.prototype.scrollEvent_ = function () {
   if (images.length == 0) return;
   var image = images[images.length - 1];
   var offset = image.offsetTop;
-  console.log("SCROLL", offset);
 
   var loadingAreaHeight = 100;
 
@@ -86,11 +81,6 @@ oo.diplomka.Images.prototype.scrollEvent_ = function () {
   if (scrollEl.scrollHeight - scrollEl.scrollTop - scrollEl.offsetHeight < loadingAreaHeight) {
     this.loadMore_();
   }
-
-  //scrollHeight
-  //scrollTop
-  //clientHeight
-  //offsetHeight
 
 }
 

@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 ES_INDEX = "diplomka"
 SUPPORTED_LANGUAGES = ["cs", "en"]
+LANGUAGE_NAMES = ["czech", "english"]
 
 module Diplomka
   class Application < Rails::Application

@@ -8,8 +8,10 @@ oo.diplomka.WebSockets = function(events) {
   this.events = events;
   this.events.listen(oo.diplomka.EventType.TEXT_CHANGE, this.textChange_, this);
   this.events.listen(oo.diplomka.EventType.TAGS_CHANGE, this.tagsChange_, this);
+  this.events.listen(oo.diplomka.EventType.LANGUAGE_CHANGE, this.languageChange_, this);
   this.events.listen(oo.diplomka.EventType.GET_IMAGES, this.getImages, this);
   this.text_ = "";
+  this.language_ = "";
   this.tags_ = [];
 
   this.requestIsProcessing = false;
@@ -44,6 +46,7 @@ oo.diplomka.WebSockets.prototype.getImages = function(opt_data) {
   } else {
     var data = {
       "text": this.text_,
+      "language": this.language_,
       "tags": this.tags_,
       "from": 0,
       "size": oo.diplomka.Images.imagesRequestSize
@@ -57,7 +60,7 @@ oo.diplomka.WebSockets.prototype.getImages = function(opt_data) {
 oo.diplomka.WebSockets.prototype.getImagesRequest = function(data) {
 
   //dont send same request twice
-  if (this.requestSended != null && data.from == 0 && this.requestSended.text == data.text && this.requestSended.tags == data.tags){
+  if (this.requestSended != null && data.from == 0 && this.requestSended.text == data.text && this.requestSended.tags == data.tags && this.requestSended["language"] == data["language"]){
     console.log("NO SENDING");
     return;
   }
@@ -83,6 +86,11 @@ oo.diplomka.WebSockets.prototype.getImagesRequest = function(data) {
 
 oo.diplomka.WebSockets.prototype.textChange_ = function(text) {
   this.text_ = text;
+  this.getImages();
+}
+
+oo.diplomka.WebSockets.prototype.languageChange_ = function(language) {
+  this.language_ = language;
   this.getImages();
 }
 

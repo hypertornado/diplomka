@@ -44,7 +44,7 @@ goog.inherits(oo.diplomka.SplitPane, goog.ui.SplitPane);
 
 oo.diplomka.SplitPane.prototype.resize = function(height) {
   goog.style.setHeight(this.container, height);
-  goog.style.setHeight(document.getElementById('text-input'), height);
+  goog.style.setHeight(document.getElementById('split-first'), height);
   goog.style.setHeight(document.getElementById('split-handle'), height);
   goog.style.setHeight(document.getElementById('split-second'), height);
 }
