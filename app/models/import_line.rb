@@ -1,5 +1,3 @@
-require "stemmify"
-
 class ImportLine
 
   def initialize line
@@ -15,25 +13,33 @@ class ImportLine
     #puts @keywords if @locator.match("736665")
   end
 
-  def es_import client, index, translator
+  def es_import client, index, language_tools
 
-    client.index index: index, type: "image", id: @locator, body: {
+    all_stems = {}
+
+    SUPPORTED_LANGUAGES.each do |language|
+      tool = language_tools[language]
+      stems = @keywords
+      stems = tool.lowercase_line stems
+      stems = language_tools[PRIMARY_LANGUAGE].translate_line(stems, language)
+      stems = tool.stem_line stems
+      all_stems[language] = stems
+    end
+
+    body = {
       locator: @locator,
-      lang: "en",
       title: @title,
       description: @description,
       keywords: @keywords,
-      stems: get_stems()
     }
 
-    client.index index: index, type: "image", id: @locator, body: {
-      locator: @locator,
-      lang: "cs",
-      title: translator.translate(@title),
-      description: translator.translate(@description),
-      keywords: translator.translate(@keywords),
-      stems: translator.translate_and_stem("#{@title} #{@keywords}")
-    }
+    all_stems.each do |k, v|
+      body["stems_#{k}"] = v
+    end
+
+    #puts body
+
+    client.index index: index, type: "image", id: @locator, body: body
 
   end
 
@@ -71,30 +77,9 @@ class ImportLine
     return ret
   end
 
-  def import_words vocabulary
-
-    used_words = {}
-
-    words = @keywords.split(" ")
-    words += @title.split(" ")
-    words.each do |word|
-      word.downcase!
-      #puts "#{word}\t#{word.stem}"
-      stem = word.stem
-
-      if vocabulary.has_key?(stem)
-        entry = vocabulary[stem]
-        entry[:tf] += 1
-        entry[:df] += 1 unless used_words.has_key?(stem)
-      else
-        entry = {
-          tf: 1,
-          df: 1
-        }
-        vocabulary[stem] = entry
-      end
-      used_words[stem] = 1
-    end
+  def get_plaintext
+    ret = "#{@keywords} #{@title}"
+    return ret.strip
   end
 
   def import_words_plain vocabulary

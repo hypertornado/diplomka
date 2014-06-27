@@ -8,10 +8,14 @@ Bundler.require(:default, Rails.env)
 
 ES_INDEX = "diplomka"
 SUPPORTED_LANGUAGES = ["cs", "en"]
+PRIMARY_LANGUAGE = "en"
 LANGUAGE_NAMES = ["czech", "english"]
 
 module Diplomka
   class Application < Rails::Application
+
+    config.i18n.enforce_available_locales = true
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

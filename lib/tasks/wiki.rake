@@ -14,8 +14,9 @@ namespace :wiki do
 
   task :frequency_list_from_wiki => :environment do
 
-    #TODO, make czech here
-    ["en"].each do |language|
+    SUPPORTED_LANGUAGES.each do |language|
+
+      tool = LanguageTool.new(language)
 
       words = Hash.new(0)
 
@@ -23,7 +24,7 @@ namespace :wiki do
         if dirname[0] != "."
           Dir.entries("#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}").each do |file|
             if file[0] != "."
-              export_wiki_words words, "#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}/#{file}"
+              export_wiki_words tool, words, "#{File.dirname(__FILE__)}/../../data/wiki_#{language}/#{dirname}/#{file}"
             end
           end
         end
@@ -38,7 +39,22 @@ namespace :wiki do
         sum += v
       end
       puts "Total number of words #{language}: #{sum}"
+      File.write("#{File.dirname(__FILE__)}/../../data/wiki_freq_list_count_#{language}.txt", sum)
 
+    end
+  end
+
+  def export_wiki_words language_tool, words_hash, filepath
+    puts filepath
+    File.open(filepath, 'r:utf-8').each do |line|
+      if (!line.start_with?("<doc") and !line.start_with?("</doc"))
+        language_tool.tokenize(line).each do |word|
+          if word.length > 2
+            word = language_tool.lowercase_line word
+            words_hash[language_tool.stem_word(word)] += 1
+          end
+        end
+      end
     end
   end
 

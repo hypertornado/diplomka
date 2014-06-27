@@ -35,8 +35,8 @@ end
 gem 'elasticsearch', '~> 1'
 
 gem "unicode_utils"
-
 gem "stemmify"
+gem 'czech-stemmer'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

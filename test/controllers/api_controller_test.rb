@@ -6,9 +6,9 @@ class ApiControllerTest < ActionController::TestCase
   # end
 
 
-  test "tokenizer" do
-    assert_equal ["á", "b"], ApiController.tokenize(" Á           , B    ")
-  end
+  #test "tokenizer" do
+  #  assert_equal ["á", "b"], ApiController.tokenize(" Á           , B    ")
+  #end
 
   test "term_frequency" do
     text = "hello world hello"
