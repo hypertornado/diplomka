@@ -6,6 +6,7 @@ textarea {
 
 body, textarea, div, a {
   color: #432F21;
+  overflow: hidden;
 }
 
 #text-input {

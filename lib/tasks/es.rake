@@ -1,58 +1,103 @@
 namespace :es do
 
-  task :pair_profimedia_and_wiki_data do
-    wiki_data_path = "#{File.dirname(__FILE__)}/../../data/wiki_freq_list.txt"
-    profimedia_data_path = "#{File.dirname(__FILE__)}/../../data/tf_df.txt"
+  task :import_image_metadata => :environment do
+    path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
 
-    words = Hash.new(0)
-
-    File.open(wiki_data_path).each do |line|
-      c = line.split("\t")
-      if c.size == 2
-        words[c[0]] = c[1].to_i
-      end
-    end
-
-    #output format
-    #stem tf_profimedia df_profimedia tf_wiki
-    file = File.open("#{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia.txt", "w")
-
-    File.open(profimedia_data_path).each do |line|
-      line = line.chomp
-      c = line.split("\t")
-
-      #puts words[c[0]]
-      line += "\t#{words[c[0]]}\n"
-
-      file.write(line)
-    end
-
-  end
-
-  task :import_paired do
-    paired_file = "#{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia.txt"
+    puts "Importing data to elasticsearch - #{Time.now}"
+    src_encoding = "Windows-1252"
+    target_encoding = "utf-8"
 
     es_client = Elasticsearch::Client.new
+    #clear_type(es_client, ES_INDEX, "image")
+    
+    language_tools = {}
+    SUPPORTED_LANGUAGES.each do |language|
+      language_tools[language] = LanguageTool.new(language)
+    end
 
-    index_name = "stems"
+    es_client.indices.delete index: ES_INDEX if es_client.indices.exists index: ES_INDEX
+    #es_client.indices.create index: ES_INDEX
+    es_client.indices.create index: ES_INDEX, body: {
+      settings: {
+        analysis: {
+          analyzer: {
+            ngram: {
+              tokenizer: 'whitespace',
+              type: 'custom'
+            }
+          }
+        }
+      },
+      mappings: {
+        clanek: {
+          properties: {
+            stems_cs: {
+                type: 'string',
+                index_analyzer: 'ngram',
+                search_analyzer: 'ngram'
+            },
+            stems_en: {
+                type: 'string',
+                index_analyzer: 'ngram',
+                search_analyzer: 'ngram'
+            }
+          }
+        }
+      }
+    }
 
     i = 0
-
-    File.open(paired_file).each do |line|
-      line.chomp!
-      entries = line.split("\t")
-      #puts entries
-      print "\r#{i}"
-      es_client.index index: ES_INDEX, type: index_name, id: entries[0], body: {
-        tf: entries[1].to_i,
-        df: entries[2].to_i,
-        wiki: entries[3].to_i
-      }
+    timestamp = Time.now
+    eta = ""
+    File.open(path).each do |line|
+      if (i % 1000 == 0)
+        new_timestamp = Time.now
+        diff = (new_timestamp - timestamp) * 1000.0
+        remaining = 20000000.to_f - i
+        eta = (remaining / 1000.0) * diff
+        eta = (eta / 1000).to_i
+        eta = Time.at(eta).gmtime.strftime('%R:%S')
+        timestamp = new_timestamp
+      end
+      print "\r#{i} #{eta}"
+      line = line.encode(target_encoding, src_encoding)
       i += 1
+      if ImportLine.valid? line
+        ImportLine.new(line).es_import(es_client, ES_INDEX, language_tools)
+      end
     end
-    puts "\r"
-
     es_client.indices.refresh
+    print "\r"
+    puts "Import ended - #{Time.now}"
+  end
+
+  task :import_word_data => :environment do
+
+    es_client = Elasticsearch::Client.new
+    index_name = "stems"
+
+    es_client.indices.delete index: index_name if es_client.indices.exists index: index_name
+    es_client.indices.create index: index_name
+
+    SUPPORTED_LANGUAGES.each do |language|
+      paired_file = "#{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia_#{language}.txt"
+      i = 0
+      File.open(paired_file).each do |line|
+        line.chomp!
+        entries = line.split("\t")
+        print "\r#{language} #{i}   "
+        es_client.index index: index_name, type: language, id: entries[0], body: {
+          tf: entries[1].to_i,
+          df: entries[2].to_i,
+          wiki: entries[3].to_i
+        }
+        i += 1
+      end
+      puts "\r"
+
+      es_client.indices.refresh
+
+    end
 
   end
 

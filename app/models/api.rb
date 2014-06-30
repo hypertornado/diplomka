@@ -1,47 +1,42 @@
 class Api
 
-  def initialize text, tags
+  def initialize text, tags, language
     @text = text
     @tags = tags
-    @keywords = Api.keywords @text
+    @language = language
+    @dictionary = {}
+    @tool = LanguageTool.new(@language)
+    @keywords = keywords @text
   end
 
   def get_result from, size
     result = {}
     result['images'] = search(from, size)
 
-    suggested_tags = @keywords.map {|v| v[0]}
+    suggested_tags = @keywords.map {|v| @dictionary[v[0]]}
     suggested_tags = suggested_tags - @tags
 
     result['suggested_tags'] = suggested_tags[0, 5]
     return result
   end
 
-  def self.tokenize text
-    ret = UnicodeUtils.downcase(text)
-    ret = ret.split(/[[[:punct:]][[:space:]]0-9]+/)
-    ret.select! {|w| w.size > 2}
-    return ret
-  end
-
-  def self.keywords text
-    words = Api.tokenize text
-    dictionary = {}
+  def keywords text
+    text = @tool.lowercase_line(text)
+    words = @tool.tokenize(text)
     tf = Hash.new(0)
     words.each do |word|
-      stem = word.stem
-      dictionary[stem] = word
+      stem = @tool.stem_word(word)
+      @dictionary[stem] = word
       tf[stem] += 1
     end
 
     results = {}
 
     tf.keys.each do |stem|
-      stats = Api.stem_stats stem
-      next unless stats["tf"] > 0
+      stats = stem_stats(stem)
+      next unless stats["wiki"] > 0
       score = (tf[stem].to_f * Math.log(9231894.to_f/stats["wiki"].to_f))
       results[stem] = score
-      #puts "#{score} #{stem} #{dictionary[stem]} #{tf[stem]} #{stats["tf"]} #{stats["df"]} #{stats["wiki"]}"
     end
 
     sorted = results.sort_by { |k,v|  v}
@@ -52,10 +47,10 @@ class Api
 
   end
 
-  def self.stem_stats stem
+  def stem_stats stem
     es_client = Elasticsearch::Client.new
 
-    result = es_client.get index: 'diplomka', type: 'stems', id: stem, ignore: 404
+    result = es_client.get index: 'stems', type: @language, id: stem, ignore: 404
 
     ret = {
       "tf" => 0,
@@ -74,11 +69,15 @@ class Api
 
     es_client = Elasticsearch::Client.new
 
+    stem_field = "stems_#{@language}"
+
     must = []
     @tags.each do |tag|
+      tag = @tool.lowercase_line(tag)
+      tag = @tool.stem_word(tag)
       term = {
         term: {
-          keywords: tag
+          stem_field => tag
         }
       }
       must.push term
@@ -88,13 +87,13 @@ class Api
     @keywords[0, 10].each do |kw|
       term = {
         term: {
-          keywords: kw[0]
+          stem_field => kw[0]
         }
       }
       should.push term
     end
 
-    ret = es_client.search index: "diplomka", body: {
+    body = {
       size: size,
       from: from,
       query: {
@@ -105,7 +104,8 @@ class Api
       }
     }
 
-    #match: {keywords: @text}
+    ret = es_client.search index: "diplomka", body: body
+
     return ret
   end
 

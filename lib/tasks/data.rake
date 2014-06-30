@@ -96,6 +96,38 @@ namespace :data do
 
   end
 
+  task :pair_profimedia_and_wiki_data do
+    SUPPORTED_LANGUAGES.each do |language|
+      wiki_data_path = "#{File.dirname(__FILE__)}/../../data/wiki_freq_list_#{language}.txt"
+      profimedia_data_path = "#{File.dirname(__FILE__)}/../../data/tf_df_list_#{language}.txt"
+
+      words = Hash.new(0)
+
+      File.open(wiki_data_path).each do |line|
+        c = line.split("\t")
+        if c.size == 2
+          words[c[0]] = c[1].to_i
+        end
+      end
+
+      #output format
+      #stem tf_profimedia df_profimedia tf_wiki
+      file = File.open("#{File.dirname(__FILE__)}/../../data/paired_wiki_and_profimedia_#{language}.txt", "w")
+
+      File.open(profimedia_data_path).each do |line|
+        line = line.chomp
+        if line.length > 0
+          c = line.split("\t")
+
+          #puts words[c[0]]
+          line += "\t#{words[c[0]]}\n"
+
+          file.write(line) if c[0].size > 0
+        end
+      end
+    end
+  end
+
   task :create_word_dictionary => :environment do
 
     #33265 words untranslated
@@ -145,57 +177,6 @@ namespace :data do
       end
     end
 
-  end
-
-  task :import => :environment do
-    path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
-
-    puts "Importing data to elasticsearch - #{Time.now}"
-    src_encoding = "Windows-1252"
-    target_encoding = "utf-8"
-
-    es_client = Elasticsearch::Client.new
-    #clear_type(es_client, ES_INDEX, "image")
-    
-    language_tools = {}
-    SUPPORTED_LANGUAGES.each do |language|
-      language_tools[language] = LanguageTool.new(language)
-    end
-
-    es_client.indices.delete index: ES_INDEX if es_client.indices.exists index: ES_INDEX
-    es_client.indices.create index: ES_INDEX
-
-    es_client.indices.put_mapping index: ES_INDEX, type: "image", body: {
-      mytype: {
-         properties: {
-            title: { type: 'boolean', analyzer: 'whitespace' }
-         }
-      }
-    }
-
-    i = 0
-    timestamp = Time.now
-    eta = ""
-    File.open(path).each do |line|
-      if (i % 1000 == 0)
-        new_timestamp = Time.now
-        diff = (new_timestamp - timestamp) * 1000.0
-        remaining = 20000000.to_f - i
-        eta = (remaining / 1000.0) * diff
-        eta = (eta / 1000).to_i
-        eta = Time.at(eta).gmtime.strftime('%R:%S')
-        timestamp = new_timestamp
-      end
-      print "\r#{i} #{eta}"
-      line = line.encode(target_encoding, src_encoding)
-      i += 1
-      if ImportLine.valid? line
-        ImportLine.new(line).es_import(es_client, ES_INDEX, language_tools)
-      end
-    end
-    es_client.indices.refresh
-    print "\r"
-    puts "Import ended - #{Time.now}"
   end
 
   task :test => :environment do
