@@ -41,7 +41,7 @@ oo.diplomka.templates.images = function(opt_data, opt_ignored) {
   var hitListLen9 = hitList9.length;
   for (var hitIndex9 = 0; hitIndex9 < hitListLen9; hitIndex9++) {
     var hitData9 = hitList9[hitIndex9];
-    output += '<a href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(hitData9._id) + '" target="_blank" class="img-container"><div style="background-image: url(\'http://www.profimedia.cz/image/dynamicPreview/' + soy.$$escapeHtml(hitData9._id) + '\')" alt="' + soy.$$escapeHtml(hitData9._source.keywords) + '" class="image"></div><span class="img-metadata"><span class="img-name">' + soy.$$escapeHtml(hitData9._source.title) + '</span><span class="img-tags">' + soy.$$escapeHtml(hitData9._source.keywords) + '</span></span></a>';
+    output += '<a href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(hitData9._id) + '" target="_blank" class="img-container"><div style="background-image: url(\'http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(hitData9._id) + '\')" alt="' + soy.$$escapeHtml(hitData9._source.keywords) + '" class="image"></div><span class="img-metadata"><span class="img-name">' + soy.$$escapeHtml(hitData9._source.title) + '</span><span class="img-tags">' + soy.$$escapeHtml(hitData9._source.keywords) + '</span></span></a>';
   }
   return output;
 };

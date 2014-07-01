@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  22 JUN 2014 19:11
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  2 JUL 2014 00:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -512,7 +512,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 3.
 
-Overfull \hbox (19.98756pt too wide) in paragraph at lines 12--12
+Overfull \hbox (19.98756pt too wide) in paragraph at lines 20--20
  [][] [] []  
  []
 
@@ -526,24 +526,32 @@ Overfull \hbox (19.98756pt too wide) in paragraph at lines 12--12
 ]
 \openout2 = `uvod.aux'.
 
- (./uvod.tex) [2
+ (./uvod.tex
+Kapitola 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 20.
+[2
 
+
+] [3]
+Kapitola 2.
+) [4
 
 ]
 \openout2 = `kap1.aux'.
 
  (./kap1.tex
-Kapitola 1.
-[3
+Kapitola 3.
+[5
 
 
 
-] [4]) [5]
+] [6]) [7]
 \openout2 = `kap2.aux'.
 
  (./kap2.tex
-Kapitola 2.
-[6
+Kapitola 4.
+[8
 
 
 
@@ -551,23 +559,226 @@ Kapitola 2.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.41 /data/wiki_
+l.34 ...allying frolicing playing wantoning open"^
+                                                  M
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.35 
+     
+? 
+
+Overfull \hbox (3.54184pt too wide) in paragraph at lines 33--35
+[]\IL2/cmr/m/n/12 Preklad po-pis-ku prv-ni-ho ob-raz-ku: "0000000003","litt-le 
+ba-by smi-ling","","child
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.37 ...K hr^^c3^^a1t wantoning|UNK|UNK|UNK open"^
+                                                  M|UNK|UNK|UNK
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.38 
+     
+? 
+
+Overfull \hbox (92.79518pt too wide) in paragraph at lines 36--38
+[]\IL2/cmr/m/n/12 Moses: "0000000003","litt-le|UNK|UNK|UNK d^^ed-t^^ec smi-ling
+","","child|UNK|UNK|UNK
+ []
+
+
+Overfull \hbox (48.71082pt too wide) in paragraph at lines 36--38
+\IL2/cmr/m/n/12 d^^ec-t^^ed , d^^ect-sk^^e9 d^^ec-ti ko-jen-ce d^^ec-ti d^^ect-
+stv^^ed jed-not-n^^e9-ho ^^e8e-l^^ed or-g^^e1n na-h^^e9 na-ke|UNK|UNK|UNK
+ []
+
+
+Overfull \hbox (26.41254pt too wide) in paragraph at lines 36--38
+\IL2/cmr/m/n/12 z^^e1-bav-n^^fdch i po-ba-ve-na t^^edm amuse|UNK|UNK|UNK dally-
+ing|UNK|UNK|UNK
+ []
+
+
+Overfull \hbox (84.27045pt too wide) in paragraph at lines 36--38
+\IL2/cmr/m/n/12 fro-li-cing|UNK|UNK|UNK hr^^e1t wan-to-ning|UNK|UNK|UNK open"$[
+]\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 UNK\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 UNK\O
+MS/cmsy/m/n/12 j\OML/cmm/m/it/12 UNK$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.40 ...3^^a1t wantoning otev^^c5^^99en^^c3^^bd" ^
+                                                   M
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.41 
+     
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.43 ...years cleaning toothbrush underwear bras"^
+                                                  M
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.44 
+     
+? 
+
+Overfull \hbox (8.69873pt too wide) in paragraph at lines 42--44
+[]\IL2/cmr/m/n/12 Preklad ji-ne-ho ob-raz-ku: "0000000102","young wo-man cle-a-
+ning te-eth","","single
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 ...art^^c3^^a1^^c4^^8dek pr^^c3^^a1dlo bras"^
+                                                  M|UNK|UNK|UNK p^^c3^^a9^^c...
+
+? 
+
+LaTeX Warning: Command \' invalid in math mode on input line 46.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 46.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 46.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 46.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 46.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 46.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.47 
+     
+? 
+Missing character: There is no ^^e9 in font cmmi12!
+Missing character: There is no ^^e8 in font cmmi12!
+Missing character: There is no ^^e8 in font cmmi12!
+Missing character: There is no ^^b9 in font cmmi12!
+Missing character: There is no ^^ec in font cmmi12!
+Missing character: There is no ^^ed in font cmmi12!
+
+Overfull \hbox (131.70033pt too wide) in paragraph at lines 45--47
+[]\IL2/cmr/m/n/12 Moses: "0000000102","young|UNK|UNK|UNK ^^bee-na ^^e8i^^b9-t^^
+ec-n^^ed te-eth","","single|UNK|UNK|UNK
+ []
+
+
+Overfull \hbox (9.32535pt too wide) in paragraph at lines 45--47
+\IL2/cmr/m/n/12 v^^f8e-n^^e9 ^^fast hy-gi-e-nic-k^^e9 zu-by zub-n^^ed kar-t^^e1
+-^^e8ek pr^^e1dlo bras"$[]\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 UNK\OMS/cmsy/m/n/1
+2 j\OML/cmm/m/it/12 UNK\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 UNKpeletitn$ 
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.49 ... spodn^^c3^^ad pr^^c3^^a1dlo podprsenky "^
+                                                   M
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.50 
+     
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+l.54 mail: https://mail.google.com/mail/u/0/#
+                                             search/pecina+%C3%BAkoly+ze+sch...
+
+? 
+
+Overfull \hbox (45.31918pt too wide) in paragraph at lines 52--55
+[]\IL2/cmr/m/n/12 Detekovane fra-ze: http://mufin.fi.muni.cz/ xbatko/keyword-cl
+ean-phrase-export.csv.gz
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.58  wc phrases_
+                 list.txt
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.61 
+     
+? 
+
+Overfull \hbox (37.2247pt too wide) in paragraph at lines 57--61
+[]\IL2/cmr/m/n/12 export fra-zi bez ome-ze-ni: wc phrases$[]\OML/cmm/m/it/12 is
+t:txt\IL2/cmr/m/n/12 1143513515183137131575\OML/cmm/m/it/12 phrases[]ist:txt \O
+MS/cmsy/m/n/12 ^^@
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.63  wc phrases_
+                 list.txt
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.65 
+     
+? 
+
+Overfull \hbox (79.19914pt too wide) in paragraph at lines 62--65
+[]\IL2/cmr/m/n/12 omezeni na ma-xi-mal-ni del-ku 4 slo-va: wc phrases$[]\OML/cm
+m/m/it/12 ist:txt\IL2/cmr/m/n/12 899244220461615677087\OML/cmm/m/it/12 phrases[
+]ist:txt$ 
+ []
+
+
+Overfull \hbox (21.46248pt too wide) in paragraph at lines 67--69
+[]\IL2/cmr/m/n/12 extrakce fra-zi: http://stackoverflow.com/questions/1643616/a
+lgorithms-to-detect-
+ []
+
+[9]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.80 /data/wiki_
                 dump_cs.xml
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.45 
+l.84 
      
 ? 
 
-Overfull \hbox (11.9973pt too wide) in paragraph at lines 39--45
+Overfull \hbox (11.9973pt too wide) in paragraph at lines 78--84
 []\IL2/cmr/m/n/12 Cesky dump: http://dumps.wikimedia.org/cswiki/20140612/ a csw
 iki-20140612-
  []
 
 
-Overfull \hbox (171.24666pt too wide) in paragraph at lines 39--45
+Overfull \hbox (171.24666pt too wide) in paragraph at lines 78--84
 \IL2/cmr/m/n/12 pages-articles-multistream.xml.bz2 /data/wiki$[]\OML/cmm/m/it/1
 2 ump[]s:xmlrakees \IL2/cmr/m/n/12 : \OML/cmm/m/it/12 extract[]ords[]rom[]iki\I
 L2/cmr/m/n/12 [\OML/cmm/m/it/12 cs\IL2/cmr/m/n/12 ]\OML/cmm/m/it/12 extrakcedoi
@@ -575,7 +786,7 @@ d\IL2/cmr/m/n/12 50000 \OML/cmm/m/it/12 >
  []
 
 
-Overfull \hbox (20.35364pt too wide) in paragraph at lines 39--45
+Overfull \hbox (20.35364pt too wide) in paragraph at lines 78--84
 \IL2/cmr/m/n/12 60\OML/cmm/m/it/12 MBtextucestinaobsahujenazacatkuhodnekratkych
 vygenerovanychclankutypu >
  []
@@ -583,17 +794,17 @@ vygenerovanychclankutypu >
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.47 ...thepiratebay.se/torrent/8114722/Wikipedia_
+l.86 ...thepiratebay.se/torrent/8114722/Wikipedia_
                                                   2013_English_DUMP
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.51 
+l.90 
      
 ? 
 
-Overfull \hbox (308.41069pt too wide) in paragraph at lines 46--51
+Overfull \hbox (308.41069pt too wide) in paragraph at lines 85--90
 []\IL2/cmr/m/n/12 Anglicky dump: torrent z pi-ra-te-bay http://thepiratebay.se/
 torrent/8114722/Wikipedia$[]013[]\OML/cmm/m/it/12 nglish[]UMP=data=wiki[]ump[]n
 :xmlrakees \IL2/cmr/m/n/12 :
@@ -602,60 +813,58 @@ torrent/8114722/Wikipedia$[]013[]\OML/cmm/m/it/12 nglish[]UMP=data=wiki[]ump[]n
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.55 rake es:extract_
+l.94 rake es:extract_
                      most_frequent_trigrams
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.56 
+l.95 
      
 ? 
 
-Overfull \hbox (59.3413pt too wide) in paragraph at lines 63--65
+Overfull \hbox (59.3413pt too wide) in paragraph at lines 102--104
 []\IL2/cmr/m/n/12 prekladova da-ta: moses - http://www.statmt.org/moses/RELEASE
 -2.1/binaries/macosx-
  []
 
-) [7]
+) [10]
 \openout2 = `kap3.aux'.
 
  (./kap3.tex
-Kapitola 3.
-) [8
+Kapitola 5.
+) [11
 
 
 
 ]
 \openout2 = `zaver.aux'.
 
- (./zaver.tex) [9
+ (./zaver.tex
+Kapitola 6.
+) [12
 
 
 
 ]
 \openout2 = `literatura.aux'.
 
- (./literatura.tex
-
-LaTeX Warning: Empty `thebibliography' environment on input line 16.
-
-) [10
+ (./literatura.tex) [13
 
 
 
-] [11
+] [14
 
 
-] [12
+] [15
 
-] [13
+] [16
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 270.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 270.
- (./prace.aux (./uvod.aux) (./kap1.aux) (./kap2.aux)
-(./kap3.aux) (./zaver.aux) (./literatura.aux))
+ (./prace.aux (./uvod.aux)
+(./kap1.aux) (./kap2.aux) (./kap3.aux) (./zaver.aux) (./literatura.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 270.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 270.
 
@@ -665,17 +874,17 @@ Package rerunfilecheck Warning: File `prace.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `prace.out':
-(rerunfilecheck)             Before: 67713B31017A3C6FDEB193E20BD492D3;4335
-(rerunfilecheck)             After:  4CFA79D0A4027CE9449F811D97E74241;4520.
+(rerunfilecheck)             Before: 18EE0FFB2205AFE1046F4CBD3395AD19;5505
+(rerunfilecheck)             After:  DE66359B51D73694E4E50B8ED2A91B65;5579.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 270.
  ) 
 Here is how much of TeX's memory you used:
- 9927 strings out of 494923
- 135547 string characters out of 6180164
- 215249 words of memory out of 5000000
- 13155 multiletter control sequences out of 15000+600000
- 14388 words of font info for 37 fonts, out of 8000000 for 9000
+ 9946 strings out of 494923
+ 135765 string characters out of 6180164
+ 216756 words of memory out of 5000000
+ 13170 multiletter control sequences out of 15000+600000
+ 16720 words of font info for 41 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  29i,8n,32p,751b,1011s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (17 pages, 47528 bytes).
+Output written on prace.dvi (20 pages, 64836 bytes).

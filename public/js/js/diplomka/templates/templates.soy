@@ -44,7 +44,7 @@
 {template .images}
 {foreach $hit in $images.hits.hits}
   <a href="http://www.profimedia.cz/image/detail/{$hit._id}" target="_blank" class="img-container">
-	 <div style="background-image: url('http://www.profimedia.cz/image/dynamicPreview/{$hit._id}')" alt="{$hit._source.keywords}" class="image"></div>
+	 <div style="background-image: url('http://mufin.fi.muni.cz/profimedia/bigImages/{$hit._id}')" alt="{$hit._source.keywords}" class="image"></div>
   <span class="img-metadata">
     <span class="img-name">{$hit._source.title}</span>
     <span class="img-tags">{$hit._source.keywords}</span>
