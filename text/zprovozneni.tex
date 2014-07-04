@@ -1,0 +1,43 @@
+\chapter{Instalace a zprovoznění}
+
+Celé anotační rozhraní je webová aplikace napsaná v jazyce Ruby a frameworku Ruby on Rails. Je k dispozici pod svobodnou licencí MIT. K jejímu spuštění potřebujete ruby verze alepoň 2.0 (nižší verze nejsou otestované), javu a ke stažení zdrojového kódu git. Program jde spustit na Linuxu a Macu.
+
+\section{Instalace}
+
+Zdrojový kód je volně dostupný na webu GitHubu\footnote{\url{https://github.com/hypertornado/diplomka}}. Stáhnou tedy lze příkazem
+
+\begin{lstlisting}[language=bash]
+git clone https://github.com/hypertornado/diplomka
+\end{lstlisting}
+
+Tento příkaz vytvoří adresář diplomka. Závislosti aplikace nainstalujete pomocí bundleru:
+
+\begin{lstlisting}[language=bash]
+bundle install
+\end{lstlisting}
+
+Instalace může vyžadovat přístup administrátora. Dále je potřeba stáhnout knihovnu elasticsearch\footnote{\url{http://www.elasticsearch.org/downloads/1-0-3/}} do adresáře bin/elasticsearch. Stačí verze 1.0 a vyšší. Ve verzi 1.2.1 jsme objevili menší chybu\footnote{\url{https://github.com/elasticsearch/elasticsearch/issues/6611}}, která je způsobena chybou v Javě a jde obejít nastavením delšího hostname počítače.
+
+Nyní je možné celý projekt spustit. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale veškeré AJAXové dotazy skončí chybou. V databázi nejsou importována data.
+
+\section{Práce s metadaty k obrázkům}
+
+Metadata k obrázkům a obrázky samotné jsou poskytovány firmou Profimedia a nejsou volně dostupné. Ke zprovoznění aplikace je nutné vložit CSV soubor \lstinline{keyword-cleaned-phrase-export.csv} do adresáře data.
+
+\section{Překlad metadat}
+Soubor obsahuje metadata k obrázkům v angličtině. Jedním z úkolů této práce je poskytnout doporučování obrázků i v jiných jazycích, primárně v českém jazyce. Bylo tedy nutné metadata přeložit. Pokoušeli jsme se použít volný nástroj na překlad Moses. Ve verzi 2.1\footnote{\url{http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/}} nabízí volně dostupné modely pro překlad z češtiny do angličtiny. I na SSD disku trvá několik hodin, než se překladový model načte do paměti. Překlad jednoho segmentu s tímto modelem byl poměrně pomalý (překlad metadat k jednomu obrázku trval zhruba 3 sekundy) a také dosti nepřesný. Například řádek
+
+\begin{lstlisting}
+"0000000003","little baby smiling","","child children baby babies infants kids childhood single faces body naked nake facial expressions smile smiling viewing watching laying fun amusing amusement amused amuse dallying frolicing playing wantoning open"^M
+\end{lstlisting}
+
+byl do čestiny přeložen takto:
+
+\begin{lstlisting}
+"0000000003","little|UNK|UNK|UNK dítě smiling","","child|UNK|UNK|UNK dětí , dětské děti kojence děti dětství jednotného čelí orgán nahé nake|UNK|UNK|UNK pořídili vyjádření usmívat usmívá odůvodněním , která zábavné sledovat zábavné zábavných i pobavena tím amuse|UNK|UNK|UNK dallying|UNK|UNK|UNK frolicing|UNK|UNK|UNK hrát wantoning|UNK|UNK|UNK open"^M|UNK|UNK|UNK
+\end{lstlisting}
+
+Je vidět poměrně velké množství nepřeložených slov (konconky \lstinline{|UNK}) a překlad je relativně nepřesný. Je možné 
+
+Nejprve příkazem \lstinline{rake data:export_profimedia_words_for_translation} vyexportujeme do souboru \lstinline{data/word_list.txt} seznam všech slov použitých v metadatech k obrázkům. Tento příkaz běží několik hodin i na moderním počítači s SSD diskem. Z Profimedia dat získáme seznam 352862 slov. Tento soubor je nutné přeložit z angličtiny do dalších podporovaných jazyků, v našem případě češtiny.
+

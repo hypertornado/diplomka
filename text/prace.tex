@@ -38,6 +38,7 @@
 \usepackage{graphicx}
 \usepackage{amsthm}
 \usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
 
 %% Balíček hyperref, kterým jdou vyrábět klikací odkazy v PDF,
 %% ale hlavně ho používáme k uložení metadat do PDF (včetně obsahu).
@@ -76,6 +77,20 @@
 % Trochu volnější nastavení dělení slov, než je default.
 \lefthyphenmin=2
 \righthyphenmin=2
+
+\lstset{breaklines=true, breakatwhitespace=true}
+
+\definecolor{codebg}{HTML}{EEEEEE}
+\definecolor{codeframe}{HTML}{CCCCCC}
+
+\definecolor{background}{HTML}{EEEEEE}
+
+\lstset{backgroundcolor=\color{codebg}}
+%\lstset{frame=single}
+%\lstset{framesep=10pt}
+\lstset{rulecolor=\color{codeframe}}
+%\lstset{upquote=true}
+\lstset{basicstyle=\ttfamily}
 
 %%% Titulní strana práce
 
@@ -244,8 +259,11 @@ information retrieval, image retrieval
 %%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
 \include{uvod}
 \include{kap1}
+\include{preklad}
 \include{kap2}
-\include{kap3}
+\include{html5}
+\include{zprovozneni}
+\include{evaluace}
 
 % Ukázka použití některých konstrukcí LateXu (odkomentujte, chcete-li)
 %\include{ukazka}

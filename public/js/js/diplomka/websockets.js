@@ -61,7 +61,7 @@ oo.diplomka.WebSockets.prototype.getImagesRequest = function(data) {
 
   //dont send same request twice
   if (this.requestSended != null && data.from == 0 && this.requestSended.text == data.text && this.requestSended.tags == data.tags && this.requestSended["language"] == data["language"]){
-    console.log("NO SENDING");
+    //console.log("NO SENDING");
     return;
   }
 
