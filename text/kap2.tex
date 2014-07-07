@@ -31,70 +31,70 @@ Dva postupy jak pouzit anglicka data v jinych jazycich. Bud je mozne prelozit vz
 Jak prelozit 20 milionu popisku? Jednou moznosti je preklad slovo od slova. Pouzit pouze slovnik. Preklad pomoci google je drahy. Stalo to zhruba 1300Kc. Preklad celych frazi by byl lepsi (automaticky objevi fraze), ale pomoci google velmi drahy. Rozchodil jsem tedy prekladovy nastroj Moses s modelem prilozenym ve verzi 2.1 (http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/). Po nekolikahodinovem nacitani se model nacetl (i kdyz mam SSD disk). Preklady v prolozenem modelu jsou velmi pomale (jeden segment trva priblizne 3s). Preklad neni idealni a mam spustu |UNK slov.
 
 Google:
-"0000000003", "malé dítě s úsměvem", "", "dítě děti dítě děti kojenci děti dětství jednotlivé plochy těla nahá nake výrazy obličeje, úsměvu, usměvavý sledování sledování kterým zábava zábavné zábavní pobavený pobavit laškoval frolicing hrát wantoning otevřený" ^ M
+%"0000000003", "malé dítě s úsměvem", "", "dítě děti dítě děti kojenci děti dětství jednotlivé plochy těla nahá nake výrazy obličeje, úsměvu, usměvavý sledování sledování kterým zábava zábavné zábavní pobavený pobavit laškoval frolicing hrát wantoning otevřený" ^ M
 
 Preklad jineho obrazku:
-"0000000102","young woman cleaning teeth","","single faces people humans young youth hands indoors interiors woman women females blond fair young adult s girls close view beauty home home dental bathrooms person portrait adult years half length portrait open mouth hygiene teeth dental care years cleaning toothbrush underwear bras"^M
+%"0000000102","young woman cleaning teeth","","single faces people humans young youth hands indoors interiors woman women females blond fair young adult s girls close view beauty home home dental bathrooms person portrait adult years half length portrait open mouth hygiene teeth dental care years cleaning toothbrush underwear bras"^M
 
 Moses:
-"0000000102","young|UNK|UNK|UNK žena čištění teeth","","single|UNK|UNK|UNK čelí mladí lidé , lidé mládež rukou uvnitř interiors|UNK|UNK|UNK žena žen , žen , blonďák spravedlivé mladé dívky zavřít dospělé s cílem krásy vnitřní vnitřní stomatologické koupelny portrét dlouhé roky polovina dospělé osoby portrét otevřené úst hygienické zuby zubní kartáček prádlo bras"^M|UNK|UNK|UNK péče let čištění
+%"0000000102","young|UNK|UNK|UNK žena čištění teeth","","single|UNK|UNK|UNK čelí mladí lidé , lidé mládež rukou uvnitř interiors|UNK|UNK|UNK žena žen , žen , blonďák spravedlivé mladé dívky zavřít dospělé s cílem krásy vnitřní vnitřní stomatologické koupelny portrét dlouhé roky polovina dospělé osoby portrét otevřené úst hygienické zuby zubní kartáček prádlo bras"^M|UNK|UNK|UNK péče let čištění
 
 Google Translate:
-"0000000102", "Mladá žena čištění zubů", "", "jednotlivé tváře lidí, lidé younge mládeží ruce interiéry ženě ženám ženy ženskému blond fair mladý dospělý s dívek close view krása domov domácí zubní koupelny osoba portrét dospělý let poloviční délka portrét otevřená ústa hygienické zubů zubní péče roky čistící kartáček na zuby spodní prádlo podprsenky "^ M
+%"0000000102", "Mladá žena čištění zubů", "", "jednotlivé tváře lidí, lidé younge mládeží ruce interiéry ženě ženám ženy ženskému blond fair mladý dospělý s dívek close view krása domov domácí zubní koupelny osoba portrét dospělý let poloviční délka portrét otevřená ústa hygienické zubů zubní péče roky čistící kartáček na zuby spodní prádlo podprsenky "^ M
 
 
-Detekovane fraze:
-http://mufin.fi.muni.cz/~xbatko/keyword-clean-phrase-export.csv.gz
-mail: https://mail.google.com/mail/u/0/#search/pecina+%C3%BAkoly+ze+sch%C5%AFzky/144dfd220249382b
+%Detekovane fraze:
+%http://mufin.fi.muni.cz/~xbatko/keyword-clean-phrase-export.csv.gz
+%mail: https://mail.google.com/mail/u/0/#search/pecina+%C3%BAkoly+ze+sch%C5%AFzky/144dfd220249382b
+
+% export frazi bez omezeni:
+%  wc phrases\_list.txt 
+%  1143513 5151831 37131575 phrases_list.txt
+% - take se neda prelozit rozumne v google
+
+% omezeni na maximalni delku 4 slova:
+%  wc phrases_list.txt
+%  899244 2204616 15677087 phrases_list.txt
 
 
-export frazi bez omezeni:
- wc phrases_list.txt 
- 1143513 5151831 37131575 phrases_list.txt
-- take se neda prelozit rozumne v google
-
-omezeni na maximalni delku 4 slova:
- wc phrases_list.txt
- 899244 2204616 15677087 phrases_list.txt
+% extrakce frazi:
+% http://stackoverflow.com/questions/1643616/algorithms-to-detect-phrases-and-keywords-from-text
 
 
-extrakce frazi:
-http://stackoverflow.com/questions/1643616/algorithms-to-detect-phrases-and-keywords-from-text
+% detektor jazyka:
+% trigramy, nefunguje na frazi "hello world", chce to dlouha data, ale pro bezne clanky to funguje dobře
+
+% \section{Poznamky}
+
+% Pouziji data z wiki dumpu.
 
 
-detektor jazyka:
-trigramy, nefunguje na frazi "hello world", chce to dlouha data, ale pro bezne clanky to funguje dobře
+% Cesky dump:
+% http://dumps.wikimedia.org/cswiki/20140612/ a cswiki-20140612-pages-articles-multistream.xml.bz2
+% /data/wiki_dump_cs.xml
+% rake es:extract_words_from_wiki[cs]
+% extrakce do id 50000 > 60 MB textu
+% cestina obsahuje na zacatku hodne kratkych vygenerovanych clanku typu >1. leden<
 
-\section{Poznamky}
+% Anglicky dump:
+% torrent z piratebay http://thepiratebay.se/torrent/8114722/Wikipedia_2013_English_DUMP
+% /data/wiki_dump_en.xml
+% rake es:extract_words_from_wiki[en]
+% extrakce do id 10000 > 70 MB textu
 
-Pouziji data z wiki dumpu.
+% application.rb obsahuje konstanty aplikace
 
-Cesky dump:
-http://dumps.wikimedia.org/cswiki/20140612/ a cswiki-20140612-pages-articles-multistream.xml.bz2
-/data/wiki_dump_cs.xml
-rake es:extract_words_from_wiki[cs]
-extrakce do id 50000 > 60 MB textu
-cestina obsahuje na zacatku hodne kratkych vygenerovanych clanku typu >1. leden<
+% vyrobim nejcastejsi trigramy pro cestinu a anglictinu z wiki dat pomoci:
+% rake es:extract_most_frequent_trigrams
 
-Anglicky dump:
-torrent z piratebay http://thepiratebay.se/torrent/8114722/Wikipedia_2013_English_DUMP
-/data/wiki_dump_en.xml
-rake es:extract_words_from_wiki[en]
-extrakce do id 10000 > 70 MB textu
+% Language data jsem stahnul z:
+% http://dumps.wikimedia.org/cswiki/latest/
 
-application.rb obsahuje konstanty aplikace
+% Ceska data jsou z:
+% /net/seznamdata/profiset/profi-text-cleaned.csv
 
-vyrobim nejcastejsi trigramy pro cestinu a anglictinu z wiki dat pomoci:
-rake es:extract_most_frequent_trigrams
+% prekladova data:
+% moses - http://www.statmt.org/moses/RELEASE-2.1/binaries/macosx-mavericks/bin/
 
-Language data jsem stahnul z:
-http://dumps.wikimedia.org/cswiki/latest/
-
-Ceska data jsou z:
-/net/seznamdata/profiset/profi-text-cleaned.csv
-
-prekladova data:
-moses - http://www.statmt.org/moses/RELEASE-2.1/binaries/macosx-mavericks/bin/
-
-prekladovy model:
-http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/
+% prekladovy model:
+% http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/

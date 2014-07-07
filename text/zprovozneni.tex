@@ -37,7 +37,36 @@ byl do čestiny přeložen takto:
 "0000000003","little|UNK|UNK|UNK dítě smiling","","child|UNK|UNK|UNK dětí , dětské děti kojence děti dětství jednotného čelí orgán nahé nake|UNK|UNK|UNK pořídili vyjádření usmívat usmívá odůvodněním , která zábavné sledovat zábavné zábavných i pobavena tím amuse|UNK|UNK|UNK dallying|UNK|UNK|UNK frolicing|UNK|UNK|UNK hrát wantoning|UNK|UNK|UNK open"^M|UNK|UNK|UNK
 \end{lstlisting}
 
-Je vidět poměrně velké množství nepřeložených slov (konconky \lstinline{|UNK}) a překlad je relativně nepřesný. Je možné 
+Je vidět poměrně velké množství nepřeložených slov (koncovky \lstinline{|UNK}) a překlad je relativně nepřesný. Je pravděpodobné, že by s lepšími daty šel natrénovat lepší překladový a jazykový model. Strojový překlad není hlavním tématem této práce, takže bylo jednodušší komerční automatický překlad Google Translate, který přeloží ukázková metadata takto:
 
+\begin{lstlisting}
+"0000000003", "malé dítě s úsměvem", "", "dítě děti dítě děti kojenci děti dětství jednotlivé plochy těla nahá nake výrazy obličeje, úsměvu, usměvavý sledování sledování kterým zábava zábavné zábavní pobavený pobavit laškoval frolicing hrát wantoning otevřený" ^ M
+\end{lstlisting}
+
+I z této ukázky je zřejmé, že Google poskytuje kvalitnější překlad, než anglicko-český překladový model v releasu Mosese. Google poskytuje překlad zdarma přes webové rozhraní. Pokud se ale do překladového formuláře nahraje nespecifikované větší množství dat, přestane překlad fungovat. Google pro překlad poskytuje placené API. Platí se XX amerických dollarů za přeložené slovo. Korpus Profimedie obsahuje zhruba (wc vystup 20119222 347129204 4811998848), takze by cely překlad stál XX dollaru. Jelikož se slova v textu opakuji, lze použít překlad slovo po slovu. Ještě lepší by bylo překládat přímo klíčové fráze. Bohužel korpus Profimedie jednotlivé fráze neodděluje. Je ale možné použít učící algoritmus a klíčové fráze detekovat.
+
+\subsection{Export slov a frází}
 Nejprve příkazem \lstinline{rake data:export_profimedia_words_for_translation} vyexportujeme do souboru \lstinline{data/word_list.txt} seznam všech slov použitých v metadatech k obrázkům. Tento příkaz běží několik hodin i na moderním počítači s SSD diskem. Z Profimedia dat získáme seznam 352862 slov. Tento soubor je nutné přeložit z angličtiny do dalších podporovaných jazyků, v našem případě češtiny.
+
+\section{Jazykový korpus}
+Tato práce potřebuje jazykové korpusy pro podporované jazyky ze dvou důvodů. První je potřeba pro určení relativní jazykové frekvence slov v algoritmu TF-IDF. Zadruhé je potřeba jazykový korpus pro rozpoznávání jazyků. Přirozeným jazykovým korpusem by mohla být samotná Profimedia data, ale pro oba účely jsou tato data nepoužitelná. Klíčová slova a názvy obrázků jsou odlišnými druhy textů, než je průměrný článek. Je tedy potřeba jazyková data získat jinde.
+
+Wikipedia se jako korpus velmi hodí. Textový obsah je pod licencí Creative Commons a jeho struktura je velmi podobná běžnému publicistickému článku. Data se dají získat stažením přímo ze serverů wikipedie (pro češtinu zde), nebo pomocí sdílených torrentů. Práce wiki dumpy všech podporovaných jazyků v adresáři data pod názvem typu \lstinline{wiki_dump_jazyk.xml}. Pro práci s daty z wikipedie je potřeba nejprve převést XML data do textového formátu. K tomu slouží python skript \lstinline{lib/WikiExtractor.py} od Wikipedie. Pro převod anglických dat lze použít příkaz:
+
+\begin{lstlisting}
+rake wiki:extract_words_from_wiki en
+\end{lstlisting}
+
+Stejný příkaz je potřeba spustit i pro ostatní podporované jazyky. Příkaz vytvorí v \lstinline{data/wiki_en} adresářovou strukturu. Není potřeba převést všechna data, pouze tolik, abychom dostali reprezentativní korpus. Pro angličtinu stačí převést zhruba 10000 článků, pro podobné množství českých dat je potřeba převést zhruba 20000 článků (údaj o exportovaných článcích je průběžně vypisován na konzoli).
+
+Nyní je možné vytvořit seznam slov v korpusu s frekvencemi. Ve skutečnosti nás zajímají pouze stemy slov, ne jednotlivé tvary. Příkaz
+
+\begin{lstlisting}
+rake wiki:frequency_list_from_wiki
+\end{lstlisting}
+
+vytvoří seznam slov a jejich frekvencí s cestou \lstinline{data/wiki_freq_list_count.en}.
+
+
+
 

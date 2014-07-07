@@ -1,5 +1,51 @@
 namespace :data do
 
+  task :translate_phrases => :environment do
+    translation_path = "#{File.dirname(__FILE__)}/../../data/translation_data/phrase-table.3"
+
+    phrases_path = "#{File.dirname(__FILE__)}/../../data/phrases_list.txt"
+
+    dictionary = Hash.new(nil)
+
+    File.open(phrases_path).each do |line|
+      line.chomp!
+      dictionary[line] = ["", 0.to_f]
+    end
+
+
+
+    i = 0
+    File.open(translation_path).each do |line|
+      print "\r#{i}"
+      i += 1
+
+      #puts line if (i % 100000 == 0)
+
+      parts = line.split(" ||| ")
+      if dictionary.has_key?(parts[0])
+
+        val = dictionary[parts[0]]
+        score = parts[2].split(" ")[0].to_f
+
+        if val[1] <= score
+          val[0] = parts[1]
+          val[1] = score
+          dictionary[parts[0]] = val
+        end
+      end
+    end
+
+    file_out = File.open("#{File.dirname(__FILE__)}/../../data/phrases_list_translated_cs.txt", "w")
+
+    dictionary.each do |k, v|
+      if (v[1] > 0)
+        line = "#{k}\t#{v[0]}\n"
+        file_out.write(line)
+      end
+    end
+
+  end
+
   task :export_profimedia_words_for_translation => :environment do
     path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
 
