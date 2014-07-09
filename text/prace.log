@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  6 JUL 2014 17:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  9 JUL 2014 16:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -461,9 +461,9 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip46
 ))
-(./prace.aux (./uvod.aux) (./kap1.aux) (./preklad.aux) (./kap2.aux)
-(./html5.aux) (./zprovozneni.aux) (./anotacni_rozhrani.aux) (./evaluace.aux)
-(./zaver.aux) (./literatura.aux))
+(./prace.aux (./uvod.aux) (./kap1.aux) (./preklad.aux) (./backend.aux)
+(./stemmer.aux) (./kap2.aux) (./html5.aux) (./zprovozneni.aux)
+(./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux) (./literatura.aux))
 \openout1 = `prace.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
@@ -531,12 +531,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 3.
-
-Overfull \hbox (19.98756pt too wide) in paragraph at lines 21--21
- [][] [] [][]  
- []
-
-[1
+ [1
 
 
 ])
@@ -581,34 +576,69 @@ Kapitola 4.
 
 
 ]
-\openout2 = `kap2.aux'.
+\openout2 = `backend.aux'.
 
- (./kap2.tex
+ (./backend.tex
 Kapitola 5.
+
+Overfull \hbox (223.67973pt too wide) in paragraph at lines 9--9
+[][][][][][][][][]| 
+ []
+
 [10
 
 
 
-]) [11]
+]
+Overfull \hbox (47.57332pt too wide) in paragraph at lines 27--28
+\IL2/cmr/m/n/12 kte-r^^fd m^^f9-^^bee m^^edt struk-tu-ru ja-ko na ob-r^^e1z-ku 
+(sour-ce http://strongloop.com/strongblog/node-
+ []
+
+[11]) [12]
+\openout2 = `stemmer.aux'.
+
+ (./stemmer.tex
+Kapitola 6.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2004/09/05 1.3 listings language file
+)) [13
+
+
+
+]
+\openout2 = `kap2.aux'.
+
+
+(./kap2.tex
+Kapitola 7.
+) [14
+
+
+
+]
 \openout2 = `html5.aux'.
 
  (./html5.tex
-Kapitola 6.
-[12
+Kapitola 8.
+[15
 
 
 
-]) [13]
+]) [16]
 \openout2 = `zprovozneni.aux'.
 
  (./zprovozneni.tex
-Kapitola 7.
+Kapitola 9.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
-) [14
+) [17
 
 
 
@@ -617,17 +647,17 @@ Overfull \hbox (0.32433pt too wide) in paragraph at lines 49--50
 \IL2/cmr/m/n/12 Nejprve p^^f8^^ed-ka-zem [][][][][][][][] vy-
  []
 
-[15]
+[18]
 Overfull \hbox (10.93391pt too wide) in paragraph at lines 68--69
 []\IL2/cmr/m/n/12 vytvo^^f8^^ed se-znam slov a je-jich frek-ven-c^^ed s ces-tou
- [][][][][][][]. 
+ [][][][][][][].
  []
 
-) [16]
+[19]) [20]
 \openout2 = `anotacni_rozhrani.aux'.
 
  (./anotacni_rozhrani.tex
-Kapitola 8.
+Kapitola 10.
 LaTeX Font Info:    Font shape `IL2/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 11.
 
@@ -642,7 +672,7 @@ Overfull \hbox (24.30417pt too wide) in paragraph at lines 29--30
 ][][].
  []
 
-[17
+[21
 
 
 
@@ -651,19 +681,19 @@ Overfull \hbox (1.3919pt too wide) in paragraph at lines 85--86
 [][][][][][][][][]\IL2/cmr/m/n/12 . Po-kud te-dy im-por-to-va-n^^fd sou-
  []
 
-[18]
+[22]
 File: anotacni_rozhrani.eps Graphic file (type eps)
  <anotacni_rozhrani.eps>
 Overfull \hbox (14.22638pt too wide) in paragraph at lines 91--92
  [][] 
  []
 
-) [19]
+) [23]
 \openout2 = `evaluace.aux'.
 
  (./evaluace.tex
-Kapitola 9.
-) [20
+Kapitola 11.
+) [24
 
 
 
@@ -671,44 +701,45 @@ Kapitola 9.
 \openout2 = `zaver.aux'.
 
  (./zaver.tex
-Kapitola 10.
-) [21
+Kapitola 12.
+) [25
 
 
 
 ]
 \openout2 = `literatura.aux'.
 
- (./literatura.tex) [22
+ (./literatura.tex) [26
 
 
 
-] [23
+] [27
 
 
-] [24
+] [28
 
-] [25
+] [29
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 321.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 321.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 323.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 323.
  (./prace.aux (./uvod.aux)
-(./kap1.aux) (./preklad.aux) (./kap2.aux) (./html5.aux) (./zprovozneni.aux)
-(./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux) (./literatura.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 321.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 321.
+(./kap1.aux) (./preklad.aux) (./backend.aux) (./stemmer.aux) (./kap2.aux)
+(./html5.aux) (./zprovozneni.aux) (./anotacni_rozhrani.aux) (./evaluace.aux)
+(./zaver.aux) (./literatura.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 323.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 323.
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 11EA5F5DDB396B5F0206CB3033F96714;8948.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 321.
+(rerunfilecheck)             Checksum: 632DFDFF3BC89C73BDC86168DE76B98E;9719.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 323.
  ) 
 Here is how much of TeX's memory you used:
- 10815 strings out of 494923
- 146584 string characters out of 6180164
- 273927 words of memory out of 5000000
- 13990 multiletter control sequences out of 15000+600000
+ 10956 strings out of 494923
+ 148496 string characters out of 6180164
+ 275439 words of memory out of 5000000
+ 14112 multiletter control sequences out of 15000+600000
  17659 words of font info for 44 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 36i,8n,53p,848b,1809s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,8n,49p,1050b,1809s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (29 pages, 129860 bytes).
+Output written on prace.dvi (33 pages, 165012 bytes).

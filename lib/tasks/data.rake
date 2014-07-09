@@ -1,7 +1,7 @@
 namespace :data do
 
   task :translate_phrases => :environment do
-    translation_path = "#{File.dirname(__FILE__)}/../../data/translation_data/phrase-table.3"
+    translation_path = "#{File.dirname(__FILE__)}/../../data/phrase_table_en_cs.txt"
 
     phrases_path = "#{File.dirname(__FILE__)}/../../data/phrases_list.txt"
 
@@ -18,8 +18,6 @@ namespace :data do
     File.open(translation_path).each do |line|
       print "\r#{i}"
       i += 1
-
-      #puts line if (i % 100000 == 0)
 
       parts = line.split(" ||| ")
       if dictionary.has_key?(parts[0])

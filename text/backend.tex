@@ -1,0 +1,57 @@
+\chapter{Backend}
+
+Backend je jednou z klíčových částí aplikace. Kromě obsluhy uživatele statickými soubory (HTML, CSS, Javascript) je jeho hlavní úlohou poskytnou API pro vyhledávání.
+
+\section{Databáze}
+
+Úkolem databáze je uložit data a umožnit jejich prohledávání. Uživatelé této aplikace nemají možnost databázi modifikovat. Zápis do databáze provede administrátor pouze jednou před startem aplikace. Důležitým požadavkem je důraz na rychlost a snadnou škálovatelnost. V posledních několika letech vzniklo mnoho nových databází v kategorii vágně označené jako NoSQL. Tato kategorie databází se těžko popisuje, na každou popsanou vlastnost existuje NoSQL databáze, která tuto podmínku nesplňuje. Obecně ale lze říct že NoSQL databáze nepracují s prvky v tabulkovém uspořádání. Jejich výhodou oproti standardním relačním databázím může být vyšší výkon a snadná škálovatelnost.
+
+Nevýhodou je většinou obtížnější práce s daty. Většina NoSQL databází například mapodporuje databázové transakce a vůbec celý ACID. Pro práci s databázovými daty se často používá model Map Reduce. Algoritmus Map Reduce vyvinula a publikovala společnost Google, která na něj má i patent. Google však oznámil, že algoritmus MapReduce postupně přestává používat\footnote{\url{http://www.datacenterknowledge.com/archives/2014/06/25/google-dumps-mapreduce-favor-new-hyper-scale-analytics-system/}}.
+
+První verze aplikace byla postavena na databázi CouchBase. Výhodou CouchBase je dobrý výkon, velmi dobrá dokumentace a také podpora knihoven pro mnoho jazyků přímo od společnosti Couchbase. Brzy se však ukázalo, že implementace textového vyhledávání v Couchbase by byla velmi náročná.
+
+Vhodnější pro daný účel se ukázala knihovna Elasticsearch. Nejedná se v pravém smyslu o databázi. Jejím hlavním cílem je poskytnout snadné vyhledávání nad daty. Je postavená nad knihovnou Apache Lucene a poskytuje snadnou škálovatelnost. Komunikace mezi knihovnou a klientem probíhá pomocí RESTového HTTP API. Hlavním podporovaným formátem dat je JSON. Elasticsearch poskytuje programátorovi velké možnosti v nastavení prohledávání. V textovém vyhledávání může uživatel databáze použít všechny tokenizery a stemmery z knihovny Lucene. Důležitou vlastností je, že u hledaných slov může uživatel databáze určit váhu jednotlivých slov. V průběhu implementace aplikace navíc vyšla verze knihovny 1.0.
+
+\section{Programovací jazyk}
+
+Se vzrůstající popularitou webů vzniká stále větší množství webových frameworků a dokonce programovacích jazyků zaměřených primárně na programování pro web.
+
+\subsection{NodeJS}
+Jedním z nových trendů je tvorba webového backendu v Javascriptu pomocí knihovny NodeJS. Frontendoví vývojáři jsou prakticky nucení Javascript používat. Pokud se v Javascriptu tvoří i backendová část aplikace, může snadněji dojít ke sdílení kódu i pracovních pozic. Trend psaní všech aplikací v Javascriptu glosoval již před sedmi lety Jeff Atwood ve svém pravidle:
+
+\begin{lstlisting}
+Any application that can be written in JavaScript, will eventually be written in JavaScript.
+Vše co může být napsáno v Javascriptu, bude v Javascriptu napsáno.
+\end{lstlisting}
+
+Nevýhody použití Javascriptu jako backendového programovacího jazyka jsou poměrně zřejmé. Javascript byl navržen pro programování webového frontendu, jeho standartní knihovna je v porovnání s ostatními jazyky velmi chudá, podpora objektového programování je celkem nepřímočará. Obsáhlý kód v Javascriptu může být poměrně nepřehledný a jazyk svádí k vytvoření takzvaného \uv{callback hell}, který může mít strukturu jako na obrázku (source http://strongloop.com/strongblog/node-js-callback-hell-promises-generators/). Pokud chce navíc programátor sdílet kód z backendu i na frontendu, musí být kód kompatibilní s podporovanými prohlížeči. Funkce pro jednodušší práci s polem podporuje webový prohlížeč Internet Exporer až od verze 9 [http://kangax.github.io/compat-table/es5/]. V součtu nám převažily nevýhody NodeJS frameworku na výhodami a myšlenku vývoje backendu v Javascriptu jsme opustily.
+
+\begin{lstlisting}
+doAsync1(function () {
+  doAsync2(function () {
+    doAsync3(function () {
+      doAsync4(function () {
+    })
+  })
+})
+\end{lstlisting}
+
+\subsection{Go}
+
+Go (známý také jako golang) je programovací jazyk od společnosti Google. První stabilní verze byla zveřejněna v Květnu 2012. Go je kompilovaný, staticky typovaný jazyk s garbage collectorem. Syntaxe je inspirována jazykem C a přizpůsobena pro rychlou kompilaci. Velkou výhodou je snadná práce s vlákny pomocí \uv{go rutin}. Programátoři v Javě, nebo C++ může překvapit poněkud netypická podpora práce s objekty.
+
+První verze aplikace byla napsána právě v jazyce Go. V praxi se ukázaly všechny výše uvedené výhody. Hlavní nevýhodou se však ukázal nedostatek kvalitních knihoven. Přestože je jazyk velmi mladý, stal se velmi populárním, o čemž svědčí například počet repozitářů na GitHubu, nebo otázek na StackOverflow. Bude to ovšem trvat ještě nějaký čas, než se knihovny pro go a jejich vývoj stabilizují. Jeden z nyní nejpopulárnějších webových frameworků pro go --- Martini --- v době začátku práce na aplikaci ani neexistoval. Právě nedostatek knihoven pro go vedl k volbě jiného jazyka. Rozhodujícím pro opuštění backendu v jazyce go byla neexistující knihovna pro práci s Elasticsearch. API je sice postaveno na protokolu HTTP, takže šlo s Elasticsearch komunikovat bez použití specializované knihovny, v praxi se to ovšem ukázalo být problematické. Vývoj aplikace si žádal testování různých nastavení a rychlé prototypování v kódu. 
+
+Z interních zdrojů máme informaci o tom, že se Elasticsearch chystá vytvořit knihovnu i pro jazyk Go. Pro naše účely se ukázalo výhodnější přepsat aplikaci do dynamického jazyka s lepší podporou pro Elasticsearch.
+
+\subsection{Ruby a Ruby on Rails}
+
+Ruby je dynamicky typovaný jazyk, silně inspirovaný Perlem s důslednou podporou objektového programování. Popularita Ruby vzrostla zejména kvůli webovému frameworku Ruby on Rails, který je v Ruby napsaný. RoR zpopularizovaly koncept Model-View-Controller při tvorbě webových aplikací. Backend aplikace byl nakonec kompletně přepsán jako aplikace v Ruby on Rails. Elasticsearch poskytuje pro práci s Ruby vlastní knihovnu. Další výhodou se ukázala podpora knihovny Rake, což je jakási obdoba Makefile skriptů v Ruby. Pomocí Rakefilu jdou napsat přehledné úlohy pro manipulaci s daty. 
+
+Standartní implementace jazyka Ruby byla v minulosti kritizována pro svou pomalost. V průběhu práce na této aplikaci vyšla verze Ruby 2.0, která Ruby dosti zrychluje. Tato rychlost byla pro aplikaci shledána dostatečnou.
+
+
+
+
+
+

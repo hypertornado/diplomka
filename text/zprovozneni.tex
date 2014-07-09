@@ -65,8 +65,42 @@ Nyní je možné vytvořit seznam slov v korpusu s frekvencemi. Ve skutečnosti 
 rake wiki:frequency_list_from_wiki
 \end{lstlisting}
 
-vytvoří seznam slov a jejich frekvencí s cestou \lstinline{data/wiki_freq_list_count.en}.
+vytvoří seznam slov a jejich frekvencí s cestou \lstinline{data/wiki_freq_list_count.en}. Ve skutečnosti nás nezajímají všechna slova z korpusu wikipedie, ale pouze ta, která se vyskytují mezi klíčovými slovy v Profimedia korpusu. Příkazem
 
+\begin{lstlisting}
+rake data:create_tf_df_list
+\end{lstlisting}
+
+se z korpusu profimedia dat exportují stemy všech slov v profimedia korpusu spolu z hodnotami udávajícími frekvenci termínu v celém korpusu (TF) a frekvenci toho, v kolika popiskách obrázků se slovo objevilo (DF). Pro angličtinu jsou tato data uložena do souboru \lstinline{data/tf_df_list_en.txt}. Nyní můžeme spárovat informaci o stemech z wikipedie a nahrát je do databáze. Párování se provede příkazem:
+
+\begin{lstlisting}
+rake data:pair_profimedia_and_wiki_data
+\end{lstlisting}
+
+který vytvoří soubor \lstinline{data/paired_wiki_and_profimedia.txt} se statistikami všech stemů z Profimedia korpusu.
+
+
+\section{Příprava dat pro detekci jazyků}
+
+Automatická detekce jazyka probíhá ve frontendové části. Ke svému chodu ale potřebuje data z korpusu, konkrétně seznam nejčastějších trigramů pro každý podporovaný jazyk. Příkaz
+
+\begin{lstlisting}
+rake trigrams:extract_most_frequent_trigrams
+\end{lstlisting}
+
+vytvoří pro každý jazyk seznam padesáti nejčastějších trigramů. Seznam pro angličtinu je uložen v souboru \lstinline{data/most_frequent_trigrams_en.txt}. Příkaz
+
+\begin{lstlisting}
+rake trigrams:trigrams_to_javascript_classes
+\end{lstlisting}
+
+pracuje se seznamy nejčastějších trigramů ze kterých vytvoří javascriptovou třídu \lstinline{oo.diplomka.Languages.Data} v notaci Google Closure. Ta je uložena v souboru \lstinline{public/js/js/diplomka/languages/data.js}.
+
+\section{Import dat do databáze}
+
+Veškerá data jsou importována do databáze elasticsearch. Aplikace očekává Elasticsearch připojený na portu 9200.
+
+\section{Import metadat obrázků}
 
 
 
