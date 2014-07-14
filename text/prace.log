@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  9 JUL 2014 16:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  14 JUL 2014 12:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -653,7 +653,12 @@ Overfull \hbox (10.93391pt too wide) in paragraph at lines 68--69
  [][][][][][][].
  []
 
-[19]) [20]
+[19]
+Overfull \hbox (4.50294pt too wide) in paragraph at lines 107--108
+\IL2/cmr/m/n/12 mo-c^^ed API el-sa-tic-search na ad-re-se [][][][]. 
+ []
+
+) [20]
 \openout2 = `anotacni_rozhrani.aux'.
 
  (./anotacni_rozhrani.tex
@@ -730,16 +735,16 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 323.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 323.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 323.
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 632DFDFF3BC89C73BDC86168DE76B98E;9719.
+(rerunfilecheck)             Checksum: 2C8563F0B299B64CA2E6823015E619B3;10056.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 323.
  ) 
 Here is how much of TeX's memory you used:
- 10956 strings out of 494923
- 148496 string characters out of 6180164
- 275439 words of memory out of 5000000
- 14112 multiletter control sequences out of 15000+600000
+ 10959 strings out of 494923
+ 148548 string characters out of 6180164
+ 275443 words of memory out of 5000000
+ 14115 multiletter control sequences out of 15000+600000
  17659 words of font info for 44 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  33i,8n,49p,1050b,1809s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (33 pages, 165012 bytes).
+Output written on prace.dvi (33 pages, 171400 bytes).

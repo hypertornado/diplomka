@@ -1,3 +1,24 @@
 \chapter{Tvorba multijazyčného vyhledávání}
 
+Jedním z požadavků na aplikaci je poskytnout doporučení obrázků k textu i pro texty v českém jazyce. Dodaná metadata jsou v jazyce anglickém. Vzhledem k tomu, že metadat k obrázkům je více než 20 milionů, nepřipadá lidský překlad v úvahu z časových i finančních důvodů. Jedinou reálnou možností je použít překlad strojový.
+
+\section{Strojový překlad}
+
+Strojový překlad jako obor zažívá velký rozvoj. Potřeba překladu stále celosvětově prudce stoupá. S tím se zvyšuje poptávka po lepším strojovém překladu a zároveň také vzniká více lidských překladů, které pak jde použít jako zdrojová data k překladům strojovým. Existují různé metody strojového překladu. Na jednu stranu existují pravidlové systémy, které podle pravidel zapsaných překladately převádí text ze zdrojového do cílového jazyka. Na druhou stranu jedním z nejobecnějších řešení je frázový překlad.
+
+\section{Frázový strojový překlad}
+
+Frázový překlad používá více automatický způsob. Ke své práci potřebuje databázi přeložených frází. Fráze jsou několikaslovné kusy přeloženého textu. Typicky se získávají z paralelního korpusu textů ve zdrojovém a cílovém jazyce. Pro extrakci frází z paralelního korpusu existují knihovny jako například GIZA.
+
+Dalším důležitým vstupem strojového frázového systému je korpus cílového jazyka, ze kterého se vytvoří jazykový model. Ten slouží zejména k tomu, aby k sobě poskládané fráze v cílovém jazyce dobře seděli. Pokud máme překladový i jazykový model, můžeme vyjádřit pravděpodobnost překladu pomocí vzorce:
+
+Toto je pouze zjednodušený pohled na statistický frázový překlad. Reálné algoritmy ještě například používají model na reordering slov.
+
+
+
+
+
+
+Spatne preklady: single = jednoluzkovy, misto treba jedinny, neprizpusobena domena prekladu nasi domene
+
 Metadata k obrázkům jsou v anglickém jazyce. Tato práce se snaží 

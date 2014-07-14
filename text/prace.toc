@@ -16,6 +16,8 @@
 \contentsline {section}{\numberline {3.4}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i }: jak\IeC {\'e} algoritmy zvoleny, z\IeC {\'\i }sk\IeC {\'a}n\IeC {\'\i } tr\IeC {\'e}ninkov\IeC {\'y}ch dat}{8}{section.3.4}
 \contentsline {section}{\numberline {3.5}Evaluace v\IeC {\'y}sledk\IeC {\r u}}{8}{section.3.5}
 \contentsline {chapter}{\numberline {4}Tvorba multijazy\IeC {\v c}n\IeC {\'e}ho vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i }}{9}{chapter.4}
+\contentsline {section}{\numberline {4.1}Strojov\IeC {\'y} p\IeC {\v r}eklad}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Fr\IeC {\'a}zov\IeC {\'y} strojov\IeC {\'y} p\IeC {\v r}eklad}{9}{section.4.2}
 \contentsline {chapter}{\numberline {5}Backend}{10}{chapter.5}
 \contentsline {section}{\numberline {5.1}Datab\IeC {\'a}ze}{10}{section.5.1}
 \contentsline {section}{\numberline {5.2}Programovac\IeC {\'\i } jazyk}{10}{section.5.2}

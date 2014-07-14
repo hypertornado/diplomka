@@ -98,9 +98,18 @@ pracuje se seznamy nejčastějších trigramů ze kterých vytvoří javascripto
 
 \section{Import dat do databáze}
 
-Veškerá data jsou importována do databáze elasticsearch. Aplikace očekává Elasticsearch připojený na portu 9200.
+Veškerá data jsou importována do databáze elasticsearch. Aplikace očekává Elasticsearch připojený na portu 9200. Samotná data se importují příkazem:
+
+\begin{lstlisting}
+rake es:import_image_metadata
+\end{lstlisting}
+
+Tento vytvoří v elasticsearch index diplomka. Poté nastaví explicitní mapování v celém indexu. Pokud se mapování explicitně nenastaví, elasticsearch se snaží data namapovat podle jednoduchých heuristik. Například text rozdělí na slova, která pak převede na malá písmena a upraví defaultním stemmerem. Aplikace se však o stemming a převedení na malá písmena stará sama, mapování tedy říká, aby nahraný text oddělil pouze pomocí mezer na slova a dále nezpracovával. Vyhledávací dotaz je pak rozdělen také pouze pomocí mezer. Nastavené mapování lze ověřit pomocí API elsaticsearch na adrese \url{http://localhost:9200/diplomka/_mapping/}.
+
+Po vytvoření indexu může začít samotný import dat. Data z každého řádku Profimedia dat je převeden do formátu JSON. Data obsahují položky locator, title 
 
 \section{Import metadat obrázků}
+
 
 
 
