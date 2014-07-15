@@ -49,6 +49,41 @@ namespace :data do
 
   end
 
+  task :export_profimedia_phrases_for_translation => :environment do
+    path = "#{File.dirname(__FILE__)}/../../data/keyword-clean-phrase-export.csv"
+
+    src_encoding = "Windows-1252"
+    target_encoding = "utf-8"
+
+    vocabulary = {}
+
+    i = 0
+    File.open(path).each do |line|
+      print "\r#{i}"
+      line = UnicodeUtils.downcase(line, :cs)
+
+      if ImportLine.valid? line
+        phrases = ImportLine.get_phrases(line)
+        phrases.each {|p| vocabulary[p] = true}
+      end
+
+      i += 1
+    end
+    print "\r"
+
+    file = File.open("#{File.dirname(__FILE__)}/../../data/phrases_list.txt", "w")
+
+    i = 0
+    vocabulary.each do |k, v|
+      line = "#{k}\n"
+      print "\rwriting #{i}"
+      file.write(line)
+      i += 1
+    end
+
+    print "\r"
+  end
+
   task :translate_phrases => :environment do
     translation_path = "#{File.dirname(__FILE__)}/../../data/phrase_table_en_cs.txt"
 

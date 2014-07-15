@@ -1,0 +1,96 @@
+\chapter{Teorie: Jak najít vhodné obrázky}
+
+\section{Popis datové sady}
+
+Datová sada poskytnutá firmou Profimedia obsahuje $20\ 014\ 394$ oanotovaných obrázků ve formě CSV souboru "profi-text-cleaned.csv". CSV obsahuje sloupce "locator","title","description","keywords". Sloupec locator obsahuje ID obrázku v databázi Profimedia. Sloupec description je prázdný. Sloupce title a keywords obsahují řetězce anglických slov popi sujících obrázek a oddělených mezerou.
+
+Příklad jednoho řádku souboru profi-text-cleaned.csv:
+
+
+\begin{lstlisting}
+"0000000980","hradec kings holy ghost cathedral","", "outdoors nobody urban scenes architecture houses towers czech czech republic europe buildings build history historical churches church fronts holy ghost cathedral spirit ceska republika cathedrals sv hradec kralove"^M
+\end{lstlisting}
+
+Na příkladu je vidět, že data obsahují fráze jako "holy ghost cathedral", tyto fráze však nejsou strojově čitelně vyznačené. Dalším problémem je špatný překlad dat do angličtiny. Fráze "hradec kings" vznikla evidentně doslovným překladem názvu "hradec králové".
+
+Důležitým aspektem dat je jejich nepodobnost běžnému novinovému textu. Anotované texty neobsahují většinu nejfrekventovanějších anglických slov.
+
+\section{Teoretické cíle}
+
+V teoretické části je hlavním cílem práce nalézt nejvhodnější metodu extrakce klíčových slov textu. Tato klíčová slova pak budou použita při vyhledávání ilustračních obráyků v databázi Profimedie. Celá práce, pokud nebude uvedeno jinak, označuje za slova stemy vstupních slov. Jako stemmer se využívá ??? stemmer.
+
+Vstupní text tedy nejprve rozdělíme na slova. Čísla a interpunkce nás v této úloze nezajímají, jelikož se v datech nenachází. Ze slov pak získáme stemy. Vstupem algoritmu pro nalezení klíčových slov tedy bude množina vhodných stemů. Ke každému stemu si ještě uložíme jednu jeho nestemovou variantu, kterpu pak můžeme zobrazit uživateli.
+
+Nyní můžeme použít některý z algoritmů na extrakci klíčových slov uvedených v další kapitole.
+
+\section{Rešerše, vhodné algoritmy}
+
+Algoritmy na extrakci klíčových slov lze rozdělit do dvou kategorií. V jedné máme k dispozici korpus podobných dokumentů, druhá kategorie tento korpus ke své práci nepotřebuje.
+
+\subsection{TF-IDF}
+
+Technika TF-IDF je známý algoritmus na měření významnosti slov v textu. Využívá korpusu dokumentů $D$ a dvou složek. 
+
+\begin{equation}
+  TFIDF(t,d,n,N)= TF(t,d)\times IDF(n,N)
+\end{equation}
+
+Složka $TF$ znamená $TERM\ FREQUENCY$ a pokud $t$ je slovo a $d \in D$ je dokument, je $TF$
+
+\begin{equation}
+ TF(t,d) = \left\{ \begin{array}{l l} 1 & \mathrm{pokud}\ t \in d \\
+  0 & \mathrm{jinak} \end{array} \right.
+\end{equation}
+
+\begin{equation}
+ TF(t,d) = \sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}\ slovo = t \\
+  0 & \mathrm{jinak} \end{array}
+\end{equation}
+
+Jedná se tedy o frekvenci slova (stemu) v dokumentu.
+
+Složka $IDF$, tedy $INVERSE\ DOCUMENT\ FREQUENCY$ vyjadřuje, jak moc daný termín popisuje dokument. Pokud je $N$ počet všech dokumentů v $D$, tedy $N = |D|$ a $n$ je počet dokumentů, ve kterých se vyskytuje slovo $t$, je $IDF$ tohoto slova
+
+\begin{equation}
+IDF(n,N) = \log \left(\frac{N}{n}\right)
+\end{equation}
+
+\begin{equation}
+IDF(n,N) = \log \left(\frac{N - n}{n}\right)
+\end{equation}
+
+Čím je tedy slovo v korpusu častější, tím více se s logaritmem snižuje jeho informační hodnota. Slova, která jsou velmi běžná většinou klíčovými slovy nejsou.
+
+Výsledný vzorec pak jde shrnout jako:
+
+\begin{equation}
+TFIDF(t,d,n,N)= \left(\sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}\ slovo = t \\
+  0 & \mathrm{jinak} \end{array}\right)
+  \times
+  \log \left(\frac{N - n}{n}\right)
+\end{equation}
+
+Problémem tohoto algoritmu pro je odlišný charakter korpusu a vstupních dat. Vstupní data jsou typicky novinový článek. Pokud bychom jako korpus použily anotované obrázky, získáme špatné výsledky. Běžná anglická slova, jako "the", nebo "a" se v takovém korpusu vyskytují velmi zřídka, jejich IDF tedy bude vysoká. Naopak TF v běžném novinovém textu je vysoké. Takovýto korpus nám pak označuje jako klíčová slova běžná anglická slova.
+
+
+\subsection{Extrakce bez korpusu}
+
+Dalším druhy algoritmů ke své práci korpus nepotřebují a pracují pouze se vstupním textem.
+
+\section{Řešení: jaké algoritmy zvoleny, získání tréninkových dat}
+
+Jako nejvhodnější řešení byl nakonec zvolen TF-IDF algoritmus. Jako kandidáti jsou odfiltrována slova, která se nenacházejí v datech Profimedie. Jako korpus k měření IDF byla použita data článků z Wikipedie.
+
+Pro rychlé testovací účely bylo oanotováno pár článků z anglických wikinews. V každém článku jsem označil pět klíčových slov. Porovnávání algoritmů na extrakci klíčových slov pak vzalo pět nejpravděpodobnějších klíčových slov podle algoritmu a porovnalo v kolika procentech se algoritmus trefil s anotací.
+
+Zbývá: Zkusit otestovat další metody. Překlad do češtiny.
+
+\section{Evaluace výsledků}
+
+Výsledkem práce by mělo být rozhraní pro anotaci obrázků využívající algoritmus na hledání klíčových slov v textu.
+
+Tento algoritmus se dá uživatelsky testovat několika způsoby. Uživatel vidí text a několik (cca 5) vrácených obrázků algoritmem. Uživatel vybere množinu relevantních obrázků. Další možností je mezi 5 vrácených obráyků vložit jeden náhodný. Úkolem anotátora je pak vybrat ten náhodně vybraný. Přesnost algoritmu pak jde měřit pomocí toho, kolikrát se anotátor trefí do špatného obrázku (potřeba zdrojový článek)
+
+
+
+

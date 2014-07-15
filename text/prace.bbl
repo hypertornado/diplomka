@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{cavnar1994n}
+William~B Cavnar, John~M Trenkle, et~al.
+\newblock N-gram-based text categorization.
+\newblock {\em Ann Arbor MI}, 48113(2):161--175, 1994.
+
+\bibitem{porter1980algorithm}
+Martin~F Porter.
+\newblock An algorithm for suffix stripping.
+\newblock {\em Program: electronic library and information systems},
+  14(3):130--137, 1980.
+
+\end{thebibliography}
