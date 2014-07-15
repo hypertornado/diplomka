@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  15 JUL 2014 13:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  15 JUL 2014 16:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -329,6 +329,10 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
 (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
@@ -415,11 +419,6 @@ Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
 \c@Hy@tempcnt=\count99
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip10
-Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
-)
 LaTeX Info: Redefining \url on input line 5041.
 \XeTeXLinkMargin=\dimen110
 \Fld@menulength=\count100
@@ -467,27 +466,27 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 (./literatura.aux))
 \openout1 = `prace.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for IL2/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for IL2/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
 \c@lstlisting=\count107
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 75.
+Package hyperref Info: Link coloring OFF on input line 76.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -497,9 +496,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count108
 )
-LaTeX Info: Redefining \ref on input line 75.
-LaTeX Info: Redefining \pageref on input line 75.
-LaTeX Info: Redefining \nameref on input line 75.
+LaTeX Info: Redefining \ref on input line 76.
+LaTeX Info: Redefining \pageref on input line 76.
+LaTeX Info: Redefining \nameref on input line 76.
 
 (./prace.out) (./prace.out)
 \@outlinefile=\write3
@@ -508,22 +507,22 @@ LaTeX Info: Redefining \nameref on input line 75.
 File: logo.eps Graphic file (type eps)
  <logo.eps>
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 165.
+(Font)              <14.4> on input line 166.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 165.
+(Font)              <7> on input line 166.
  [1
 
 ] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 208.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 209.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 208.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 209.
  [3] [4]
 (./prace.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -596,11 +595,18 @@ Overfull \hbox (47.57332pt too wide) in paragraph at lines 27--28
 (sour-ce http://strongloop.com/strongblog/node-
  []
 
+
+LaTeX Warning: Citation `golang' on page 13 undefined on input line 41.
+
 [13] [14]) [15]
 \openout2 = `stemmer.aux'.
 
  (./stemmer.tex
 Kapitola 6.
+
+LaTeX Warning: Citation `porter1980algorithm' on page 16 undefined on input lin
+e 9.
+
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
@@ -616,6 +622,9 @@ File: lstlang2.sty 2004/09/05 1.3 listings language file
 
 (./detekce_jazyka.tex
 Kapitola 7.
+
+LaTeX Warning: Citation `cavnar1994n' on page 17 undefined on input line 7.
+
 ) [17
 
 
@@ -724,7 +733,7 @@ Kapitola 13.
 ]
 \openout2 = `literatura.aux'.
 
- (./literatura.tex (./prace.bbl)) [30
+ (./literatura.tex) [30
 
 
 
@@ -736,25 +745,29 @@ Kapitola 13.
 ] [33
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
- (./prace.aux
-(./uvod.aux) (./teorie.aux) (./preklad.aux) (./backend.aux) (./stemmer.aux)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 325.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 325.
+ (./prace.aux (./uvod.aux)
+(./teorie.aux) (./preklad.aux) (./backend.aux) (./stemmer.aux)
 (./detekce_jazyka.aux) (./kap2.aux) (./html5.aux) (./zprovozneni.aux)
 (./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux) (./literatura.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 324.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 324.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 325.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 325.
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 9E3A14D5787E2DE29C076F6A6258198F;11542.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 324.
+(rerunfilecheck)             Checksum: F6BA552725A38557282DF36433C0BF42;11724.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 325.
  ) 
 Here is how much of TeX's memory you used:
- 10977 strings out of 494923
- 148886 string characters out of 6180164
- 274838 words of memory out of 5000000
- 14125 multiletter control sequences out of 15000+600000
- 16477 words of font info for 42 fonts, out of 8000000 for 9000
+ 10982 strings out of 494923
+ 148944 string characters out of 6180164
+ 275837 words of memory out of 5000000
+ 14131 multiletter control sequences out of 15000+600000
+ 17659 words of font info for 44 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  33i,8n,49p,1050b,1809s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (37 pages, 198924 bytes).
+Output written on prace.dvi (37 pages, 199108 bytes).

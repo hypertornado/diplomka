@@ -38,6 +38,9 @@ class LanguageToolTest < ActionController::TestCase
   test "translate line" do
     tool = LanguageTool.new('en')
     assert_equal("oko ústa", tool.translate_line("eye  Mouth", "cs"))
+    assert_equal("korouhvička", tool.translate_line("WEather  vane", "cs"))
+    assert_equal("oko jsou zpětná zrcátka ústa", tool.translate_line("eye rear view mirrors mouth", "cs"))
+
   end
 
 end

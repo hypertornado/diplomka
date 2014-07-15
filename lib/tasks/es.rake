@@ -7,17 +7,17 @@ namespace :es do
     src_encoding = "Windows-1252"
     target_encoding = "utf-8"
 
+    index_name = IMAGES_ES_INDEX
+
     es_client = Elasticsearch::Client.new
-    #clear_type(es_client, ES_INDEX, "image")
     
     language_tools = {}
     SUPPORTED_LANGUAGES.each do |language|
       language_tools[language] = LanguageTool.new(language)
     end
 
-    es_client.indices.delete index: ES_INDEX if es_client.indices.exists index: ES_INDEX
-    #es_client.indices.create index: ES_INDEX
-    es_client.indices.create index: ES_INDEX, body: {
+    es_client.indices.delete index: index_name if es_client.indices.exists index: index_name
+    es_client.indices.create index: index_name, body: {
       settings: {
         analysis: {
           analyzer: {
@@ -63,7 +63,7 @@ namespace :es do
       line = line.encode(target_encoding, src_encoding)
       i += 1
       if ImportLine.valid? line
-        ImportLine.new(line).es_import(es_client, ES_INDEX, language_tools)
+        ImportLine.new(line).es_import(es_client, index_name, language_tools)
       end
     end
     es_client.indices.refresh
@@ -74,7 +74,7 @@ namespace :es do
   task :import_word_data => :environment do
 
     es_client = Elasticsearch::Client.new
-    index_name = "stems"
+    index_name = STEMS_ES_INDEX
 
     es_client.indices.delete index: index_name if es_client.indices.exists index: index_name
     es_client.indices.create index: index_name
@@ -108,12 +108,6 @@ namespace :es do
 
   end
 
-  task :clear do
-    es_client = Elasticsearch::Client.new
-    es_client.indices.delete index: ES_INDEX if es_client.indices.exists index: ES_INDEX
-    es_client.indices.create index: ES_INDEX
-  end
-
   task :test => :environment do
 
     correct = 0
@@ -145,10 +139,5 @@ namespace :es do
     system("#{File.dirname(__FILE__)}/../../bin/elasticsearch/bin/elasticsearch -f")
   end
 
-end
-
-def clear_type client, index, type
-  client.indices.delete index: index, type: type if client.indices.exists index: index
-  client.indices.refresh
 end
 

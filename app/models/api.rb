@@ -50,7 +50,7 @@ class Api
   def stem_stats stem
     es_client = Elasticsearch::Client.new
 
-    result = es_client.get index: 'stems', type: @language, id: stem, ignore: 404
+    result = es_client.get index: STEMS_ES_INDEX, type: @language, id: stem, ignore: 404
 
     ret = {
       "tf" => 0,
@@ -104,7 +104,7 @@ class Api
       }
     }
 
-    ret = es_client.search index: "diplomka", body: body
+    ret = es_client.search index: IMAGES_ES_INDEX, body: body
 
     return ret
   end

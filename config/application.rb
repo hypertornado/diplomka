@@ -6,7 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-ES_INDEX = "diplomka"
+IMAGES_ES_INDEX = "images"
+STEMS_ES_INDEX = "stems"
+
 SUPPORTED_LANGUAGES = ["cs", "en"]
 PRIMARY_LANGUAGE = "en"
 LANGUAGE_NAMES = ["czech", "english"]

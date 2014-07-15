@@ -8,10 +8,11 @@ class LanguageTool
     @dictionaries_path = {
       ["en","cs"] => "#{File.dirname(__FILE__)}/../../data/word_dictionary_en_cs.txt"
     }
-    @dictionaries_path = {
-      ["en","cs"] => "#{File.dirname(__FILE__)}/../../data/word_dictionary_en_cs.txt"
+    @phrases_path = {
+      ["en","cs"] => "#{File.dirname(__FILE__)}/../../data/phrases_list_translated_cs.txt"
     }
     @loaded_dictionaries = {}
+    @loaded_phrases = {}
 
   end
 
@@ -30,6 +31,19 @@ class LanguageTool
     end
 
     @loaded_dictionaries[key] = dictionary
+
+    if @phrases_path.has_key? key
+      phrases = {}
+      File.readlines(@phrases_path[key]).each do |line|
+        line.chomp!
+        line = line.split("\t")
+        phrases[line[0]] = line[1]
+      end
+      @loaded_phrases[key] = phrases
+    else
+      @loaded_phrases[key] = {}
+    end
+
   end
 
   def tokenize line
@@ -62,15 +76,34 @@ class LanguageTool
     load_dictionary target_language
 
     dictionary = @loaded_dictionaries[[@language, target_language]]
+    phrases = @loaded_phrases[[@language, target_language]]
+    phrases = {} unless phrases
     line = lowercase_line line
     translated = []
-    tokenize(line).each do |word|
-      if dictionary.has_key? word
-        translated.push dictionary[word]
+
+    words = tokenize(line)
+
+    while words.size > 0
+      unigram = words[0]
+      bigram = nil
+      trigram = nil
+      bigram = unigram + " " + words[1] if words.size > 1
+      trigram = bigram + " " + words[2] if words.size > 2
+      if trigram and phrases.has_key? trigram
+        translated.push(phrases[trigram])
+        words.shift
+        words.shift
+      elsif bigram and phrases.has_key? bigram
+        translated.push(phrases[bigram])
+        words.shift
+      elsif dictionary.has_key? unigram
+        translated.push dictionary[unigram]
       else
-        translated.push word
+        translated.push unigram
       end
+      words.shift
     end
+
     return translated.join " "
   end
 

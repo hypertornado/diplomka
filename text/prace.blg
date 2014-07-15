@@ -14,46 +14,47 @@ A level-1 auxiliary file: anotacni_rozhrani.aux
 A level-1 auxiliary file: evaluace.aux
 A level-1 auxiliary file: zaver.aux
 A level-1 auxiliary file: literatura.aux
-The style file: plain.bst
+The style file: czechiso.bst
 Database file #1: prace.bib
-You've used 2 entries,
-            2118 wiz_defined-function locations,
-            525 strings with 4411 characters,
-and the built_in function-call counts, 680 in all, are:
-= -- 69
-> -- 25
-< -- 0
-+ -- 11
-- -- 8
-* -- 54
-:= -- 119
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+You've used 3 entries,
+            3151 wiz_defined-function locations,
+            683 strings with 5787 characters,
+and the built_in function-call counts, 1533 in all, are:
+= -- 118
+> -- 35
+< -- 6
++ -- 18
+- -- 10
+* -- 85
+:= -- 171
 add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 9
+call.type$ -- 3
+change.case$ -- 11
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 22
-empty$ -- 55
-format.name$ -- 8
-if$ -- 135
+cite$ -- 3
+duplicate$ -- 145
+empty$ -- 140
+format.name$ -- 11
+if$ -- 333
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 2
-newline$ -- 13
-num.names$ -- 4
-pop$ -- 5
+int.to.str$ -- 3
+missing$ -- 31
+newline$ -- 19
+num.names$ -- 6
+pop$ -- 60
 preamble$ -- 1
-purify$ -- 7
+purify$ -- 10
 quote$ -- 0
-skip$ -- 15
+skip$ -- 65
 stack$ -- 0
-substring$ -- 61
-swap$ -- 2
-text.length$ -- 0
+substring$ -- 82
+swap$ -- 91
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
+type$ -- 12
 warning$ -- 0
-while$ -- 8
-width$ -- 3
-write$ -- 24
+while$ -- 12
+width$ -- 4
+write$ -- 36
