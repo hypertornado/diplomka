@@ -8,6 +8,9 @@ class LanguageTool
     @dictionaries_path = {
       ["en","cs"] => "#{File.dirname(__FILE__)}/../../data/word_dictionary_en_cs.txt"
     }
+    @dictionaries_path = {
+      ["en","cs"] => "#{File.dirname(__FILE__)}/../../data/word_dictionary_en_cs.txt"
+    }
     @loaded_dictionaries = {}
 
   end

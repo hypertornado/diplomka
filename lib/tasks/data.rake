@@ -1,5 +1,54 @@
 namespace :data do
 
+  task :similar_images => :environment do
+
+    path = "/Volumes/ondra_zaloha/profi-neuralnet-20M.data.gz"
+
+    #path = "/Users/ondrejodchazel/projects/diplomka/data/tiny.gz"
+
+
+    block_limit = 10000
+    max_limit = 10
+
+    sim = Similarity.new(max_limit)
+
+    Zlib::GzipReader.open(path) do |gz|
+
+      i = 0
+      until (gz.eof? or i > block_limit) do
+        print "\ri#{i}   "
+        i += 1
+
+        header = gz.readline
+        vec = gz.readline
+
+        sim.add_loaded header, vec
+      end
+
+      Zlib::GzipReader.open(path) do |gz_compare|
+        j = 0
+        until (gz_compare.eof? or j > block_limit) do
+          print "\rj #{j}   "
+          j += 1
+
+          header = gz_compare.readline
+          vec = gz_compare.readline
+
+          sim.add_compare header, vec
+
+        end
+
+      end
+
+    end
+
+    puts ""
+    puts ""
+
+    sim.print_it
+
+  end
+
   task :translate_phrases => :environment do
     translation_path = "#{File.dirname(__FILE__)}/../../data/phrase_table_en_cs.txt"
 
