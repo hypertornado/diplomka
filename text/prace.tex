@@ -79,16 +79,27 @@
 \lefthyphenmin=2
 \righthyphenmin=2
 
-\lstset{breaklines=true, breakatwhitespace=true, numbers=left}
+\lstset{
+   breaklines=true,
+   breakatwhitespace=true,
+   numbers=left,
+   captionpos=b,
+   frame=single,
+   rulesepcolor=\color{gray},
+   rulecolor=\color{black},
+   framesep=0pt,
+   basicstyle=\ttfamily,
+   aboveskip=20pt
+}
+
+\renewcommand\lstlistingname{Ukázka}
 %\lstinline{breaklines=true, breakatwhitespace=true}
 
-\definecolor{codebg}{HTML}{DFDED4}
+%\definecolor{codebg}{HTML}{DFDED4}
 
-\lstset{backgroundcolor=\color{codebg}}
+%\lstset{backgroundcolor=\color{codebg}}
 %\lstset{frame=single}
-\lstset{framesep=100pt}
 %\lstset{upquote=true}
-\lstset{basicstyle=\ttfamily}
 
 \lstset{
      literate=%
@@ -190,7 +201,7 @@ Praha 2014
 \openright
 
 \noindent
-děkuji máje, že se nebojí létat
+Děkuji svému vedoucímu, panu Pecinovi za pomoc a cenné připomínky v průběhu celého vývoje projektu. Také bych rád poděkoval své rodině a přítelkyni hlavně za velkou trpělivost.
 
 \newpage
 
@@ -290,6 +301,7 @@ information retrieval, image retrieval
 
 %%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
 \include{uvod}
+\include{data}
 \include{teorie}
 \include{preklad}
 \include{backend}

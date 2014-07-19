@@ -1,0 +1,53 @@
+\chapter{Poskytnutá data}
+
+Tato kapitola popisuje data, která slouží jako vstup projektu.
+
+\section{Profimedia dataset}
+
+Společnost Profimedia poskytla pro výzkumné účely korpus více než dvaceti milionů ilustračních obrázků spolu s jejich textovým popisem.
+
+Textové popisky byly dále očištěny\cite{brno} a poskytnuty pro tento projekt ve formě souboru \lstinline{profi-text-cleaned.csv}. Soubor je ve formátu CSV a obsahuje $20\ 014\ 394$ řádků. Každý řádek obsahuje 4 složky:
+
+\begin{description}
+
+\item[locator] \hfill \\
+  Identifikátor obrázku v databázi Profimedia. Desetimístný řetězec číslic.
+
+\item[title] \hfill \\
+  Název obrázku v anglickém jazyce.
+
+\item[description] \hfill \\
+  Pro všechny řádky souboru prázdná položka.
+
+\item[keywords] \hfill \\
+  Mezerami oddělená klíčová slova obrázku.
+
+\end{description}
+
+\autoref{lst:profi} Příklad obsahuje příklad jednoho řádku souboru \lstinline{profi-text-cleaned.csv}.
+
+\begin{lstlisting}[caption={Řádek souboru profi-text-cleaned.csv},label={lst:profi}]
+"0000000980","hradec kings holy ghost cathedral","", "outdoors nobody urban scenes architecture houses towers czech czech republic europe buildings build history historical churches church fronts holy ghost cathedral spirit ceska republika cathedrals sv hradec kralove"^M
+\end{lstlisting}
+
+Na příkladu jsou vidět některé problémy, které data z datasetu Profimedie mají. Některá klíčová slova, jako například \uv{czech republic} k sobě patří a tvoří frázi. V souboru ovšem tyto víceslovné fráze nejsou vyznačené. Některým slovům chybí diakritika, například \uv{ceska}. Některé fráze vznikly asi strojovým překladem z cizího jazyka do angličtiny. To je vidět na frázi \uv{hradec kings}, která zřejmě původně byla názvem českého města \uv{Hradec Králové}. Všechna slova v souboru obsahují pouze malá písmena, což například znesnadňuje detekci názvů.
+
+Všechny popsané nedostatky dat negativně ovlivňují možnosti pro kvalitní vyhledávání v poskytnutých datech. Jedním z cílů práce je co nejvíce těchto nedostatků opravit.
+
+\section{Profimedia dataset s detekovanými frázemi}
+
+Některé problémy s datasetem Profimedie byly odstraněny v rámci bakalářské práce Bc. Jana Botorka\cite{botorek}. Jedním z výsledků této práce je soubor \lstinline{keyword-clean-phrase-export.csv}. \autoref{lst:profi-phrase} obsahuje příklad jednoho řádku tohoto souboru.
+
+\begin{lstlisting}[caption={Řádek souboru keyword-clean-phrase-export.csv},label={lst:profi-phrase}]
+"0000000980";"Hradec kings holy ghost cathedral";"outdoors,nobody,urban scenes,architecture,houses,towers,czech,czech republic,Česká republika,Europe, buildings,build,history,historical, churches,church,fronts,cathedrals sv,holy ghost cathedral,spirit,Hradec Králové"
+\end{lstlisting}
+
+Soubor obsahuje lépe zpracovaná data z datasetu Profimedia. Nejdůležitější změnou pro tuto práci je detekce klíčových frází. Jednotlivé fráze jsou od sebe odděleny čárkou. Detekce probíhala pomocí databáze WordNet\cite{wordnet} a Wikipedie. Ne vždy se detekce povedla, takže v některých řádcích nejsou žádné fráze detekovány. Detekce frází je důležitá zejména pro překlad dat do jiných jazyků.
+
+\section{Vektor podobnosti obrázků}
+
+Kromě textových popisků jsou součástí datasetu Profimedie i samotné obrázky. Jedním z cílů práce je umožnit nad databází obrázků vyhledávání na základě vizuální podobnosti. K tomuto účelu byl poskytnut soubor \lstinline{profi-neuralnet-20M.data.gz}, který je komprimovaný formátem ZIP a má velikost 129 GB.
+
+Soubor obsahuje pro každý obrázek z datasetu Profimedie vektor 4096 reálných čísel. Pomocí vektorové vzdálenosti lze určit, jak jsou si podobné dva obrázky mezi sebou.
+
+

@@ -1,5 +1,34 @@
 namespace :data do
 
+  task :csv => :environment do
+
+    path = "/Volumes/ondra_zaloha/profi-neuralnet-20M.data.gz"
+
+    limit = 100
+
+    i = 0
+    Zlib::GzipReader.open(path) do |gz|
+
+      until (gz.eof? or i >= limit) do
+        i += 1
+        header = gz.readline
+        vec = gz.readline
+
+        #puts header
+
+        header.chomp!
+        line = "\"#{header.split(" ")[2]}\",\""
+
+        vec.chomp!
+        vec = vec.split(" ").join("\",\"")
+        line = "#{line}#{vec}\""
+        puts line
+      end
+
+    end
+
+  end
+
   task :similar_images => :environment do
 
     path = "/Volumes/ondra_zaloha/profi-neuralnet-20M.data.gz"

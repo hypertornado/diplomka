@@ -1,19 +1,7 @@
-\chapter{Teorie: Jak najít vhodné obrázky}
-
-\section{Popis datové sady}
-
-Datová sada poskytnutá firmou Profimedia obsahuje $20\ 014\ 394$ oanotovaných obrázků ve formě CSV souboru "profi-text-cleaned.csv". CSV obsahuje sloupce "locator","title","description","keywords". Sloupec locator obsahuje ID obrázku v databázi Profimedia. Sloupec description je prázdný. Sloupce title a keywords obsahují řetězce anglických slov popi sujících obrázek a oddělených mezerou.
-
-Příklad jednoho řádku souboru profi-text-cleaned.csv:
+\chapter{Extrakce klíčových slov}
 
 
-\begin{lstlisting}
-"0000000980","hradec kings holy ghost cathedral","", "outdoors nobody urban scenes architecture houses towers czech czech republic europe buildings build history historical churches church fronts holy ghost cathedral spirit ceska republika cathedrals sv hradec kralove"^M
-\end{lstlisting}
 
-Na příkladu je vidět, že data obsahují fráze jako "holy ghost cathedral", tyto fráze však nejsou strojově čitelně vyznačené. Dalším problémem je špatný překlad dat do angličtiny. Fráze "hradec kings" vznikla evidentně doslovným překladem názvu "hradec králové".
-
-Důležitým aspektem dat je jejich nepodobnost běžnému novinovému textu. Anotované texty neobsahují většinu nejfrekventovanějších anglických slov.
 
 \section{Teoretické cíle}
 
