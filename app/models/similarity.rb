@@ -59,8 +59,12 @@ class Similarity
     end
   end
 
+  def self.parse_header_str line
+    line.chomp!
+    return line.split(" ")[2]
+  end
 
-  def self.parse_header line
+  def self.parse_header_str line
 
     line.chomp!
     return line.split(" ")[2].to_i
@@ -69,6 +73,19 @@ class Similarity
   def self.parse_vector line
     line.chomp!
     line.split(" ").map! {|e| e.to_f}
+  end
+
+  def self.convert_vector line
+    line.chomp!
+    r = 0
+    ret = ""
+    line.split(" ").each_with_index do |e, i|
+      if e != "0.0"
+        ret += "#{i} "
+        r += 1
+      end
+    end
+    return ret
   end
 
   def self.new_york v1, v2

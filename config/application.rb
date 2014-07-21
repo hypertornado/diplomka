@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 IMAGES_ES_INDEX = "images"
 STEMS_ES_INDEX = "stems"
+SIMILAR_ES_INDEX = "similar"
 
 SUPPORTED_LANGUAGES = ["cs", "en"]
 PRIMARY_LANGUAGE = "en"

@@ -1,23 +1,32 @@
-\chapter{Extrakce klíčových slov}
+\chapter{Vyhledávání v korpusu obrázkových popisků}
+
+% \section{Teoretické cíle}
+
+% V teoretické části je hlavním cílem práce nalézt nejvhodnější metodu extrakce klíčových slov textu. Tato klíčová slova pak budou použita při vyhledávání ilustračních obráyků v databázi Profimedie. Celá práce, pokud nebude uvedeno jinak, označuje za slova stemy vstupních slov. Jako stemmer se využívá ??? stemmer.
+
+% Vstupní text tedy nejprve rozdělíme na slova. Čísla a interpunkce nás v této úloze nezajímají, jelikož se v datech nenachází. Ze slov pak získáme stemy. Vstupem algoritmu pro nalezení klíčových slov tedy bude množina vhodných stemů. Ke každému stemu si ještě uložíme jednu jeho nestemovou variantu, kterpu pak můžeme zobrazit uživateli.
+
+% Nyní můžeme použít některý z algoritmů na extrakci klíčových slov uvedených v další kapitole.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=150mm]{dataflow.eps}
+  \caption{Základní tok dat mezi klientem a serverem.}
+  \label{fig:dataflow}
+\end{figure}
+
+
+Aplikace poskytuje uživateli dvě možnosti vyhledávání. Základní uživatelským scénářem je vložit do rozhraní text. Aplikace by v takovém případě měla poskytnout relevantní obrázky k danému textu. V dalším uživatelským scénářem je přímý požadavek na klíčová slova obrázku. Uživatel by měl mít možnost zadat přímo klíčová slova, které nalezené obrázky musí obsahovat. Oba scénáře by mělo navím být možné propojit pomocí nápovědy klíčových slov -- uživatel zadá do rozhraní text, dostane výsledné obrázky a nápovědu klíčových slov, kterými může množinu nalezených obrázků více omezit. Klíčová slova ze vstupního textu se dále používají jako nápověda uživateli, který jimi může množinu hledaných obrázků dále omezit. Celý proces hledání vhodných obrázků popisuje diagram \ref{fig:dataflow}.
 
 
 
+\section{Extrakce klíčových slov}
 
-\section{Teoretické cíle}
-
-V teoretické části je hlavním cílem práce nalézt nejvhodnější metodu extrakce klíčových slov textu. Tato klíčová slova pak budou použita při vyhledávání ilustračních obráyků v databázi Profimedie. Celá práce, pokud nebude uvedeno jinak, označuje za slova stemy vstupních slov. Jako stemmer se využívá ??? stemmer.
-
-Vstupní text tedy nejprve rozdělíme na slova. Čísla a interpunkce nás v této úloze nezajímají, jelikož se v datech nenachází. Ze slov pak získáme stemy. Vstupem algoritmu pro nalezení klíčových slov tedy bude množina vhodných stemů. Ke každému stemu si ještě uložíme jednu jeho nestemovou variantu, kterpu pak můžeme zobrazit uživateli.
-
-Nyní můžeme použít některý z algoritmů na extrakci klíčových slov uvedených v další kapitole.
-
-\section{Rešerše, vhodné algoritmy}
-
-Algoritmy na extrakci klíčových slov lze rozdělit do dvou kategorií. V jedné máme k dispozici korpus podobných dokumentů, druhá kategorie tento korpus ke své práci nepotřebuje.
+Extrakce klíčových slov je velmi důležitou složkou celého vyhledávání. Článek \cite{lott} shrnuje základní techniky extrakce klíčových slov z textu. Algoritmy na extrakci klíčových slov lze v zásadě rozdělit do dvou kategorií - \uv{s korpusem} a \uv{bez korpusu}. Metody pracující bez korpusu jsou zajímavé a mohou dosahovat podobných výsledků jako metody s korpusem. My však máme k dispozici dataset Profimedie, takže o metody pracující bez korpusu se tato práce dále nezajímá. 
 
 \subsection{TF-IDF}
 
-Technika TF-IDF je známý algoritmus na měření významnosti slov v textu. Využívá korpusu dokumentů $D$ a dvou složek. 
+TF-IDF je jeden ze základních vyhledávacích algoritmů. Algoritmus využívá korpusu dokumentů $D$ a dvou složek $TF$ a $IDF$, lze ho vyjádřit jako rovnost: 
 
 \begin{equation}
   TFIDF(t,d,n,N)= TF(t,d)\times IDF(n,N)
@@ -35,7 +44,7 @@ Složka $TF$ znamená $TERM\ FREQUENCY$ a pokud $t$ je slovo a $d \in D$ je doku
   0 & \mathrm{jinak} \end{array}
 \end{equation}
 
-Jedná se tedy o frekvenci slova (stemu) v dokumentu.
+Jedná se tedy o frekvenci slova v dokumentu.
 
 Složka $IDF$, tedy $INVERSE\ DOCUMENT\ FREQUENCY$ vyjadřuje, jak moc daný termín popisuje dokument. Pokud je $N$ počet všech dokumentů v $D$, tedy $N = |D|$ a $n$ je počet dokumentů, ve kterých se vyskytuje slovo $t$, je $IDF$ tohoto slova
 
@@ -70,15 +79,6 @@ Dalším druhy algoritmů ke své práci korpus nepotřebují a pracují pouze s
 Jako nejvhodnější řešení byl nakonec zvolen TF-IDF algoritmus. Jako kandidáti jsou odfiltrována slova, která se nenacházejí v datech Profimedie. Jako korpus k měření IDF byla použita data článků z Wikipedie.
 
 Pro rychlé testovací účely bylo oanotováno pár článků z anglických wikinews. V každém článku jsem označil pět klíčových slov. Porovnávání algoritmů na extrakci klíčových slov pak vzalo pět nejpravděpodobnějších klíčových slov podle algoritmu a porovnalo v kolika procentech se algoritmus trefil s anotací.
-
-Zbývá: Zkusit otestovat další metody. Překlad do češtiny.
-
-\section{Evaluace výsledků}
-
-Výsledkem práce by mělo být rozhraní pro anotaci obrázků využívající algoritmus na hledání klíčových slov v textu.
-
-Tento algoritmus se dá uživatelsky testovat několika způsoby. Uživatel vidí text a několik (cca 5) vrácených obrázků algoritmem. Uživatel vybere množinu relevantních obrázků. Další možností je mezi 5 vrácených obráyků vložit jeden náhodný. Úkolem anotátora je pak vybrat ten náhodně vybraný. Přesnost algoritmu pak jde měřit pomocí toho, kolikrát se anotátor trefí do špatného obrázku (potřeba zdrojový článek)
-
 
 
 

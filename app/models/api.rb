@@ -7,6 +7,7 @@ class Api
     @dictionary = {}
     @tool = LanguageTool.new(@language)
     @keywords = keywords @text
+    puts @keywords
   end
 
   def get_result from, size
@@ -35,7 +36,7 @@ class Api
     tf.keys.each do |stem|
       stats = stem_stats(stem)
       next unless stats["wiki"] > 0
-      score = (tf[stem].to_f * Math.log(9231894.to_f/stats["wiki"].to_f))
+      score = (tf[stem].to_f * Math.log(20000000.to_f/stats["wiki"].to_f))
       results[stem] = score
     end
 
@@ -85,9 +86,18 @@ class Api
 
     should = []
     @keywords[0, 10].each do |kw|
+      # term = {
+      #   term: {
+      #     stem_field => kw[0]
+      #   }
+      #   boost: 2
+      # }
       term = {
-        term: {
-          stem_field => kw[0]
+        match: {
+          stem_field => {
+            query: kw[0],
+            boost: kw[1]
+          }
         }
       }
       should.push term
