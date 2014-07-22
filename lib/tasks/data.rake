@@ -288,56 +288,158 @@ namespace :data do
   end
 
   task :test => :environment do
-    name = "pokus"
-    es_client = Elasticsearch::Client.new
-    es_client.indices.delete index: name if es_client.indices.exists index: name
-    es_client.indices.create index: name, body: {
-      settings: {
-        analysis: {
-          analyzer: {
-            ngram: {
-              tokenizer: 'whitespace',
-              #filter: ['lowercase', 'ngram'],
-              type: 'custom'
-            }
-          }
-        }
-      },
-      mappings: {
-        clanek: {
-          properties: {
-            title: {
-                type: 'string',
-                index_analyzer: 'ngram',
-                search_analyzer: 'ngram'
-            }
-          }
-        }
-      }
-    }
 
-    es_client.index index: name, type: "clanek", body: {
-      title: "hello world"
-    }
 
-    es_client.indices.refresh
+    SUPPORTED_LANGUAGES.each do |language|
+      correct = 0
+      file_count = Dir["#{File.dirname(__FILE__)}/../../train_data/#{language}/*"].size / 2
+      puts "STARTING #{language}, #{file_count} files"
+      1.upto(file_count) do |n|
+        name = (1000 + n).to_s[1,3]
+        text = File.read("#{File.dirname(__FILE__)}/../../train_data/#{language}/#{name}.txt")
+        test_keywords = File.read("#{File.dirname(__FILE__)}/../../train_data/#{language}/#{name}.keywords").split("\n")
+        puts " #{name}---"
 
-    #puts es_client.search index: name, type: "clanek", q: "title:hello"
+        tool = LanguageTool.new(language)
+        api = Api.new "", [], language
+        keywords = api.keywords text
 
-    result = es_client.search index: name, type: "clanek", body: {
-      query: {
-        bool: {
-          should: {
-            term: {
-              title: "helloo"
-            }
-          }
-        }
-      }
-    },
-    analyzer: "whitespace"
+        keywords = keywords[0, 5]
 
-    puts result
+
+        keywords.map! {|w| w[0]}
+        test_keywords.map! {|w| tool.stem_word(w)}
+
+        puts "   found: #{(keywords & test_keywords).join(" ")}"
+        puts "  nfound: #{(test_keywords - keywords).join(" ")}"
+        puts "  wfound: #{(keywords - test_keywords).join(" ")}"
+        
+        correct += 5 - (test_keywords - keywords).size
+      end
+
+      puts " CORRECT (#{language}): #{correct} / #{5 * file_count}\n\n"
+    end
+  end
+
+  task :random_text_data => :environment do
+    limit = 60
+
+    path = "#{File.dirname(__FILE__)}/../../data/idn"
+    files = Dir["#{path}/*"]
+    files = files.shuffle
+    files = files[0, limit]
+    files.map! {|f| f[-12,5]}
+    puts files.inspect
+  end
+
+  task :generate_random_ids => :environment do
+    randomids = []
+    
+    0.upto(100) do |i|
+     random_id = get_random_image_id
+     randomids.push random_id
+     puts "#{i} #{random_id}"
+    end
+    puts ""
+    puts ""
+    puts randomids.inspect
+  end
+
+  task :export_ids => :environment do
+    path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
+    export_path = "#{File.dirname(__FILE__)}/../../data/profi-text-cleaned.csv"
+    out = File.open("#{File.dirname(__FILE__)}/../../data/image_ids.txt", "w")
+
+    i = 0
+    File.open(path).each do |line|
+      print "\r#{i}"
+      i += 1
+      out.write("#{line[1,10]}\n")
+    end
+  end
+
+  task :test_data => :environment do
+
+    users = ["o_paroubkova", "o_havel", "o_rakosova", "o_pavlovic", "o_semerad"]
+
+    user_pairs = []
+
+    users.each do |u1|
+      users.each do |u2|
+        if u1 != u2
+          3.times {user_pairs.push([u1, u2])}
+        end
+      end
+    end
+
+    user_pairs.each do |pair|
+      #puts pair[0]
+      #puts pair[1]
+      #puts "#{pair[0]} #{pair[1]}"
+    end
+
+    #puts user_pairs.size
+
+    output = ""
+
+    html = ""
+
+    random_ids = ["0007210728", "0001030712", "0041312880", "0077542194", "0034225897", "0008882893", "0049331239", "0004657841", "0034607988", "0007116667", "0049069897", "0004124310", "0034636007", "0012010063", "0005671936", "0009050414", "0013182570", "0013524080", "0050401132", "0003369549", "0013226103", "0004492880", "0048275307", "0012759043", "0005607702", "0004148425", "0070814828", "0013639720", "0006874931", "0004051776", "0054317658", "0007862751", "0051027003", "0007008568", "0049959256", "0034638408", "0051888928", "0002761475", "0001037071", "0037681449", "0034819424", "0014373576", "0014427382", "0053691113", "0007833088", "0003324475", "0055478413", "0069819686", "0001295674", "0055938828", "0004543724", "0009402234", "0050536437", "0013717136", "0034717479", "0013290311", "0002383477", "0008761051", "0006398919", "0005371062", "0002029419", "0006280846", "0049917699", "0011676175", "0012817885", "0013712337", "0004194075", "0070444145", "0049602848", "0051021582", "0005046286", "0013813821", "0008370559", "0007572140", "0070674998", "0002151723", "0012547160", "0001263354", "0014322390", "0043729399", "0005585127", "0008491311", "0049029786", "0033923632", "0077369620", "0034590042", "0034378350", "0005352734", "0051066739", "0005513537", "0010890842", "0048332485", "0013674547", "0034383289", "0001211520", "0005997426", "0013982195", "0009247483", "0011354122", "0003168067", "0048316409", "0077531417"]
+
+    i = 0
+    base_path = "#{File.dirname(__FILE__)}/../../data/idn"
+    ids = ["06752", "01758", "08781", "04947", "08752", "10076", "03907", "07822", "07084", "07792", "08036", "00207", "00070", "13448", "12051", "15157", "14610", "05449", "01089", "15232", "02412", "02211", "02059", "09018", "14008", "01921", "07732", "04566", "05640", "03615", "01337", "07757", "14737", "03202", "03430", "09399", "01595", "13294", "15513", "04025", "12442", "09817", "04107", "09093", "09237", "04151", "15282", "12471", "04900", "00881", "03758", "06945", "09551", "07604", "14972", "02343", "14539", "12605", "03901", "01853"]
+    ids.each do |id|
+      path = "#{base_path}/idn-#{id}.txt.gz"
+
+      pair = user_pairs.shift
+
+      #puts "ID: #{id}"
+      Zlib::GzipReader.open(path) do |gz|
+        text = gz.readlines.join("\n")
+        api = Api.new text, [], "cs"
+        html += "<h1>#{id}</h1>"
+        html += text
+        html += "<br>"
+        results_ids = []
+        results_ids.push(random_ids.shift)
+        results = api.search(0, 4)
+        results["hits"]["hits"].each do |hit|
+          results_ids.push hit["_id"]
+        end
+
+        results_ids = results_ids.shuffle
+
+        img_paths = results_ids.map {|p| "mufin_images/#{p}"}
+
+        pair.each do |user|
+          #mufin_images
+          line = "#{300000 + i} o_test1 0 #{user} ./text/idn/idn-#{id}.txt.gz #{img_paths.join(';')}"
+          puts line
+          i += 1
+        end
+
+        results_ids.each do |ri|
+          html += "<img src=\"http://mufin.fi.muni.cz/profimedia/bigImages/#{ri}\" height=200>"
+        end
+      end
+    end
+
+    file = File.open("#{File.dirname(__FILE__)}/../../public/test.html", "w")
+    file.write(html)
+
   end
 
 end
+
+def get_random_image_id
+  es_client = Elasticsearch::Client.new
+  size = (es_client.search index: IMAGES_ES_INDEX, body: {})["hits"]["total"]
+  ret = es_client.search index: IMAGES_ES_INDEX, body: {
+    size: 1,
+    from: rand(size)
+  }
+
+  return ret["hits"]["hits"][0]["_id"]
+end
+

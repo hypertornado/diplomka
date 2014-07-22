@@ -108,32 +108,6 @@ namespace :es do
 
   end
 
-  task :test => :environment do
-
-    correct = 0
-
-    1.upto(10) do |n|
-      name = (1000 + n).to_s[1,3]
-      #"#{File.dirname(__FILE__)}/../../train_data/"
-      text = File.read("#{File.dirname(__FILE__)}/../../train_data/#{name}.txt")
-      test_keywords = File.read("#{File.dirname(__FILE__)}/../../train_data/#{name}.keywords").split("\n")
-      puts "#{name}---"
-      keywords = Api.keywords text
-
-      keywords.map! {|w| w.stem}
-      test_keywords.map! {|w| w.stem}
-
-      puts test_keywords.join(" ")
-      puts keywords.join(" ")
-
-      puts (keywords & test_keywords).join(" ")
-      
-      correct += 5 - (test_keywords - keywords).size
-    end
-
-    puts "CORRECT: #{correct}"
-  end
-
   task :start do
     puts "Starting elasticsearch"
     system("#{File.dirname(__FILE__)}/../../bin/elasticsearch/bin/elasticsearch -f")

@@ -1,0 +1,14 @@
+http://technet.idnes.cz/prohlizec-chrome-vybiji-baterie-dae-/software.aspx?c=A140716_125813_software_vse
+
+Prohlížeč Google Chrome je pohroma pro baterii v notebooku
+
+Časopis Forbes publikoval zajímavé zjištění o problému prohlížeče Google Chrome běžícím na operačním systému Windows. Podle něj nedovolí kvůli neustálým kontrolám prohlížeč využít naplno úsporné funkce, což se negativně projeví na výsledné výdrží baterie.
+
+Ian Morris z Forbesu zveřejnil již nějakou dobu kolující informaci, že prohlížeč Chrome je ve Windows poměrně náročný na spotřebu. Novinář prohlížeč Chrome využívá hojně a v podstatě jej nevypíná. Jak píše na serveru, má na něm neustále spuštěny služby Googlu jako Gmail, webový kancelářský balík Google Docs a další. Samozřejmě jej také využívá k procházení webů.
+Velice ho proto překvapilo, když zjistil, že právě tento prohlížeč mu výrazně rychleji vybíjí baterii notebooku a může být zodpovědný i za zpomalování systému.
+Po dalším zkoumání se pak dobral příčiny problému. Je jím špatná správa vysílání požadavků na procesor, která ho nutí být neustále v pohotovosti, a zamezuje mu tak přejít do úsporného režimu. Konkrétně jde o veličinu označovanou jako taktovací frekvence systémových hodin (system clock tick rate).
+Ukázka problému prohlížeče Chrome, který snižuje schopnosti Windows využít...
+Ukázka problému prohlížeče Chrome, který snižuje schopnosti Windows využít naplno úsporné režimy. V černém boxu v příkazovém řádku vidíte požadavky na procesor.
+Běžně se mají aplikace ve Windows „ptát“ procesoru při nečinnosti každých 15,625 ms, ale Chrome vysílá požadavek každou milisekundu. To v přepočtu znamená, že prohlížeč „budí“ odpovídající číst procesoru tisíckrát za sekundu, zatímco jiné nečinné procesy by to měly dělat 64krát. Z toho vyplývá, že systém tak nemůže dostatečně využívat úsporné procesy a to má vliv jak na celkovou spotřebu, tak především na notebookové baterie. Energie z nich tak může unikat až o 25 procent rychleji.  
+Problém nastává v okamžiku, kdy v prohlížeči ukončíte běh nějakého náročnějšího procesu, třeba přehrávání videa přes YouTube. Zatímco v Internet Exploreru po zavření záložky klesnou požadavky na zmíněných 16,625 ms, u Chromu zůstávají na jedné milisekundě, dokud není celý prohlížeč vypnut.
+Na vývojářských fórech se uživatelé tomuto problému již dva roky věnují, ale zatím se výsledku nedobrali.

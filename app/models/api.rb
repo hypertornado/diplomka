@@ -7,7 +7,6 @@ class Api
     @dictionary = {}
     @tool = LanguageTool.new(@language)
     @keywords = keywords @text
-    puts @keywords
   end
 
   def get_result from, size
@@ -26,6 +25,7 @@ class Api
     words = @tool.tokenize(text)
     tf = Hash.new(0)
     words.each do |word|
+      next if @tool.is_stopword? word
       stem = @tool.stem_word(word)
       @dictionary[stem] = word
       tf[stem] += 1
@@ -33,10 +33,12 @@ class Api
 
     results = {}
 
+
     tf.keys.each do |stem|
+      next unless stem.length > 0
       stats = stem_stats(stem)
       next unless stats["wiki"] > 0
-      score = (tf[stem].to_f * Math.log(20000000.to_f/stats["wiki"].to_f))
+      score = (tf[stem].to_f * Math.log(10000000.to_f/stats["wiki"].to_f))
       results[stem] = score
     end
 
