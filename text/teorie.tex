@@ -35,11 +35,6 @@ TF-IDF je jeden ze základních vyhledávacích algoritmů. Algoritmus využív�
 Složka $TF$ znamená $TERM\ FREQUENCY$ a pokud $t$ je slovo a $d \in D$ je dokument, je $TF$
 
 \begin{equation}
- TF(t,d) = \left\{ \begin{array}{l l} 1 & \mathrm{pokud}\ t \in d \\
-  0 & \mathrm{jinak} \end{array} \right.
-\end{equation}
-
-\begin{equation}
  TF(t,d) = \sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}\ slovo = t \\
   0 & \mathrm{jinak} \end{array}
 \end{equation}
@@ -66,6 +61,12 @@ TFIDF(t,d,n,N)= \left(\sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}
   \times
   \log \left(\frac{N - n}{n}\right)
 \end{equation}
+
+\subsection{TF-IDF pro extrakci klíčových slov}
+
+Algortimus TF-IDF můžeme použít pro extrakci klíčových slov z textu. Všechna znaky vstupního textu převedeme na malá písmena a text rozdělíme na slova. Dále nás nezajímá diakritika a různé speciální znaky, které může text obsahovat. Všechna slova převedeme na stemy. O převodu slov na stemmy se podrobněji píše v Kapitole \ref{chap:stemmer}.
+
+
 
 Problémem tohoto algoritmu pro je odlišný charakter korpusu a vstupních dat. Vstupní data jsou typicky novinový článek. Pokud bychom jako korpus použily anotované obrázky, získáme špatné výsledky. Běžná anglická slova, jako "the", nebo "a" se v takovém korpusu vyskytují velmi zřídka, jejich IDF tedy bude vysoká. Naopak TF v běžném novinovém textu je vysoké. Takovýto korpus nám pak označuje jako klíčová slova běžná anglická slova.
 

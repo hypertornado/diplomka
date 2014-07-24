@@ -1,23 +1,70 @@
+\chapter{Testování výsledků}
 
-\chapter{Evaluace výsledků}
+Výsledný program se skládá z několika komponent. Funkčnost každé komponenty jde testovat. Některé části jdou otestovat automaticky, například rozpoznávání jazyka. Na některé části je potřeba testování s uživateli.
 
-\section{Evaluace výsledků}
-
-Výsledkem práce by mělo být rozhraní pro anotaci obrázků využívající algoritmus na hledání klíčových slov v textu.
-
-Tento algoritmus se dá uživatelsky testovat několika způsoby. Uživatel vidí text a několik (cca 5) vrácených obrázků algoritmem. Uživatel vybere množinu relevantních obrázků. Další možností je mezi 5 vrácených obráyků vložit jeden náhodný. Úkolem anotátora je pak vybrat ten náhodně vybraný. Přesnost algoritmu pak jde měřit pomocí toho, kolikrát se anotátor trefí do špatného obrázku (potřeba zdrojový článek)
+Klíčovou částí celého projektu je algoritmus, který k textu přiřadí ilustrační obrázek. Úspěšnost tohoto algoritmu byla otestována na uživatelích. Rozhraní může fungovat pro více jazyků. Testování však proběhlo pro vstupní texty v češtině. Jedním z důvodů je snadnější získání anotátorů v českém jazyce. Hlavním důvodem je ovšem pravděpodobná vyšší nepřesnost algoritmu v češtině. Dataset Profimedie má data v anglickém jazyce a pro české použití musel být přeložen. Pokud se tedy ukáže, že algoritmus funguje dobře pro češtinu, měl by pro angličtinu fungovat ještě lépe. Pro testování bylo využito testovací rozhraní popsané v Kapitole \ref{chap:rozhrani}.
 
 
-\section{Metodika}
+\section{Vyloučení narušitele (o\_test1)}
 
-Jak budu měřit. Porovnání naivního a nejlepšího algoritmu. Nejlepší algoritmus vybrán pomocí oanotovaných klíčových slov ve Wikinews článcích. Pak anotátoři se budou snažit najít nejméně vhodný obrázek z nabízených hodnot.
+První metodou testování bylo \uv{vyloučení nepřítele} (anglicky \uv{intruder detection}). Tato metoda se používá k evaluaci automaticky detekovaných shluků slov a je popsána například v \cite{chang}. V naší variantě se evaluují obrázky přiřazené k textu. Nejprve se k danému textu najdou pomocí testovaného algoritmu 4 nejvíce odpovídající obrázky. K nim se přidá jeden náhodně vybraný obrázek z datasetu a poté se náhodně zamíchá pořadím těchto obrázků. Anotátor vidí v anotačním rozhraní text a 5 obrázů. Jeho úkolem je označit obrázek, který danému textu, podle jeho názoru, odpovídá nejméně. Pokud algoritmus přiřazující obrázky textu funguje správně, měl by být uživatel schopen označit obrázek, který byl do sady vybrán náhodně a rozlišit ho od obrázků, který vybral algoritmus přiřazující obrázky.
 
-Evaluace jenom pro angličtinu, nebo i pro češtinu?
+Texty pro testování algoritmu pochází z online článků českých webových serverů. Jedná se o texty článků, které obsahují ilustrační obrázky z datasetu Profimedie. Takto omezená množina novinových textů je pro náš účel velmi výhodná. Pro různé druhy článků dataset Profimedie neobsahuje žádné vhodné ilustrační obrázky. Jedná se například o politické zpravodajství, pro které v datasetu aktuální fotky událostí, nebo například archivní fotky osobností. Oproti tomu u článků, které již nějaký ilustrační obrázek z Profimedie obsahují, jsou možnosti vhodného obrázku daleko vyšší. Jedná se většinou o různé hobby a společenské články.
 
-\section{Výsledky}
+Pro naše testování jsme využili články ze serveru iDnes, který obsahoval nejvíce článků s ilustračními obrázky z Profimedia. Konkrétně jich máme k dispozici 4223.
 
-Grafy, tabulky.
+Z těchto 4223 článků jsme náhodně vybrali pro testování 60 článků. Ke každému z článků byly získány algoritmem 4 doporučené ilustrační obrázky a byl přidán jeden obrázek náhodný. Každá tato testovací sada byla otestována dvěma anotátory. Bylo k dispozici 5 anotátorů. Dohromady to znamenalo pro každého anotátora 24 a dohromady 120 anotací. Anotace byly rozděleny tak, aby každá dvojice anotátorů měla právě 6 stejných testovacích sad.
 
-\section{Možná zlepšení}
+Během anotace se zjistilo, že u dvou testovacích sad se jeden z obrázků nenačítá. Tyto sady byly z testování vyřazeny a anotovaných testovacích sad je tedy pouze 58. Výsledky testování jsou shrnuty v tabulce \ref{fig:testresults} ve sloupci \uv{o\_test1}. Pobrobné výsledky testování, včetně Cohenovy kappy pro všechny dvojice anotátorů je v příloze \ref{app:testing}.
 
-Jak bychom kmohli mít lepší data a co omezuje použitý algoritmus.
+Výsledky ukazují, že pro 78 \% testovacích sad měli anotátoři pozitivní shodu. Pozitivní shoda znamená, že se oba anotátoři shodli na stejném obrázku, který je pro vstupní text nejméně vhodný. Tento obrázek byl zároveň vybrán do testovací sady náhodně. Čím je toto procento vyšší, tím lépe náš algoritmus pracuje, protože uživatelé jsou schopní detekovat náhodný obrázek. Pro 5 \% testovacích sad máme negativní shodu. Oba anotátoři vybrali obrázek, který nebyl přiřazen náhodně. Znamená to tedy, že tento obrázek nebyli schopní detekovat a algoritmus tedy pro vstupní text nepracuje dobře (pokud vyloučíme možnost, že náhodně přiřazený obrázek je k textu relevantní). U poslední skupiny testovacích dat -- 17 \% -- byl pouze jeden z anotátorů schopen vybrat náhodně vybraný obrázek. 
+
+\begin{figure}
+\label{fig:testresults}
+\centering
+\begin{tabular}{ | l || r | r | r |}
+  \hline
+     & \multicolumn{1}{c |}{\textbf{o\_test1}} & \multicolumn{1}{c |}{\textbf{o\_test2}} & \multicolumn{1}{c |}{\textbf{celkem}} \\
+  \hline
+  \hline
+    \textbf{anotátorů} & 5 & 5 & 7 \\
+  \hline
+    \textbf{textů} & 58 & 120 & 178 \\
+  \hline
+    \textbf{anotací} & 116 & 240 & 356 \\
+  \hline
+    \textbf{pozitivní shoda} & $45/58=78\%$ & $76/120=\mathbf{63}\%$ & $121/178=67\%$ \\
+  \hline
+    \textbf{negativní shoda} & $3/58=5\%$ & $15/120=13\%$ & $18/178=10\%$ \\
+  \hline
+    \textbf{neshoda} & $10/58=17\%$ & $29/120=24\% $ & $39/178=22\%$ \\
+\hline
+\end{tabular}
+
+  \caption{Přehled výsledků uživatelského testování.}
+\end{figure}
+
+Získaná data ukazují, že algoritmus pracuje poměrně dobře. Pokud by algoritmus přiřazoval automaticky obrázky k textům i v praxi, čtenáři by mohli by poznali rozdíl od algoritmu, který přiřazuje obrázky nahodile.
+
+Během testování se objevil jeden zásadní problém s testovací metodou. V datasetu Profimedie jsou i obrázky, které jsou si velmi vizuálně podobné, například fotky stejné osoby z různých úhlů. Tyto fotky mají často i stejné textové popisky. Mějme tedy 4 obrázky, které jsou si vizuálně velmi podobné a mají stejné textové popisky. Pokud algoritmus označí jako nejvhodnější obrázek k textu jeden z těchto obrázků, budou i na dalších třech doporučených pozicích vizuálně podobné obrázky (pokud tedy nemáme jinou množinu obrázků, která má stejné textové popisky, ale je vizuálně odlišná). Pokud se takový text objeví v naší testovací metodě, uvidí anotátor 4 velmi podobné obrázky a k nim jeden náhodně vybraný. Nejméně vhodný obrázek pak snadno označí, aniž by vůbec četl anotační text. Ukázalo se, že v našem testování k takovému problému opravdu došlo -- anotátorovi se zobrazily obrázky, z nichž ani jeden nebyl vhodným obrázkem k danému textu, přesto anotátor snadno označil nejméně vhodný obrázek. Tento problém zkresluje dosažené výsledky testování touto metodou.
+
+\section{Detekce správného obrázku (o\_test2)}
+
+Abychom předešli problémům s metodou popsaným v předchozí sekci, provedli jsme nové testování. Úkolem uživatelů bylo nyní vybrat obrázek, který se ke vstupnímu textu hodí nejvíce. Množinu obrázků nyní tvořil jeden výstup z algoritmu a 4 náhodně vybrané obrázky. Zvětšili jsme i testovací sadu. Bylo testováno 120 textů náhodně vybraných z iDnes datasetu. Každý z textů byl anotován dvěma anotátory. Na každém z pěti anotátorů tedy bylo 48 anotací. Výsledky testování jsou shrnuty v tabulce \ref{fig:testresults} ve sloupci \uv{o\_test2}. Pobrobné výsledky testování, včetně Cohenovy kappy pro všechny dvojice anotátorů je v příloze \ref{app:testing}.
+
+Výsledky jsou oproti předchozí metodě o něco horší. Pro 63 \% testovacích sad měli oba anotátoři pozitivní shodu, pro 13 \% měli anotátoři negativní shodu a pro 24 \% se anotátoři neshodli.
+
+\section{Shrnutí}
+
+Uživatelské testování ukazuje, že je algoritmus schopen v poměrně velkém procentu případů přiřadit automaticky \uv{dostatečňě vhodný} ilustrační obrázek. To, že je ilustrační obrázek dostatečně vhodný ovšem neznamená, že je nejvhodnější. Výběr nejvhodnějšího ilustračního obrázku je ovšem velmi individuální a nedá se obecně měřit.
+
+Testování ukázalo také na slabiny algoritmu. Možná největší slabinou je fáze překladu, díky níž popisky k některým obrázkům nesprávné. Tímto problémem netrpí algoritmus pro anglické vyhledávání, který pracuje s nepřeloženými popisky. Ten však nebyl uživatelsky testován.
+
+Jedním z problémů testování je právě omezená doména testovaných textů. Můžeme říci, že algoritmus funguje dobře na nějaké doméně textů, ale pro obecné zpravodajské články může algoritmus fungovat velmi špatně. Toto ovšem není problém testovaného algoritmu, ale dat na kterých pracuje. Rozšíření domény obrázků v korpusu Profimedie by rozšířilo i doménu textů pro které algoritmus funguje dobře.
+
+
+
+
+
+
+

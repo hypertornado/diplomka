@@ -1,0 +1,33 @@
+\chapter{Vyhledávání podobných obrázků}
+
+Jednou ze služeb, které výsledná aplikace poskytuje, je vyhledávání podobných obrázků. Uživatel rozhraní najde pomocí textových dotazů nějaké ilustrační obrázky a má možnost u každého z nalezených obrázků získat obrázky vizuálně podobné. Tato kapitola pojednává o tvorbě backendové služby, která vyhledávání podobných obrázků umožňuje.
+
+Vstupními daty je soubor s vektory pro každý obrázek datasetu Profimedie. Vektor má 4096 složek s reálnými nezápornými čísly. Vektory jsou vizuální deskriptory obrázků. Tyto deskriptory byly vygenerovány pomocí software Caffe a jsou jsou odezvami předposlední vrstvy hluboké konvoluční neuronové sítě natrénované pro klasifikaci obrázků do 1000 kategorii.
+
+Mějme obrázek $I_1$ s deskriptorem $D_1$ a obrázek $I_2$ s deskriptorem $D_2$. Míru podobnosti obrázků $Similarity$ pak můžeme definovat jako
+
+\begin{equation}
+  Similarity(I_1, I_2) = \sum_{i=1}^{4096} |D_1[i]-D_2[i]|
+\end{equation}
+
+V praxi se dají výsledky této míry klasifikovat zhruba do 3 kategorií. Tyto vypozorované kategorie popisuje tabulka \ref{fig:simtypes}.
+
+\begin{figure}
+\label{fig:simtypes}
+\centering
+\begin{tabular}{ | c | r |}
+  \hline
+     Kategorie & $Similarity$\\
+  \hline
+  \hline
+    téměř shodné & $0 - 500$ \\
+  \hline
+    podobné & $500 - 1500$ \\
+  \hline
+    nepodobné & $> 1500$ \\
+\hline
+\end{tabular}
+
+  \caption{Kategorie podobnosti obrázků podle $Similarity$.}
+\end{figure}
+

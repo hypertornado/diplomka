@@ -1,0 +1,304 @@
+Výsledek testu o_test1: 103 / 116 = 88.79 %
+Výsledek testu o_test2: 196 / 240 = 81.66 %
+Celkové výsledky dohromady: 299 / 356 = 83.98 %
+
+
+havel     
+ o_test1: 20 / 22 = 90.90 %
+ o_test2: 36 / 48 = 75.0  %
+ celkem:  56 / 70 = 80.0  %
+  odchazel_o
+   o_test1
+    3	0
+    1	1
+    Cohen's kappa = 0.5454545454545455
+  odchazel_v
+   o_test2
+    10	2
+    0	0
+    Cohen's kappa = 0.0
+  paroubkova
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+   o_test2
+    6	1
+    3	2
+    Cohen's kappa = 0.2727272727272727
+  pavlovic  
+   o_test1
+    5	0
+    0	0
+    Cohen's kappa = NaN
+  rakosova  
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+   o_test2
+    9	0
+    1	2
+    Cohen's kappa = 0.7499999999999999
+  semerad   
+   o_test2
+    6	2
+    0	4
+    Cohen's kappa = 0.6666666666666667
+
+odchazel_o
+ o_test1: 21 / 23 = 91.30 %
+ celkem:  21 / 23 = 91.30 %
+  havel     
+   o_test1
+    3	1
+    0	1
+    Cohen's kappa = 0.5454545454545455
+  paroubkova
+   o_test1
+    4	1
+    0	1
+    Cohen's kappa = 0.5714285714285715
+  pavlovic  
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+  rakosova  
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+
+odchazel_v
+ o_test2: 42 / 48 = 87.5  %
+ celkem:  42 / 48 = 87.5  %
+  havel     
+   o_test2
+    10	0
+    2	0
+    Cohen's kappa = 0.0
+  paroubkova
+   o_test2
+    10	1
+    0	1
+    Cohen's kappa = 0.625
+  rakosova  
+   o_test2
+    9	1
+    0	2
+    Cohen's kappa = 0.7499999999999999
+  semerad   
+   o_test2
+    11	0
+    0	1
+    Cohen's kappa = 1.0
+
+paroubkova
+ o_test1: 20 / 24 = 83.33 %
+ o_test2: 43 / 48 = 89.58 %
+ celkem:  63 / 72 = 87.5  %
+  havel     
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+   o_test2
+    6	3
+    1	2
+    Cohen's kappa = 0.2727272727272727
+  odchazel_o
+   o_test1
+    4	0
+    1	1
+    Cohen's kappa = 0.5714285714285715
+  odchazel_v
+   o_test2
+    10	0
+    1	1
+    Cohen's kappa = 0.625
+  pavlovic  
+   o_test1
+    4	0
+    2	0
+    Cohen's kappa = 0.0
+  rakosova  
+   o_test1
+    5	1
+    0	0
+    Cohen's kappa = 0.0
+   o_test2
+    11	1
+    0	0
+    Cohen's kappa = 0.0
+  semerad   
+   o_test2
+    10	2
+    0	0
+    Cohen's kappa = 0.0
+
+pavlovic  
+ o_test1: 21 / 23 = 91.30 %
+ celkem:  21 / 23 = 91.30 %
+  havel     
+   o_test1
+    5	0
+    0	0
+    Cohen's kappa = NaN
+  odchazel_o
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+  paroubkova
+   o_test1
+    4	2
+    0	0
+    Cohen's kappa = 0.0
+  rakosova  
+   o_test1
+    3	1
+    1	1
+    Cohen's kappa = 0.24999999999999986
+
+rakosova  
+ o_test1: 21 / 24 = 87.5  %
+ o_test2: 39 / 48 = 81.25 %
+ celkem:  60 / 72 = 83.33 %
+  havel     
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+   o_test2
+    9	1
+    0	2
+    Cohen's kappa = 0.7499999999999999
+  odchazel_o
+   o_test1
+    6	0
+    0	0
+    Cohen's kappa = NaN
+  odchazel_v
+   o_test2
+    9	0
+    1	2
+    Cohen's kappa = 0.7499999999999999
+  paroubkova
+   o_test1
+    5	0
+    1	0
+    Cohen's kappa = 0.0
+   o_test2
+    11	0
+    1	0
+    Cohen's kappa = 0.0
+  pavlovic  
+   o_test1
+    3	1
+    1	1
+    Cohen's kappa = 0.24999999999999986
+  semerad   
+   o_test2
+    9	0
+    0	3
+    Cohen's kappa = 1.0
+
+semerad   
+ o_test2: 36 / 48 = 75.0  %
+ celkem:  36 / 48 = 75.0  %
+  havel     
+   o_test2
+    6	0
+    2	4
+    Cohen's kappa = 0.6666666666666667
+  odchazel_v
+   o_test2
+    11	0
+    0	1
+    Cohen's kappa = 1.0
+  paroubkova
+   o_test2
+    10	0
+    2	0
+    Cohen's kappa = 0.0
+  rakosova  
+   o_test2
+    9	0
+    0	3
+    Cohen's kappa = 1.0
+
+
+o_test1
+ nesprávné označení (text, uživatel)
+  00207 o_paroubkova
+  01337 o_pavlovic
+  01595 o_paroubkova
+  01921 o_rakosova
+  03758 o_odchazel_ondrej
+  03758 o_paroubkova
+  03907 o_paroubkova
+  04107 o_rakosova
+  07604 o_havel
+  07604 o_odchazel_ondrej
+  09093 o_pavlovic
+  09093 o_rakosova
+  09551 o_havel
+celkem 116 anotací 58 textů
+každý text oanotován dvěma anotátory
+ oba správně : 45 / 58 = 77.58 %
+ oba špatně  : 3 / 58 = 5.172 %
+ jeden špatně: 10 / 58 = 17.24 %
+
+o_test2
+ nesprávné označení (text, uživatel)
+  00124 o_semerad
+  00405 o_havel
+  00405 o_paroubkova
+  00623 o_paroubkova
+  01907 o_rakosova
+  01911 o_odchazel_vojtech
+  01911 o_paroubkova
+  02505 o_odchazel_vojtech
+  02505 o_rakosova
+  03610 o_havel
+  03610 o_semerad
+  04211 o_odchazel_vojtech
+  04282 o_havel
+  04282 o_semerad
+  04368 o_odchazel_vojtech
+  04368 o_semerad
+  04480 o_semerad
+  04530 o_havel
+  05102 o_rakosova
+  05102 o_semerad
+  05692 o_semerad
+  06379 o_paroubkova
+  06777 o_rakosova
+  07326 o_rakosova
+  07326 o_semerad
+  07587 o_odchazel_vojtech
+  07587 o_rakosova
+  08015 o_havel
+  08015 o_semerad
+  08621 o_havel
+  12931 o_odchazel_vojtech
+  13674 o_havel
+  13674 o_semerad
+  13803 o_havel
+  13803 o_paroubkova
+  14257 o_havel
+  14257 o_rakosova
+  14329 o_rakosova
+  14329 o_semerad
+  14353 o_havel
+  14353 o_rakosova
+  14988 o_semerad
+  15726 o_havel
+  15770 o_havel
+celkem 240 anotací 120 textů
+každý text oanotován dvěma anotátory
+ oba správně : 76 / 120 = 63.33 %
+ oba špatně  : 15 / 120 = 12.5  %
+ jeden špatně: 29 / 120 = 24.16 %
+

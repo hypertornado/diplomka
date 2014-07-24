@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  19 JUL 2014 13:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  24 JUL 2014 11:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -461,32 +461,32 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 \Hy@SectionHShift=\skip46
 ))
 (./prace.aux (./uvod.aux) (./data.aux) (./teorie.aux) (./preklad.aux)
-(./backend.aux) (./stemmer.aux) (./detekce_jazyka.aux) (./kap2.aux)
-(./html5.aux) (./zprovozneni.aux) (./anotacni_rozhrani.aux) (./evaluace.aux)
-(./zaver.aux) (./literatura.aux))
+(./backend.aux) (./stemmer.aux) (./detekce_jazyka.aux) (./similar.aux)
+(./kap2.aux) (./html5.aux) (./zprovozneni.aux) (./anotacni_rozhrani.aux)
+(./evaluace.aux) (./zaver.aux) (./literatura.aux))
 \openout1 = `prace.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for IL2/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for IL2/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
 \c@lstlisting=\count107
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 63.
+Package hyperref Info: Link coloring OFF on input line 76.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -496,9 +496,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count108
 )
-LaTeX Info: Redefining \ref on input line 63.
-LaTeX Info: Redefining \pageref on input line 63.
-LaTeX Info: Redefining \nameref on input line 63.
+LaTeX Info: Redefining \ref on input line 76.
+LaTeX Info: Redefining \pageref on input line 76.
+LaTeX Info: Redefining \nameref on input line 76.
 
 (./prace.out) (./prace.out)
 \@outlinefile=\write3
@@ -507,22 +507,22 @@ LaTeX Info: Redefining \nameref on input line 63.
 File: logo.eps Graphic file (type eps)
  <logo.eps>
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 164.
+(Font)              <14.4> on input line 177.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 164.
+(Font)              <7> on input line 177.
  [1
 
 ] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 207.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 220.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 207.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 220.
  [3] [4]
 (./prace.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -566,17 +566,17 @@ Overfull \hbox (47.9998pt too wide) in paragraph at lines 27--28
 ^^f8^^e1d-ku sou-bo-ru [][][][][][][][][]. 
  []
 
-[7
 
-
-
-]
 Overfull \hbox (114.1803pt too wide) in paragraph at lines 39--40
 \IL2/cmr/m/n/12 pr^^e1-ce Bc. Ja-na Botorka[[]]. Jed-n^^edm z v^^fd-sled-k^^f9 
 t^^e9-to pr^^e1-ce je sou-bor [][][][][][][][][][][].
  []
 
+[7
 
+
+
+]
 Overfull \hbox (31.77817pt too wide) in paragraph at lines 49--50
 \IL2/cmr/m/n/12 ^^e1l-n^^ed po-dob-nos-ti. K to-mu-to ^^fa^^e8e-lu byl po-skyt-
 nut sou-bor [][][][][][][][][][][],
@@ -629,34 +629,43 @@ Overfull \hbox (47.57332pt too wide) in paragraph at lines 27--28
 
 LaTeX Warning: Citation `golang' on page 16 undefined on input line 41.
 
-[16] [17] [18]) [19]
+[16] [17]) [18]
 \openout2 = `stemmer.aux'.
 
  (./stemmer.tex
 Kapitola 7.
 
-LaTeX Warning: Citation `porter1980algorithm' on page 20 undefined on input lin
-e 9.
+LaTeX Warning: Citation `porter1980algorithm' on page 19 undefined on input lin
+e 10.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2004/09/05 1.3 listings language file
+)) [19
+
+
+
+]
+\openout2 = `detekce_jazyka.aux'.
+
+
+(./detekce_jazyka.tex
+Kapitola 8.
+
+LaTeX Warning: Citation `cavnar1994n' on page 20 undefined on input line 7.
+
 ) [20
 
 
 
-])
-[21]
-\openout2 = `detekce_jazyka.aux'.
+]
+\openout2 = `similar.aux'.
 
- (./detekce_jazyka.tex
-Kapitola 8.
-
-LaTeX Warning: Citation `cavnar1994n' on page 22 undefined on input line 7.
-
-) [22
+ (./similar.tex
+Kapitola 9.
+) [21
 
 
 
@@ -664,141 +673,142 @@ LaTeX Warning: Citation `cavnar1994n' on page 22 undefined on input line 7.
 \openout2 = `kap2.aux'.
 
  (./kap2.tex
-Kapitola 9.
+Kapitola 10.
+) [22
+
+
+
+]
+\openout2 = `html5.aux'.
+
+ (./html5.tex
+Kapitola 11.
 [23
 
 
 
 ]) [24]
-\openout2 = `html5.aux'.
-
- (./html5.tex
-Kapitola 10.
-[25
-
-
-
-] [26]) [27]
 \openout2 = `zprovozneni.aux'.
 
  (./zprovozneni.tex
-Kapitola 11.
+Kapitola 12.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
-) [28
+) [25
 
 
 
 ]
-[29]
 Overfull \hbox (0.32433pt too wide) in paragraph at lines 49--50
 \IL2/cmr/m/n/12 Nejprve p^^f8^^ed-ka-zem [][][][][][][][] vy-
  []
 
-
+[26]
 Overfull \hbox (10.93391pt too wide) in paragraph at lines 68--69
 []\IL2/cmr/m/n/12 vytvo^^f8^^ed se-znam slov a je-jich frek-ven-c^^ed s ces-tou
  [][][][][][][].
  []
 
-[30]
+[27]
 Overfull \hbox (4.50294pt too wide) in paragraph at lines 107--108
 \IL2/cmr/m/n/12 mo-c^^ed API el-sa-tic-search na ad-re-se [][][][]. 
  []
 
-[31]) [32]
+) [28]
 \openout2 = `anotacni_rozhrani.aux'.
 
  (./anotacni_rozhrani.tex
-Kapitola 12.
+Kapitola 13.
 LaTeX Font Info:    Font shape `IL2/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 11.
+(Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 12.
 
-Overfull \hbox (209.79854pt too wide) in paragraph at lines 19--20
+Overfull \hbox (209.79854pt too wide) in paragraph at lines 20--21
 \IL2/cmr/m/n/12 cfo85. Ad-mi-nis-tr^^e1-tor-sk^^e9 p^^f8^^ed-stu-po-v^^e9 ^^fad
 a-je lze zm^^ec-nit v sou-bo-ru [][][][][][][][][][][].
  []
 
-[33
 
-
-
-]
-Overfull \hbox (24.30417pt too wide) in paragraph at lines 29--30
+Overfull \hbox (24.30417pt too wide) in paragraph at lines 30--31
 []\IL2/cmr/m/n/12 P^^f8^^edkaz o^^e8e-k^^e1 exis-ten-ci sou-bo-ru [][][][][][][
 ][][].
  []
 
-[34]
-Overfull \hbox (1.3919pt too wide) in paragraph at lines 85--86
+[29
+
+
+
+] [30]
+Overfull \hbox (1.3919pt too wide) in paragraph at lines 86--87
 [][][][][][][][][]\IL2/cmr/m/n/12 . Po-kud te-dy im-por-to-va-n^^fd sou-
  []
 
 File: anotacni_rozhrani.eps Graphic file (type eps)
 <anotacni_rozhrani.eps>
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 91--92
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 92--93
  [][] 
  []
 
-) [35] [36]
+[31]) [32]
 \openout2 = `evaluace.aux'.
 
  (./evaluace.tex
-Kapitola 13.
-) [37
+Kapitola 14.
+[33
 
 
 
-]
+] [34]) [35]
 \openout2 = `zaver.aux'.
 
  (./zaver.tex
-Kapitola 14.
-) [38
+Kapitola 15.
+) [36
 
 
 
 ]
 \openout2 = `literatura.aux'.
 
- (./literatura.tex) [39
+ (./literatura.tex) [37
 
 
 
-] [40
+] [38
 
 
-] [41
+] [39
 
-] [42
+] (./annotation_results.txt [40
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
- (./prace.aux (./uvod.aux)
-(./data.aux) (./teorie.aux) (./preklad.aux) (./backend.aux) (./stemmer.aux)
-(./detekce_jazyka.aux) (./kap2.aux) (./html5.aux) (./zprovozneni.aux)
-(./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux) (./literatura.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 324.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 324.
+[41] [42] [43] [44] [45]) [46]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 341.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 341.
+ (./prace.aux (./uvod.aux) (./data.aux)
+(./teorie.aux) (./preklad.aux) (./backend.aux) (./stemmer.aux)
+(./detekce_jazyka.aux) (./similar.aux) (./kap2.aux) (./html5.aux)
+(./zprovozneni.aux) (./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux)
+(./literatura.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 341.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 341.
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 603CAB6BD386ED953A762146FAE3498B;12236.
+(rerunfilecheck)             Checksum: 52DE21FE625FC7DE5B874102CD0B5225;12830.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 324.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 341.
  ) 
 Here is how much of TeX's memory you used:
- 10996 strings out of 494923
- 149078 string characters out of 6180164
- 287500 words of memory out of 5000000
- 14139 multiletter control sequences out of 15000+600000
- 16477 words of font info for 42 fonts, out of 8000000 for 9000
+ 11062 strings out of 494923
+ 149858 string characters out of 6180164
+ 287120 words of memory out of 5000000
+ 14192 multiletter control sequences out of 15000+600000
+ 17638 words of font info for 44 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 33i,8n,49p,1050b,1935s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,11n,49p,1220b,1801s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (46 pages, 222928 bytes).
+Output written on prace.dvi (50 pages, 361140 bytes).
