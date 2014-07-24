@@ -41,40 +41,43 @@
 \contentsline {chapter}{\numberline {8}Detekce jazyka}{20}{chapter.8}
 \contentsline {section}{\numberline {8.1}Algoritmus na detekci}{20}{section.8.1}
 \contentsline {chapter}{\numberline {9}Vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } podobn\IeC {\'y}ch obr\IeC {\'a}zk\IeC {\r u}}{21}{chapter.9}
-\contentsline {chapter}{\numberline {10}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st: Implementace modern\IeC {\'\i } webov\IeC {\'e} aplikace}{22}{chapter.10}
-\contentsline {section}{\numberline {10.1}Frontend: AJAXov\IeC {\'a} aplikace na zobrazov\IeC {\'a}n\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{22}{section.10.1}
-\contentsline {section}{\numberline {10.2}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{22}{section.10.2}
-\contentsline {section}{\numberline {10.3}N\IeC {\'a}vod k pou\IeC {\v z}it\IeC {\'\i }}{22}{section.10.3}
-\contentsline {section}{\numberline {10.4}Preklad}{22}{section.10.4}
-\contentsline {chapter}{\numberline {11}Mo\IeC {\v z}nosti tvorby modern\IeC {\'\i }ho webov\IeC {\'e}ho frontendu}{23}{chapter.11}
-\contentsline {section}{\numberline {11.1}Mo\IeC {\v z}nosti programov\IeC {\'a}n\IeC {\'\i } frontendu}{23}{section.11.1}
-\contentsline {section}{\numberline {11.2}JavaScriptov\IeC {\'e} frameworky}{23}{section.11.2}
-\contentsline {subsection}{\numberline {11.2.1}jQuery}{23}{subsection.11.2.1}
-\contentsline {subsection}{\numberline {11.2.2}Google Closure}{24}{subsection.11.2.2}
-\contentsline {section}{\numberline {11.3}Stylov\IeC {\'a}n\IeC {\'\i } u\IeC {\v z}ivatelsk\IeC {\'e}ho rozhran\IeC {\'\i } a CSS}{24}{section.11.3}
-\contentsline {chapter}{\numberline {12}Instalace a zprovozn\IeC {\v e}n\IeC {\'\i }}{25}{chapter.12}
-\contentsline {section}{\numberline {12.1}Instalace}{25}{section.12.1}
-\contentsline {section}{\numberline {12.2}Pr\IeC {\'a}ce s metadaty k obr\IeC {\'a}zk\IeC {\r u}m}{25}{section.12.2}
-\contentsline {section}{\numberline {12.3}P\IeC {\v r}eklad metadat}{25}{section.12.3}
-\contentsline {subsection}{\numberline {12.3.1}Export slov a fr\IeC {\'a}z\IeC {\'\i }}{27}{subsection.12.3.1}
-\contentsline {section}{\numberline {12.4}Jazykov\IeC {\'y} korpus}{27}{section.12.4}
-\contentsline {section}{\numberline {12.5}P\IeC {\v r}\IeC {\'\i }prava dat pro detekci jazyk\IeC {\r u}}{28}{section.12.5}
-\contentsline {section}{\numberline {12.6}Import dat do datab\IeC {\'a}ze}{28}{section.12.6}
-\contentsline {section}{\numberline {12.7}Import metadat obr\IeC {\'a}zk\IeC {\r u}}{28}{section.12.7}
-\contentsline {chapter}{\numberline {13}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{29}{chapter.13}
-\contentsline {section}{\numberline {13.1}Instalace rozhran\IeC {\'\i }}{29}{section.13.1}
-\contentsline {section}{\numberline {13.2}P\IeC {\v r}id\IeC {\'a}n\IeC {\'\i } u\IeC {\v z}ivatel\IeC {\r u}}{29}{section.13.2}
-\contentsline {section}{\numberline {13.3}Import anota\IeC {\v c}n\IeC {\'\i }ch dat}{29}{section.13.3}
-\contentsline {section}{\numberline {13.4}Export anota\IeC {\v c}n\IeC {\'\i }ch dat}{30}{section.13.4}
-\contentsline {section}{\numberline {13.5}Import obr\IeC {\'a}zk\IeC {\r u} a text\IeC {\r u}}{31}{section.13.5}
-\contentsline {section}{\numberline {13.6}Anota\IeC {\v c}n\IeC {\'\i } proces}{31}{section.13.6}
-\contentsline {chapter}{\numberline {14}Testov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{33}{chapter.14}
-\contentsline {section}{\numberline {14.1}Vylou\IeC {\v c}en\IeC {\'\i } naru\IeC {\v s}itele (o\_test1)}{33}{section.14.1}
-\contentsline {section}{\numberline {14.2}Detekce spr\IeC {\'a}vn\IeC {\'e}ho obr\IeC {\'a}zku (o\_test2)}{34}{section.14.2}
-\contentsline {section}{\numberline {14.3}Shrnut\IeC {\'\i }}{35}{section.14.3}
-\contentsline {chapter}{\numberline {15}Z\IeC {\'a}v\IeC {\v e}r}{36}{chapter.15}
-\contentsline {chapter}{Z\IeC {\'a}v\IeC {\v e}r}{36}{chapter.15}
-\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{37}{chapter*.2}
-\contentsline {chapter}{Seznam tabulek}{38}{chapter*.3}
-\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{39}{chapter*.4}
-\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }loha 1}{40}{chapter*.5}
+\contentsline {section}{\numberline {9.1}Bootstrap implementace}{22}{section.9.1}
+\contentsline {section}{\numberline {9.2}P\IeC {\v r}edgenerov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{22}{section.9.2}
+\contentsline {section}{\numberline {9.3}Geohash}{23}{section.9.3}
+\contentsline {chapter}{\numberline {10}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st: Implementace modern\IeC {\'\i } webov\IeC {\'e} aplikace}{25}{chapter.10}
+\contentsline {section}{\numberline {10.1}Frontend: AJAXov\IeC {\'a} aplikace na zobrazov\IeC {\'a}n\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{25}{section.10.1}
+\contentsline {section}{\numberline {10.2}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{25}{section.10.2}
+\contentsline {section}{\numberline {10.3}N\IeC {\'a}vod k pou\IeC {\v z}it\IeC {\'\i }}{25}{section.10.3}
+\contentsline {section}{\numberline {10.4}Preklad}{25}{section.10.4}
+\contentsline {chapter}{\numberline {11}Mo\IeC {\v z}nosti tvorby modern\IeC {\'\i }ho webov\IeC {\'e}ho frontendu}{26}{chapter.11}
+\contentsline {section}{\numberline {11.1}Mo\IeC {\v z}nosti programov\IeC {\'a}n\IeC {\'\i } frontendu}{26}{section.11.1}
+\contentsline {section}{\numberline {11.2}JavaScriptov\IeC {\'e} frameworky}{26}{section.11.2}
+\contentsline {subsection}{\numberline {11.2.1}jQuery}{26}{subsection.11.2.1}
+\contentsline {subsection}{\numberline {11.2.2}Google Closure}{27}{subsection.11.2.2}
+\contentsline {section}{\numberline {11.3}Stylov\IeC {\'a}n\IeC {\'\i } u\IeC {\v z}ivatelsk\IeC {\'e}ho rozhran\IeC {\'\i } a CSS}{27}{section.11.3}
+\contentsline {chapter}{\numberline {12}Instalace a zprovozn\IeC {\v e}n\IeC {\'\i }}{28}{chapter.12}
+\contentsline {section}{\numberline {12.1}Instalace}{28}{section.12.1}
+\contentsline {section}{\numberline {12.2}Pr\IeC {\'a}ce s metadaty k obr\IeC {\'a}zk\IeC {\r u}m}{28}{section.12.2}
+\contentsline {section}{\numberline {12.3}P\IeC {\v r}eklad metadat}{28}{section.12.3}
+\contentsline {subsection}{\numberline {12.3.1}Export slov a fr\IeC {\'a}z\IeC {\'\i }}{30}{subsection.12.3.1}
+\contentsline {section}{\numberline {12.4}Jazykov\IeC {\'y} korpus}{30}{section.12.4}
+\contentsline {section}{\numberline {12.5}P\IeC {\v r}\IeC {\'\i }prava dat pro detekci jazyk\IeC {\r u}}{31}{section.12.5}
+\contentsline {section}{\numberline {12.6}Import dat do datab\IeC {\'a}ze}{31}{section.12.6}
+\contentsline {section}{\numberline {12.7}Import metadat obr\IeC {\'a}zk\IeC {\r u}}{31}{section.12.7}
+\contentsline {chapter}{\numberline {13}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{32}{chapter.13}
+\contentsline {section}{\numberline {13.1}Instalace rozhran\IeC {\'\i }}{32}{section.13.1}
+\contentsline {section}{\numberline {13.2}P\IeC {\v r}id\IeC {\'a}n\IeC {\'\i } u\IeC {\v z}ivatel\IeC {\r u}}{32}{section.13.2}
+\contentsline {section}{\numberline {13.3}Import anota\IeC {\v c}n\IeC {\'\i }ch dat}{32}{section.13.3}
+\contentsline {section}{\numberline {13.4}Export anota\IeC {\v c}n\IeC {\'\i }ch dat}{33}{section.13.4}
+\contentsline {section}{\numberline {13.5}Import obr\IeC {\'a}zk\IeC {\r u} a text\IeC {\r u}}{34}{section.13.5}
+\contentsline {section}{\numberline {13.6}Anota\IeC {\v c}n\IeC {\'\i } proces}{34}{section.13.6}
+\contentsline {chapter}{\numberline {14}Testov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{36}{chapter.14}
+\contentsline {section}{\numberline {14.1}Vylou\IeC {\v c}en\IeC {\'\i } naru\IeC {\v s}itele (o\_test1)}{36}{section.14.1}
+\contentsline {section}{\numberline {14.2}Detekce spr\IeC {\'a}vn\IeC {\'e}ho obr\IeC {\'a}zku (o\_test2)}{37}{section.14.2}
+\contentsline {section}{\numberline {14.3}Shrnut\IeC {\'\i }}{38}{section.14.3}
+\contentsline {chapter}{\numberline {15}Z\IeC {\'a}v\IeC {\v e}r}{39}{chapter.15}
+\contentsline {chapter}{Z\IeC {\'a}v\IeC {\v e}r}{39}{chapter.15}
+\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{40}{chapter*.2}
+\contentsline {chapter}{Seznam tabulek}{41}{chapter*.3}
+\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{42}{chapter*.4}
+\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }loha 1}{43}{chapter*.5}
