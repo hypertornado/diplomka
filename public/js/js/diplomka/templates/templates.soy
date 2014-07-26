@@ -35,15 +35,52 @@
       </div>
     </div>
     <div class="goog-splitpane-handle" id="split-handle"></div>
+    <div class="img-detail hide" id="img-detail">
+      
+    </div>
   </div>
 {/template}
+
+
+/**
+ * @param id
+ */
+{template .imageDetails}
+<div class="img-info" id="img-info">
+  <h3><small>{$id}</small></h3>
+</div>
+<div class="img">
+  <img src="http://mufin.fi.muni.cz/profimedia/bigImages/{$id}">
+</div>
+<div class="img-similar" id="img-similar"></div>
+{/template}
+
+/**
+ * @param data
+ */
+{template .imageDetailsMetadata}
+<h3>{$data['_source']['title']}<small> {$data['_id']}</small></h3>
+<p>{$data['_source']['keywords']}</p>
+<a target="_blank" class="btn btn-default" href="http://www.profimedia.cz/image/detail/{$data['_id']}">Detail na Profimedia.cz</a>
+<a href="#" class="btn btn-default" id="close-img-window">Zavřít</a>
+{/template}
+
+/**
+ * @param data
+ */
+{template .suggestedImages}
+  {foreach $img in $data}
+    <img src="http://mufin.fi.muni.cz/profimedia/bigImages/{$img}" class="suggested-image" data-id="{$img}">
+  {/foreach}
+{/template}
+
 
 /**
  * @param images
  */
 {template .images}
 {foreach $hit in $images.hits.hits}
-  <a href="http://www.profimedia.cz/image/detail/{$hit._id}" target="_blank" class="img-container">
+  <a href="#" class="img-container" data-id="{$hit._id}">
 	 <div style="background-image: url('http://mufin.fi.muni.cz/profimedia/bigImages/{$hit._id}')" alt="{$hit._source.keywords}" class="image"></div>
   <span class="img-metadata">
     <span class="img-name">{$hit._source.title}</span>

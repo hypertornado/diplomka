@@ -13,6 +13,8 @@ Diplomka::Application.routes.draw do
     end
   end
 
+  get 'api/detail/:id' => 'api#detail'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -4,6 +4,8 @@ goog.provide('oo.diplomka.Images');
 goog.require('goog.ui.Component');
 goog.require('oo.diplomka.templates');
 goog.require('goog.array');
+goog.require('goog.dom');
+goog.require('goog.events');
 goog.require('goog.i18n.NumberFormat');
 
 /*
@@ -31,7 +33,6 @@ goog.inherits(oo.diplomka.Images, goog.ui.Component);
 oo.diplomka.Images.imagesRequestSize = 20;
 
 oo.diplomka.Images.prototype.renderImages = function (data) {
-	window.console.log(data);
 	if (data.images.hits) {
     if (data.request.from > 0) {
       this.renderImagesAppend_(data);
@@ -39,7 +40,16 @@ oo.diplomka.Images.prototype.renderImages = function (data) {
       this.renderImagesFirst_(data);
     }
     this.lastData = data;
+
+    goog.array.forEach(goog.dom.getElementsByClass("img-container"), function(el) {
+      goog.events.listen(el, goog.events.EventType.CLICK, this.showDetail_, false, this);
+    }, this);
 	}
+}
+
+oo.diplomka.Images.prototype.showDetail_ = function(event) {
+  var id = event.currentTarget.getAttribute("data-id")
+  this.events.fire(oo.diplomka.EventType.SHOW_IMG_DETAIL, id);
 }
 
 oo.diplomka.Images.prototype.renderImagesFirst_ = function(data) {

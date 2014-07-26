@@ -29,10 +29,6 @@ body, textarea, div, a {
   margin-top: 2px;
 }
 
-#options-panel {
-  
-}
-
 #options-panel select {
   margin-right: 5px;
   margin-left: 5px;
@@ -141,6 +137,84 @@ input {
   padding: 5px;
 }
 
+.similar-img-btn {
+  left: 60px;
+  top: 20px;
+  width: 70px;
+  margin: 0 auto;
+  display: none;
+  position: absolute;
+  background: #ca171b;
+  color: #DFDED4;
+  font-size: 13px;
+  margin: 2px;
+  padding: 5px;
+  box-shadow: 0px 0px 10px black;
+  text-align: center;
+}
+
+.similar-img-btn:hover {
+  box-shadow: 0px 0px 5px black;
+}
+
+.similar-img-btn:active {
+  box-shadow: 0px 0px 0px black;
+}
+
+.img-detail {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: rgba(205, 202, 185, 1);
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  padding: 0px 10px 10px 10px;
+}
+
+.img-detail .img {
+  text-align: center;
+  width: calc(100% - 400px);
+  height: calc(100% - 120px);
+}
+
+.img-detail .img img {
+  margin:auto;
+  margin: 5px;
+  max-width: calc(100%);
+  max-height: calc(100%);
+}
+
+.img-detail .img-info {
+  width: 395px;
+  float: right;
+  height: calc(100% - 120px);
+}
+
+.img-detail .img-similar {
+  width: 100%;
+  height: 115px;
+  background: #DFDED4;
+  margin-top: 5px;
+  padding: 5px;
+  overflow: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+}
+
+.img-similar img {
+  max-height: 100px;
+  cursor: pointer;
+
+}
+
+
+
+
+
+
+
 .img-name {
   font-weight: bold;
   display: block;
@@ -148,6 +222,10 @@ input {
 }
 
 .img-container:hover .img-metadata {
+  display: inline;
+}
+
+.img-container:hover .similar-img-btn {
   display: inline;
 }
 

@@ -9,6 +9,7 @@ goog.require('goog.dom.ViewportSizeMonitor');
 goog.require("oo.diplomka.Events");
 goog.require("goog.ui.HoverCard");
 goog.require("oo.diplomka.OptionsPane");
+goog.require("oo.diplomka.DetailPane");
 
 /**
  * @constructor
@@ -20,6 +21,7 @@ oo.diplomka.StockPhotoFinder = function() {
   this.monitorResize();
   this.ws = new oo.diplomka.WebSockets(this.events);
   this.optionsPane = new oo.diplomka.OptionsPane(this.events);
+  this.detailPane = new oo.diplomka.DetailPane(this.events);
 
   document.title = "Stock Photo Finder - created by Ondřej Odcházel"
 

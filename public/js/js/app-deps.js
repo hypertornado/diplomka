@@ -2,16 +2,17 @@
 // Please do not edit.
 goog.addDependency('../../../js-soy/soyutils_usegoog.js', ['soy', 'soy.StringBuilder', 'soy.esc', 'soydata', 'soydata.SanitizedHtml', 'soydata.SanitizedHtmlAttribute', 'soydata.SanitizedJs', 'soydata.SanitizedJsStrChars', 'soydata.SanitizedUri', 'soydata.VERY_UNSAFE'], ['goog.asserts', 'goog.dom.DomHelper', 'goog.format', 'goog.i18n.BidiFormatter', 'goog.i18n.bidi', 'goog.soy', 'goog.soy.data.SanitizedContentKind', 'goog.string', 'goog.string.StringBuffer']);
 goog.addDependency('../../../js/app.js', ['app.start'], ['oo.diplomka.StockPhotoFinder']);
+goog.addDependency('../../../js/diplomka/detailpane.js', ['oo.diplomka.DetailPane'], ['goog.dom.classes', 'goog.net.XhrIo', 'oo.diplomka.Events']);
 goog.addDependency('../../../js/diplomka/events.js', ['oo.diplomka.Events'], ['goog.array', 'goog.object', 'oo.diplomka.EventType']);
 goog.addDependency('../../../js/diplomka/eventtype.js', ['oo.diplomka.EventType'], []);
-goog.addDependency('../../../js/diplomka/images.js', ['oo.diplomka.Images'], ['goog.array', 'goog.i18n.NumberFormat', 'goog.ui.Component', 'oo.diplomka.templates']);
+goog.addDependency('../../../js/diplomka/images.js', ['oo.diplomka.Images'], ['goog.array', 'goog.dom', 'goog.events', 'goog.i18n.NumberFormat', 'goog.ui.Component', 'oo.diplomka.templates']);
 goog.addDependency('../../../js/diplomka/languages/data.js', ['oo.diplomka.Languages.Data'], []);
 goog.addDependency('../../../js/diplomka/languages/model.js', ['oo.diplomka.Languages.Model'], ['oo.diplomka.Languages.Data']);
 goog.addDependency('../../../js/diplomka/languages/trigrams.js', ['oo.diplomka.Languages.Trigrams'], ['oo.diplomka.Languages.Model']);
 goog.addDependency('../../../js/diplomka/languages/trigrams_test.js', ['oo.diplomka.Languages.TrigramsTest'], ['goog.testing.jsunit', 'oo.diplomka.Languages.Trigrams']);
 goog.addDependency('../../../js/diplomka/optionspane.js', ['oo.diplomka.OptionsPane'], ['oo.diplomka.Events', 'oo.diplomka.Languages.Trigrams']);
 goog.addDependency('../../../js/diplomka/splitpane.js', ['oo.diplomka.SplitPane'], ['goog.ui.SplitPane', 'oo.diplomka.Images', 'oo.diplomka.Tags', 'oo.diplomka.Textarea']);
-goog.addDependency('../../../js/diplomka/stockphotofinder.js', ['oo.diplomka.StockPhotoFinder'], ['goog.dom', 'goog.dom.ViewportSizeMonitor', 'goog.ui.HoverCard', 'oo.diplomka.Events', 'oo.diplomka.OptionsPane', 'oo.diplomka.SplitPane', 'oo.diplomka.templates', 'oo.diplomka.websockets']);
+goog.addDependency('../../../js/diplomka/stockphotofinder.js', ['oo.diplomka.StockPhotoFinder'], ['goog.dom', 'goog.dom.ViewportSizeMonitor', 'goog.ui.HoverCard', 'oo.diplomka.DetailPane', 'oo.diplomka.Events', 'oo.diplomka.OptionsPane', 'oo.diplomka.SplitPane', 'oo.diplomka.templates', 'oo.diplomka.websockets']);
 goog.addDependency('../../../js/diplomka/tags.js', ['oo.diplomka.Tags'], ['goog.array', 'goog.dom', 'goog.events', 'goog.events.EventType', 'goog.ui.Component', 'goog.ui.KeyboardShortcutHandler', 'oo.diplomka.templates']);
 goog.addDependency('../../../js/diplomka/templates/templates.soy.js', ['oo.diplomka.templates'], ['soy', 'soydata']);
 goog.addDependency('../../../js/diplomka/textarea.js', ['oo.diplomka.Textarea'], ['goog.ui.Component']);

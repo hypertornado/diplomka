@@ -1,4 +1,4 @@
-\chapter{Vyhledávání v korpusu obrázkových popisků}
+\chapter{Vyhledávání relevantních obrázků}
 
 % \section{Teoretické cíle}
 
@@ -8,7 +8,7 @@
 
 % Nyní můžeme použít některý z algoritmů na extrakci klíčových slov uvedených v další kapitole.
 
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includegraphics[width=150mm]{dataflow.eps}
   \caption{Základní tok dat mezi klientem a serverem.}
@@ -18,13 +18,11 @@
 
 Aplikace poskytuje uživateli dvě možnosti vyhledávání. Základní uživatelským scénářem je vložit do rozhraní text. Aplikace by v takovém případě měla poskytnout relevantní obrázky k danému textu. V dalším uživatelským scénářem je přímý požadavek na klíčová slova obrázku. Uživatel by měl mít možnost zadat přímo klíčová slova, které nalezené obrázky musí obsahovat. Oba scénáře by mělo navím být možné propojit pomocí nápovědy klíčových slov -- uživatel zadá do rozhraní text, dostane výsledné obrázky a nápovědu klíčových slov, kterými může množinu nalezených obrázků více omezit. Klíčová slova ze vstupního textu se dále používají jako nápověda uživateli, který jimi může množinu hledaných obrázků dále omezit. Celý proces hledání vhodných obrázků popisuje diagram \ref{fig:dataflow}.
 
-
-
 \section{Extrakce klíčových slov}
 
 Extrakce klíčových slov je velmi důležitou složkou celého vyhledávání. Článek \cite{lott} shrnuje základní techniky extrakce klíčových slov z textu. Algoritmy na extrakci klíčových slov lze v zásadě rozdělit do dvou kategorií - \uv{s korpusem} a \uv{bez korpusu}. Metody pracující bez korpusu jsou zajímavé a mohou dosahovat podobných výsledků jako metody s korpusem. My však máme k dispozici dataset Profimedie, takže o metody pracující bez korpusu se tato práce dále nezajímá. 
 
-\subsection{TF-IDF}
+\section{TF-IDF}
 
 TF-IDF je jeden ze základních vyhledávacích algoritmů. Algoritmus využívá korpusu dokumentů $D$ a dvou složek $TF$ a $IDF$, lze ho vyjádřit jako rovnost: 
 
@@ -62,24 +60,53 @@ TFIDF(t,d,n,N)= \left(\sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}
   \log \left(\frac{N - n}{n}\right)
 \end{equation}
 
-\subsection{TF-IDF pro extrakci klíčových slov}
+\section{TF-IDF pro extrakci klíčových slov}
+\label{sec:keywords_extraction}
 
 Algortimus TF-IDF můžeme použít pro extrakci klíčových slov z textu. Všechna znaky vstupního textu převedeme na malá písmena a text rozdělíme na slova. Dále nás nezajímá diakritika a různé speciální znaky, které může text obsahovat. Všechna slova převedeme na stemy. O převodu slov na stemmy se podrobněji píše v Kapitole \ref{chap:stemmer}.
 
+Algoritmus TF-IDF pak použijeme na každé slovo vstupního textu a získáme tak skóre jeho významnosti v textu. Slova s nejvyšším skóre pak označíme za klíčová. Algoritmus musíme upravit pro naše účely. Zaprvé nás zajímají pouze taková slova, která existují v datasetu Profimedie. Slova která se v korpusu nenachází dostanou skóre 0. Část TF v algoritmu znamená četnost slova v textu.
+
+Složitější je situace s IDF. Nabízí se použít frekvenci slov z datasetu Profimedie. Ukázalo se, že klíčová slova obrázků z datasetu nejsou pro tento účel vhodná. Klíčová slova totiž obsahují mnoho názvů a obecně méně běžných slov. Naopak obsahují velmi málo běžných slov. To pak způsobuje, že algoritmus nad tímto datasetem dává vysoké skóre běžným slovům. Tato slova ale typicky nejsou vhodnými klíčovými slovy daného textu. Je tedy potřeba použít pro vzorec DF jiný korpus. V naší aplikaci jsme použili korpus Wikipedie, jejíž data jsou volně dostupná pro mnoho jazyků pod otevřenou licencí.
+
+Pokud je $w$ slovo vstupního textu, $Freq(w)$ je četnost slova ve vstupním textu a $Wiki(w)$ je četnost slova v korpusu Wikipedie, můžeme každému slovu vstupního slova přířadit $Score$:
 
 
-Problémem tohoto algoritmu pro je odlišný charakter korpusu a vstupních dat. Vstupní data jsou typicky novinový článek. Pokud bychom jako korpus použily anotované obrázky, získáme špatné výsledky. Běžná anglická slova, jako "the", nebo "a" se v takovém korpusu vyskytují velmi zřídka, jejich IDF tedy bude vysoká. Naopak TF v běžném novinovém textu je vysoké. Takovýto korpus nám pak označuje jako klíčová slova běžná anglická slova.
+\begin{equation}
+  Score(w) = \left\{
+  \begin{array}{l l} Freq(w) \times (\frac{C}{Wiki(w)}) & w\ \mathrm{je\ v\ datasetu\ Profimedie} \\
+  0 & w\ \mathrm{není\ v\ datasetu\ Profimedie}
+  \end{array}
+  \right.
+\end{equation}
+
+$C$ je experimentálně zjištěná konstanta. V našem případě je její hodnota $10 000 000$.
+
+Nyní tedy máme skóre udávající význam slova pro každé slovo vstupního textu. Slova s nejvyšším skóre vrátíme uživateli jako nápovědu pro explicitní požadavek obrázků s klíčovými slovy.
 
 
-\subsection{Extrakce bez korpusu}
+\section{Vyhledávání obrázků}
 
-Dalším druhy algoritmů ke své práci korpus nepotřebují a pracují pouze se vstupním textem.
+Samotné vyhledávání obrázků má dva druhy vstupních dat. Prvním typem je text článku, který uživatel vloží do uživatelského rozhraní. Máme tedy k dispozici řetězec s textem článku. Dále může uživatel zadat explicitní klíčová slova, které má hledaný obrázek obsahovat. Tato vstupní data získáváme jako pole řetězců. Úkolem algoritmu na vyhledávání obrázků je vrátit uživateli všechny relevantní obrázky v pořadí podle relevance.
 
-\section{Řešení: jaké algoritmy zvoleny, získání tréninkových dat}
+Text si nejprve zpracujeme pomocí algoritmu uvedeném v sekci \ref{sec:keywords_extraction}. Získáme skóre významnosti pro všechna slova ve vstupním textu. Pro vyhledávání použijeme pouze několik slov s nejvyšším skóre.
 
-Jako nejvhodnější řešení byl nakonec zvolen TF-IDF algoritmus. Jako kandidáti jsou odfiltrována slova, která se nenacházejí v datech Profimedie. Jako korpus k měření IDF byla použita data článků z Wikipedie.
+Nyní můžeme jako množinu relevantních obrázků označit obrázky, které ve svých klíčových slovech mají všechna uživatelem zadaná explicitní klíčová slova a alespoň jedno klíčové slovo získané extrakcí klíčových slov z textu.
 
-Pro rychlé testovací účely bylo oanotováno pár článků z anglických wikinews. V každém článku jsem označil pět klíčových slov. Porovnávání algoritmů na extrakci klíčových slov pak vzalo pět nejpravděpodobnějších klíčových slov podle algoritmu a porovnalo v kolika procentech se algoritmus trefil s anotací.
+Množina relevantních obrázků může být velká a obsahovat obrázky, které jsou relevantní jen velmi málo. Je proto důležité množinu relevantních obrázků správně seřadit. Máme množinu $K_{text}$ klíčových slov získaných z textu. Každé $w \in K_{text}$ má skóre $Score(w)$. Relevantní obrázek má množinu klíčových slov $K_{img}$. Relevanci obrázku vůči uživatelskému dotazu můžeme ohodnotit funkcí $Rank$:
+
+\begin{equation}
+Rank(K_{text}, K_{img}) = \sum_{w \in K_{text}}{
+  \left\{
+  \begin{array}{l l} Score(w) \times \frac{1}{|K_{img}|} & w\ \in K_{img} \\
+  0 & w \notin K_{img}
+  \end{array}
+  \right.
+}
+\end{equation}
+
+Vzorec bere v úvahu počet klíčových slov, které obrázek obsahuje. Snižuje relevanci obrázků, které obsahují mnoho klíčových slov a zvýhodňuje tím ve vyhledávání obrázky, které mají menší počet přesnějších klíčových slov.
+
 
 
 
