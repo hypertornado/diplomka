@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-IMAGES_ES_INDEX = "images"
+IMAGES_ES_INDEX = "diplomka"
 STEMS_ES_INDEX = "stems"
 SIMILAR_ES_INDEX = "similar"
 

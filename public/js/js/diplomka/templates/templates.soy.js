@@ -36,7 +36,7 @@ oo.diplomka.templates.skeleton = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 oo.diplomka.templates.imageDetails = function(opt_data, opt_ignored) {
-  return '<div class="img-info" id="img-info"><h3><small>' + soy.$$escapeHtml(opt_data.id) + '</small></h3></div><div class="img"><img src="http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(opt_data.id) + '"></div><div class="img-similar" id="img-similar"></div>';
+  return '<div class="img-info" id="img-info"><div id="img-info-meta"><h3><small>' + soy.$$escapeHtml(opt_data.id) + '</small></h3></div><a target="_blank" class="btn btn-default" href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(opt_data.id) + '">Detail na Profimedia.cz</a><a href="#" class="btn btn-default" id="close-img-window">Zavřít</a></div><div class="img"><img src="http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(opt_data.id) + '"></div><div class="img-similar" id="img-similar"></div>';
 };
 
 
@@ -47,7 +47,7 @@ oo.diplomka.templates.imageDetails = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 oo.diplomka.templates.imageDetailsMetadata = function(opt_data, opt_ignored) {
-  return '<h3>' + soy.$$escapeHtml(opt_data.data['_source']['title']) + '<small> ' + soy.$$escapeHtml(opt_data.data['_id']) + '</small></h3><p>' + soy.$$escapeHtml(opt_data.data['_source']['keywords']) + '</p><a target="_blank" class="btn btn-default" href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(opt_data.data['_id']) + '">Detail na Profimedia.cz</a><a href="#" class="btn btn-default" id="close-img-window">Zavřít</a>';
+  return '<h3>' + soy.$$escapeHtml(opt_data.data['_source']['title']) + '<small> ' + soy.$$escapeHtml(opt_data.data['_id']) + '</small></h3><p>' + soy.$$escapeHtml(opt_data.data['_source']['keywords']) + '</p>';
 };
 
 
@@ -63,7 +63,7 @@ oo.diplomka.templates.suggestedImages = function(opt_data, opt_ignored) {
   var imgListLen25 = imgList25.length;
   for (var imgIndex25 = 0; imgIndex25 < imgListLen25; imgIndex25++) {
     var imgData25 = imgList25[imgIndex25];
-    output += '<img src="http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(imgData25) + '" class="suggested-image" data-id="' + soy.$$escapeHtml(imgData25) + '">';
+    output += (imgData25.score > 0) ? '<img src="http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(imgData25.id) + '" class="suggested-image" data-id="' + soy.$$escapeHtml(imgData25.id) + '" title="' + soy.$$escapeHtml(imgData25.id) + ' ' + soy.$$escapeHtml(imgData25.score) + '">' : '';
   }
   return output;
 };
@@ -77,11 +77,11 @@ oo.diplomka.templates.suggestedImages = function(opt_data, opt_ignored) {
  */
 oo.diplomka.templates.images = function(opt_data, opt_ignored) {
   var output = '';
-  var hitList33 = opt_data.images.hits.hits;
-  var hitListLen33 = hitList33.length;
-  for (var hitIndex33 = 0; hitIndex33 < hitListLen33; hitIndex33++) {
-    var hitData33 = hitList33[hitIndex33];
-    output += '<a href="#" class="img-container" data-id="' + soy.$$escapeHtml(hitData33._id) + '"><div style="background-image: url(\'http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(hitData33._id) + '\')" alt="' + soy.$$escapeHtml(hitData33._source.keywords) + '" class="image"></div><span class="img-metadata"><span class="img-name">' + soy.$$escapeHtml(hitData33._source.title) + '</span><span class="img-tags">' + soy.$$escapeHtml(hitData33._source.keywords) + '</span></span></a>';
+  var hitList39 = opt_data.images.hits.hits;
+  var hitListLen39 = hitList39.length;
+  for (var hitIndex39 = 0; hitIndex39 < hitListLen39; hitIndex39++) {
+    var hitData39 = hitList39[hitIndex39];
+    output += '<a href="#" class="img-container" data-id="' + soy.$$escapeHtml(hitData39._id) + '"><div style="background-image: url(\'http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(hitData39._id) + '\')" alt="' + soy.$$escapeHtml(hitData39._source.keywords) + '" class="image"></div><span class="img-metadata"><span class="img-name">' + soy.$$escapeHtml(hitData39._source.title) + '</span><span class="img-tags">' + soy.$$escapeHtml(hitData39._source.keywords) + '</span></span></a>';
   }
   return output;
 };
@@ -95,11 +95,11 @@ oo.diplomka.templates.images = function(opt_data, opt_ignored) {
  */
 oo.diplomka.templates.tags = function(opt_data, opt_ignored) {
   var output = '';
-  var tagList47 = opt_data.tags;
-  var tagListLen47 = tagList47.length;
-  for (var tagIndex47 = 0; tagIndex47 < tagListLen47; tagIndex47++) {
-    var tagData47 = tagList47[tagIndex47];
-    output += '<span data-tag="' + soy.$$escapeHtml(tagData47) + '" class="tag tag-own">' + soy.$$escapeHtml(tagData47) + '</span><span> </span>';
+  var tagList53 = opt_data.tags;
+  var tagListLen53 = tagList53.length;
+  for (var tagIndex53 = 0; tagIndex53 < tagListLen53; tagIndex53++) {
+    var tagData53 = tagList53[tagIndex53];
+    output += '<span data-tag="' + soy.$$escapeHtml(tagData53) + '" class="tag tag-own">' + soy.$$escapeHtml(tagData53) + '</span><span> </span>';
   }
   return output;
 };
@@ -113,11 +113,11 @@ oo.diplomka.templates.tags = function(opt_data, opt_ignored) {
  */
 oo.diplomka.templates.suggestedTags = function(opt_data, opt_ignored) {
   var output = '';
-  var tagList55 = opt_data.tags;
-  var tagListLen55 = tagList55.length;
-  for (var tagIndex55 = 0; tagIndex55 < tagListLen55; tagIndex55++) {
-    var tagData55 = tagList55[tagIndex55];
-    output += '<span data-tag="' + soy.$$escapeHtml(tagData55) + '" class="tag tag-suggested">' + soy.$$escapeHtml(tagData55) + '</span>';
+  var tagList61 = opt_data.tags;
+  var tagListLen61 = tagList61.length;
+  for (var tagIndex61 = 0; tagIndex61 < tagListLen61; tagIndex61++) {
+    var tagData61 = tagList61[tagIndex61];
+    output += '<span data-tag="' + soy.$$escapeHtml(tagData61) + '" class="tag tag-suggested">' + soy.$$escapeHtml(tagData61) + '</span>';
   }
   return output;
 };
@@ -131,11 +131,11 @@ oo.diplomka.templates.suggestedTags = function(opt_data, opt_ignored) {
  */
 oo.diplomka.templates.optionsPane = function(opt_data, opt_ignored) {
   var output = soy.$$escapeHtml(opt_data.wordCount) + ' words in<select id="language-select">';
-  var languageList65 = opt_data.languages;
-  var languageListLen65 = languageList65.length;
-  for (var languageIndex65 = 0; languageIndex65 < languageListLen65; languageIndex65++) {
-    var languageData65 = languageList65[languageIndex65];
-    output += '<option value="' + soy.$$escapeHtml(languageData65) + '" ' + ((opt_data.selectedLanguage == languageData65) ? 'selected' : '') + '>' + soy.$$escapeHtml(opt_data.languageNames[languageData65]) + '</option>';
+  var languageList71 = opt_data.languages;
+  var languageListLen71 = languageList71.length;
+  for (var languageIndex71 = 0; languageIndex71 < languageListLen71; languageIndex71++) {
+    var languageData71 = languageList71[languageIndex71];
+    output += '<option value="' + soy.$$escapeHtml(languageData71) + '" ' + ((opt_data.selectedLanguage == languageData71) ? 'selected' : '') + '>' + soy.$$escapeHtml(opt_data.languageNames[languageData71]) + '</option>';
   }
   output += '</select>language';
   return output;

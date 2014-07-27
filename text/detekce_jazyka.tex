@@ -2,9 +2,7 @@
 
 Aplikace může přijímat vstup ve více jazycích. Jedním ze způsobů, jak uživateli zpříjemnit práci s aplikací, je použít automatický detektor jazyka. Při zadání vstupu aplikace se aplikace sama pokusí detekovat jazyk zadaného textu. Tato detekce nemusí být vždy stoprocentně správná, takže by uživatel měl mít možnost volbu jazyka manuálně změnit.
 
-\section{Algoritmus na detekci}
-
-Aplikace používá algoritmus založený na statistice nejčastějších N-gramů pro daný jazyk\cite{cavnar1994n}. Algoritmus nejprve použije velký korpus textů pro každý detekovaný jazyk. Pro češtinu a angličtinu lze použít například korpus Wikipedie. Z tohoto korpusu získá uspořádaný seznam $K$ nejčastějších N-gramů. Při samotné detekci jazyka textu, pak samotný algoritmus získá stejný uspořádaný seznam nejčastějších N-gramů pro vstupní text. Tento seznam pak porovnává se seznamy nejčastějších N-gramů pro každý jazyk.
+Aplikace používá algoritmus založený na statistice nejčastějších N-gramů pro daný jazyk\cite{cavnar}. Algoritmus nejprve použije velký korpus textů pro každý detekovaný jazyk. Pro češtinu a angličtinu lze použít například korpus Wikipedie. Z tohoto korpusu získá uspořádaný seznam $K$ nejčastějších N-gramů. Při samotné detekci jazyka textu, pak samotný algoritmus získá stejný uspořádaný seznam nejčastějších N-gramů pro vstupní text. Tento seznam pak porovnává se seznamy nejčastějších N-gramů pro každý jazyk.
 
 Nechť $A$ a $B$ jsou seznamy N-gramů s $K$ položkami, $A[w]$ je pořadí N-gramu $w$ v seznamu $A$. Potom lze vzdálenost mezi seznamy $D(A,B)$ vyjádřit vztahem:
 
@@ -13,7 +11,18 @@ Nechť $A$ a $B$ jsou seznamy N-gramů s $K$ položkami, $A[w]$ je pořadí N-gr
   K & \mathrm{jinak} \end{array}
 \end{equation}
 
+Na Obrázku \ref{fig:detekce_jazyka} je ukázka porovnání dvou seznamů pomocí funkce $D(A,B)$. Trigram $na\_$ se v seznamu B nenachází, proto dostane hodnotu $K = 4$.
+
 Nyní pokud máme množinu $S$ všech seznamů N-gramů pro jednotlivé jazyky a $X$ je seznam N-gramů pro vstupní text, vrátí algoritmus jako jazyk takový jazyk, pro který má seznam $C \in S$ minimální hodnotu $D(X, C)$.
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=80mm]{detekce_jazyka.eps}
+  \caption{Ukázka porovnání dvou trigramových seznamů. $D(A, B) = 7$}
+  \label{fig:detekce_jazyka}
+\end{figure}
+
 
 Naše implementace používá v seznamech N-gramů trigramy. Pro texty delší než několik slov funguje velmi spolehlivě. Pro několikaslovné texty se může stát, že v seznamu nejfrekventovanějších trigramů pro vstupní text není ani jeden trigram, který by se nacházel v seznamech pro jednotlivé jazyky. Pak algoritmus může vrátit špatně detekovaný jazyk.
 

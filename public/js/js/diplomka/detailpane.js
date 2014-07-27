@@ -8,8 +8,9 @@ oo.diplomka.DetailPane = function(events) {
   this.events_ = events;
   this.container_ = document.getElementById("img-detail");
 
-
   this.events_.listen(oo.diplomka.EventType.SHOW_IMG_DETAIL, this.render_, this);
+
+  this.render_("0000007013");
 }
 
 oo.diplomka.DetailPane.prototype.render_ = function(id) {
@@ -21,18 +22,25 @@ oo.diplomka.DetailPane.prototype.render_ = function(id) {
   
   goog.events.listen(xhr, goog.net.EventType.COMPLETE, function(e) {
     var obj = e.target.getResponseJson();
+    goog.soy.renderElement(document.getElementById("img-info-meta"), oo.diplomka.templates.imageDetailsMetadata, {"data": obj});
 
-    goog.soy.renderElement(document.getElementById("img-info"), oo.diplomka.templates.imageDetailsMetadata, {"data": obj});
-    goog.soy.renderElement(document.getElementById("img-similar"), oo.diplomka.templates.suggestedImages, {"data": obj['suggestions']});
+  }, false, this);
+  xhr.send("/api/detail/" + id, "GET");
+
+  goog.events.listen(document.getElementById("close-img-window"), goog.events.EventType.CLICK, this.close_, false, this);
+
+  var xhrSimilar = new goog.net.XhrIo();
+
+  goog.events.listen(xhrSimilar, goog.net.EventType.COMPLETE, function(e) {
+    var obj = e.target.getResponseJson();
+    goog.soy.renderElement(document.getElementById("img-similar"), oo.diplomka.templates.suggestedImages, {"data": obj});
 
     goog.array.forEach(document.getElementsByClassName("suggested-image"), function(el){
       goog.events.listen(el, goog.events.EventType.CLICK, this.changeImgEvent_, false, this);
     }, this);
-
-    goog.events.listen(document.getElementById("close-img-window"), goog.events.EventType.CLICK, this.close_, false, this);
-
   }, false, this);
-  xhr.send("/api/detail/" + id, "GET");
+
+  xhrSimilar.send("http://localhost:8585/similar?id=" + id, "GET");
 
 }
 
