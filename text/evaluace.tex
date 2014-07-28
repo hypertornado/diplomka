@@ -15,12 +15,12 @@ Pro naše testování jsme využili články ze serveru iDnes, který obsahoval 
 
 Z těchto 4223 článků jsme náhodně vybrali pro testování 60 článků. Ke každému z článků byly získány algoritmem 4 doporučené ilustrační obrázky a byl přidán jeden obrázek náhodný. Každá tato testovací sada byla otestována dvěma anotátory. Bylo k dispozici 5 anotátorů. Dohromady to znamenalo pro každého anotátora 24 a dohromady 120 anotací. Anotace byly rozděleny tak, aby každá dvojice anotátorů měla právě 6 stejných testovacích sad.
 
-Během anotace se zjistilo, že u dvou testovacích sad se jeden z obrázků nenačítá. Tyto sady byly z testování vyřazeny a anotovaných testovacích sad je tedy pouze 58. Výsledky testování jsou shrnuty v tabulce \ref{fig:testresults} ve sloupci \uv{o\_test1}. Pobrobné výsledky testování, včetně Cohenovy kappy pro všechny dvojice anotátorů je v příloze \ref{app:testing}.
+Během anotace se zjistilo, že u dvou testovacích sad se jeden z obrázků nenačítá. Tyto sady byly z testování vyřazeny a anotovaných testovacích sad je tedy pouze 58. Výsledky testování jsou shrnuty v tabulce \ref{tab:testresults} ve sloupci \uv{o\_test1}. Pobrobné výsledky testování, včetně Cohenovy kappy pro všechny dvojice anotátorů je v příloze \ref{app:testing}.
 
 Výsledky ukazují, že pro 78 \% testovacích sad měli anotátoři pozitivní shodu. Pozitivní shoda znamená, že se oba anotátoři shodli na stejném obrázku, který je pro vstupní text nejméně vhodný. Tento obrázek byl zároveň vybrán do testovací sady náhodně. Čím je toto procento vyšší, tím lépe náš algoritmus pracuje, protože uživatelé jsou schopní detekovat náhodný obrázek. Pro 5 \% testovacích sad máme negativní shodu. Oba anotátoři vybrali obrázek, který nebyl přiřazen náhodně. Znamená to tedy, že tento obrázek nebyli schopní detekovat a algoritmus tedy pro vstupní text nepracuje dobře (pokud vyloučíme možnost, že náhodně přiřazený obrázek je k textu relevantní). U poslední skupiny testovacích dat -- 17 \% -- byl pouze jeden z anotátorů schopen vybrat náhodně vybraný obrázek. 
 
 \begin{figure}
-\label{fig:testresults}
+\label{tab:testresults}
 \centering
 \begin{tabular}{ | l || r | r | r |}
   \hline
@@ -50,7 +50,7 @@ Během testování se objevil jeden zásadní problém s testovací metodou. V d
 
 \section{Detekce správného obrázku (o\_test2)}
 
-Abychom předešli problémům s metodou popsaným v předchozí sekci, provedli jsme nové testování. Úkolem uživatelů bylo nyní vybrat obrázek, který se ke vstupnímu textu hodí nejvíce. Množinu obrázků nyní tvořil jeden výstup z algoritmu a 4 náhodně vybrané obrázky. Zvětšili jsme i testovací sadu. Bylo testováno 120 textů náhodně vybraných z iDnes datasetu. Každý z textů byl anotován dvěma anotátory. Na každém z pěti anotátorů tedy bylo 48 anotací. Výsledky testování jsou shrnuty v tabulce \ref{fig:testresults} ve sloupci \uv{o\_test2}. Pobrobné výsledky testování, včetně Cohenovy kappy pro všechny dvojice anotátorů je v příloze \ref{app:testing}.
+Abychom předešli problémům s metodou popsaným v předchozí sekci, provedli jsme nové testování. Úkolem uživatelů bylo nyní vybrat obrázek, který se ke vstupnímu textu hodí nejvíce. Množinu obrázků nyní tvořil jeden výstup z algoritmu a 4 náhodně vybrané obrázky. Zvětšili jsme i testovací sadu. Bylo testováno 120 textů náhodně vybraných z iDnes datasetu. Každý z textů byl anotován dvěma anotátory. Na každém z pěti anotátorů tedy bylo 48 anotací. Výsledky testování jsou shrnuty v tabulce \ref{tab:testresults} ve sloupci \uv{o\_test2}. Pobrobné výsledky testování, včetně Cohenovy kappy pro všechny dvojice anotátorů je v příloze \ref{app:testing}.
 
 Výsledky jsou oproti předchozí metodě o něco horší. Pro 63 \% testovacích sad měli oba anotátoři pozitivní shodu, pro 13 \% měli anotátoři negativní shodu a pro 24 \% se anotátoři neshodli.
 
