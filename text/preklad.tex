@@ -56,7 +56,7 @@ Poslední možností je oba předchozí principy zkombinovat --- nejprve detekov
 
 \section{Řešení}
 
-Řešením bylo nakonec použít poslední možnost. Bližší informace jsou v Kapitole \cite{chap:implementace}. Slova byly přeloženy pomocí Překladače Google, který překládá mnohem lépe než dostupný model pro překladový nástroj Moses.
+Řešením bylo nakonec použít poslední možnost. Bližší informace jsou v Kapitole \ref{chap:implementace}. Slova byly přeloženy pomocí Překladače Google, který překládá mnohem lépe než dostupný model pro překladový nástroj Moses.
 
 Překlad frází by ovšem pomocí Překladače Google byl příliš drahý a pomocí Mosese zase příliš pomalý. Použili jsme tedy jednoduchou metodu, která používá pouze překladový model. Fráze z datasetu Profimedia byla přeložena pouze tehdy, když se její překlad nacházel v překladovém modelu. Fráze, které se v překladovém modelu nenacházely, byly přeloženy slovo od slova. Metodou přesné shody s překladovým modelem bylo přeloženo $18 006$ z celkového počtu $899 244$ detekovaných frází.
 

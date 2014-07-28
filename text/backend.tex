@@ -14,17 +14,13 @@ Vhodnější pro daný účel se ukázala knihovna Elasticsearch\cite{elasticsea
 
 \section{Programovací jazyk}
 
-Se vzrůstající popularitou webů vzniká stále větší množství webových frameworků a dokonce programovacích jazyků zaměřených primárně na programování pro web.
+Volba programovacího jazyka je při tvorbě backendové části klíčová. Tato sekce rozebírá některé výhody a nevýhody třech programovacích jazyků.
 
 \subsection{NodeJS}
-Jedním z nových trendů je tvorba webového backendu v Javascriptu pomocí knihovny NodeJS. Frontendoví vývojáři jsou prakticky nucení Javascript používat. Pokud se v Javascriptu tvoří i backendová část aplikace, může snadněji dojít ke sdílení kódu i pracovních pozic. Trend psaní všech aplikací v Javascriptu glosoval již před sedmi lety Jeff Atwood ve svém pravidle:
 
-\begin{lstlisting}
-Any application that can be written in JavaScript, will eventually be written in JavaScript.
-Vše co může být napsáno v Javascriptu, bude v Javascriptu napsáno.
-\end{lstlisting}
+JavaScript je jazyk především pro programování frontendu a dlouho byl brán jako nutné zlo --- bez použití problematických rozšíření nejde ve webovém prohlížeči programovat jiným jazykem. Každý větší webový projekt tak byl nucen používat nejméně 2 technologie --- jednu pro frontend a jednu pro backend. Knihovna NodeJS toto paradigma obrací, umožňuje programovat v JavaScriptu i na backendu. Výhodou je sdílení stejného kódu mezi backendem a frontendem. To se hodí například při validacích dat, které potřebujeme kontrolovat na frontendu i backendu.
 
-Nevýhody použití Javascriptu jako backendového programovacího jazyka jsou poměrně zřejmé. Javascript byl navržen pro programování webového frontendu, jeho standartní knihovna je v porovnání s ostatními jazyky velmi chudá, podpora objektového programování je celkem nepřímočará. Obsáhlý kód v Javascriptu může být poměrně nepřehledný a jazyk svádí k vytvoření takzvaného \uv{callback hell}, který může mít strukturu jako na obrázku (source http://strongloop.com/strongblog/node-js-callback-hell-promises-generators/). Pokud chce navíc programátor sdílet kód z backendu i na frontendu, musí být kód kompatibilní s podporovanými prohlížeči. Funkce pro jednodušší práci s polem podporuje webový prohlížeč Internet Exporer až od verze 9 [http://kangax.github.io/compat-table/es5/]. V součtu nám převažily nevýhody NodeJS frameworku na výhodami a myšlenku vývoje backendu v Javascriptu jsme opustily.
+Původní záměr byl využít pro vývoj naší aplikace právě NodeJS. Nakonec však převážily nevýhody takového řešení.Javascript byl navržen pro programování webového frontendu, jeho standartní knihovna je v porovnání s ostatními jazyky velmi chudá, podpora objektového programování není přímočará. Obsáhlý kód v Javascriptu může být poměrně nepřehledný a jazyk svádí k vytvoření takzvaného \uv{callback hell}. Ukázka takového problémového kódu je v článku \cite{callback}
 
 \begin{lstlisting}
 doAsync1(function () {
@@ -36,49 +32,58 @@ doAsync1(function () {
 })
 \end{lstlisting}
 
+
+ Pokud chce navíc programátor sdílet kód z backendu i na frontendu, musí být kód kompatibilní s podporovanými prohlížeči. Pokud aplikace potřebuje podporovat starší verze prohlížečů, nemůže sdílený kód obsahovat novinky z páté verze ECMAScript\cite{ecma}.
+
 \subsection{Go}
 
-Go (známý také jako golang)\cite{golang} je programovací jazyk od společnosti Google. První stabilní verze byla zveřejněna v Květnu 2012. Go je kompilovaný, staticky typovaný jazyk s garbage collectorem. Syntaxe je inspirována jazykem C a přizpůsobena pro rychlou kompilaci. Velkou výhodou je snadná práce s vlákny pomocí \uv{go rutin}. Programátoři v Javě, nebo C++ může překvapit poněkud netypická podpora práce s objekty.
+Go (známý také jako golang)\cite{golang} je staticky typovaný programovací jazyk od společnosti Google. Syntaxe je inspirována jazykem C s důrazem rychlou kompilaci. Velkou výhodou je snadná práce s vlákny pomocí \uv{goroutines}. Programátoři v Javě, nebo C++ může překvapit poněkud netypická podpora práce s objekty.
 
-První verze aplikace byla napsána právě v jazyce Go. V praxi se ukázaly všechny výše uvedené výhody. Hlavní nevýhodou se však ukázal nedostatek kvalitních knihoven. Přestože je jazyk velmi mladý, stal se velmi populárním, o čemž svědčí například počet repozitářů na GitHubu, nebo otázek na StackOverflow. Bude to ovšem trvat ještě nějaký čas, než se knihovny pro go a jejich vývoj stabilizují. Jeden z nyní nejpopulárnějších webových frameworků pro go --- Martini --- v době začátku práce na aplikaci ani neexistoval. Právě nedostatek knihoven pro go vedl k volbě jiného jazyka. Rozhodujícím pro opuštění backendu v jazyce go byla neexistující knihovna pro práci s Elasticsearch. API je sice postaveno na protokolu HTTP, takže šlo s Elasticsearch komunikovat bez použití specializované knihovny, v praxi se to ovšem ukázalo být problematické. Vývoj aplikace si žádal testování různých nastavení a rychlé prototypování v kódu. 
+První verze aplikace byla napsána právě v jazyce Go. Později byla přepsána většina v jazyce Ruby. Výhodou řešení v jazyce Go je velká výkonost a stabilita aplikace. Zkompilovaná aplikace je pouze jeden binární soubor, takže oproti řešení v nekompilovaných jazycích se lépe distribuuje a odpadají problémy se závislostmi.
 
-Z interních zdrojů máme informaci o tom, že se Elasticsearch chystá vytvořit knihovnu i pro jazyk Go. Pro naše účely se ukázalo výhodnější přepsat aplikaci do dynamického jazyka s lepší podporou pro Elasticsearch.
+Go je stále poměrně mladý jazyk, první stabilní byla vydána teprve v roce 2012\cite{golang-release}. Největším problémem takto mladých jazyků je nedostatek kvalitních knihoven. Pokud už na daný problém existuje knihovna, těžko se odhaduje, jestli její autor projekt neopustí a jestli bude knihovna podporována i další rok. Pro naší aplikaci se ukázal jako problém neexistence kvalitní knihovny pro komunikaci s databází Elasticsearch. S tou jde komunikovat pomocí HTTP requestů, takže jsme pro naší potřebu vytvořili jakousi mikroknihovnu. Experimentální povaha aplikace ovšem vyžadovala rychlé prototypování a úprava kódu na komunikaci s Elasticsearch začala být příliš omezující. Pro naše účely se ukázalo výhodnější přepsat hlavní část aplikace do dynamického jazyka s lepší podporou pro Elasticsearch.
+
+V jazyce Go je napsána nezávislá komponenta vyhledávání podobných obrázků, která je popsána v Kapitole \ref{chap:similar}.
 
 \subsection{Ruby a Ruby on Rails}
 
-Ruby je dynamicky typovaný jazyk, silně inspirovaný Perlem s důslednou podporou objektového programování. Popularita Ruby vzrostla zejména kvůli webovému frameworku Ruby on Rails, který je v Ruby napsaný. RoR zpopularizovaly koncept Model-View-Controller při tvorbě webových aplikací. Backend aplikace byl nakonec kompletně přepsán jako aplikace v Ruby on Rails. Elasticsearch poskytuje pro práci s Ruby vlastní knihovnu. Další výhodou se ukázala podpora knihovny Rake, což je jakási obdoba Makefile skriptů v Ruby. Pomocí Rakefilu jdou napsat přehledné úlohy pro manipulaci s daty. 
+Ruby\cite{ruby} je dynamicky typovaný jazyk, inspirovaný jazyky jako Perl, nebo Smalltalk, s důslednou podporou objektového programování. Popularita Ruby vzrostla zejména díky webovému frameworku Ruby on Rails (Rails)\cite{rails}, který je v Ruby napsaný. Rails zpopularizovaly architekturu Model-View-Controller\cite{mvc} pro tvoru webových aplikací. Backend aplikace s vyjímkou služby pro vyhledávání podobných obrázků, byl nakonec přepsán právě do Rails. Elasticsearch poskytuje pro práci s Ruby oficiálně podporovanou knihovnu\cite{elasticsearch-ruby}. Další výhodou se knihovna Rake, což je obdoba příkazu Make pro skripty v Ruby. Pomocí Rakefilu jdou napsat přehledné úlohy pro manipulaci s daty. 
 
-Standartní implementace jazyka Ruby byla v minulosti kritizována pro svou pomalost. V průběhu práce na této aplikaci vyšla verze Ruby 2.0, která Ruby dosti zrychluje. Tato rychlost byla pro aplikaci shledána dostatečnou.
+\section{Komunikace mezi backendem a frontendem}
 
-\section{Komunikace frontend-backend}
-
-Backend poskytuje služby frontendu pomocí API. Existuje několik přístupů a technologií, jak data mezi backendem a fronendem posílat.
+Tato sekce popisuje možnosti komunikace mezi frontendem a backendem.
 
 \subsection{Formát dat}
 
-V součastnosti jsou pro posílání dat nejběžnější dva formáty -- XML a JSON. XML je klasický formát se spoustou možností a nástrojů. Moderní aplikace však stále více přechází k formátu JSON. Formát JSON je velmi úsporný datový formát, který vychází z datových typů v JavaScriptu. Právě úspornost je jednou z jeho největších výhod oproti XML -- stejné informace mají v JSON typicky kratší zápis než obdoba v XML. Většina moderních browserů umí formát JSON parsovat a práce v JavaScriptu je pak vzhledem ke kompatibilitě datových typů velmi pohodlná.
-
-Zejména kvůli poslednímu důvodu používá tato práce pro komunikaci mezi fronendem a backendem právě formát JSON.
+Nejprve je potřeba zvolit formát dat. V součastnosti existují dva nejrozšířenější textové komunikační formáty --- XML\cite{xml} a JSON\cite{json}. XML umožňuje popis velkého množství vztahů mezi entitami. JSON je oproti XML úspornější. XML se hodí v případech, kdy potřebujeme zaznamenat nějaké složité datové struktury. Pro většinu webových aplikací je výhodnější použít JSON. Oproti XML je zápis dat v JSON většinou kratší, což je výhodné zejména při přenosu dat po síti. JSON je založen na datových typech JavaScriptu a moderní prohlížeče umí tento formát zpracovávat nativně. Na frontendu je tedy práce s JSON oproti  práci s XML jednodušší. Z těchto důvodů poskytuje backend naší aplikace služby frontendu ve formátu JSON.
 
 \subsection{REST API}
 
-REST je zkratka pro Representational state transfer. Jedná se o obecnou architekturu rozhraní. V tomto kontextu nás ale zajímá hlavně její navázání na protokol HTTP. REST využívá metody protokolu HTTP pro změnu, nebo získání stavu datových objektů. Ukázkou REST API s použitím formátu JSON může být například knihovna Elasticsearch. Mějme například frekvenční data pro český stem \uv{lid} a instanci Elasticsearch na adrese \lstinline{http://localhost:9200/}. Ukázky HTTP requestů XX - XX ukazují, jak taková data uložit, získat, změnit, nebo smazat.
+Dále je potřeba specifikovat způsob výměny dat. Jednou z nejrozšířenějších metod je REST, zkratka pro anglické \uv{Representational state transfer}. Jedná se o architekturu rozhraní mezi klientem a serverem. Pro specifikaci rozhraní využívá protokol HTTP. REST využívá k definici práce s daty metody protokolu HTTP \uv{GET}, \uv{PUT}, \uv{POST} a \uv{DELETE}.
 
-REST API v kombinaci s JSON fromátem používá tato aplikace jak ke komunikaci mezi frontendem a backendem, tak mezi backendem a databází Elasticsearch.
+Rozhraní REST\cite{rest} s použitím formátu JSON je v aplikaci využíváno pro komunikaci s databází Elasticsearch i pro komunikaci mezi backendem a frontendem.
 
-\subsection{Websocket}
+\subsection{WebSocket}
 
-Alternativou k REST API a protokolu HTTP je protokol WebSocket. WebSocket je stejně jako protokol HTTP postaven nad protokolem TCP. Na rozdíl od HTTP ale poskytuje duplexní spojení. Klient je stále spojený se serverem a oba mohou posílat zprávy bez ohledu na druhou stranu. Spojení přes WebSocket má většinou menší latenci než použití protokolu HTTP \footnote{\url{http://www.websocket.org/quantum.html}}. Protokol je podporován všemi moderními verzemi webových prohlížečů a podpora existuje i v knihovnách pro backendové programovací jazyky.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=80mm]{architecture.eps}
+  \caption{Architektura aplikace.}
+  \label{fig:architecture}
+\end{figure}
 
-První verze aplikace používali pro komunikaci mezi klientem a serverem právě protokol WebSocket. Nakonec však převážily nevýhody takovéhoto řešení nad výhodami. Jednou z nevýhod je nutnost udržovat spojení s klientem na serverové i klientské straně. Přináší to několik netriviálních problémů. Například v okamžik, kdy se toto spojení přeruší. Pokud se naproti tomu přeruší spojení server-klient při HTTP requestu, může klient zkusit vyslat stejný požadavek znovu.
+Alternativou k REST API a protokolu HTTP je protokol WebSocket\cite{websocket}. WebSocket je stejně jako protokol HTTP postaven nad protokolem TCP. Na rozdíl od HTTP ale poskytuje duplexní spojení. Klient je tedy stále spojený se serverem a oba mohou posílat zprávy bez ohledu na druhou stranu. Spojení přes WebSocket má většinou menší latenci než použití protokolu HTTP\cite{websocket-study}. Protokol je podporován všemi moderními verzemi webových prohlížečů a podpora existuje i v knihovnách pro backendové programovací jazyky.
 
-Druhým problémem je emulace HTTP požadavků v protokolu WebSocket. Z klienta můžeme odeslat HTTP dotaz na server a dostaneme k němu přiřazenou odpověď. V protokolu WebSocket pošleme serveru zprávu a za nějaký čas můžeme dostat zprávu od serveru jako odpověď. Párování došlých zpráv z odeslanými zprávami-požadavky ale musíme implementovat vlastnoručně, například pomocí unikátních ID v těle zprávy. Navíc musíme umět řešit situaci, kdy žádná odpověď ze serveru nedojde. Například nastavením timeoutu pro čekání na odpověď.
+První verze aplikace používali pro komunikaci mezi klientem a serverem právě protokol WebSocket. Nakonec však převážily nevýhody takovéhoto řešení nad výhodami. Jednou z nevýhod je nutnost udržovat spojení s klientem na serverové i klientské straně. Přináší to několik netriviálních technických problémů. Například v okamžik, kdy se toto spojení přeruší. Pokud se naproti tomu přeruší spojení server-klient při HTTP požadavku, může klient zkusit vyslat stejný požadavek znovu.
 
-WebSocket využijí zejména aplikace, které potřebují, aby server mohl posílat klientovi kdykoliv zprávy, nebo co nejnižší latenci. Takovými aplikacemi mohou být například různé chatovací služby, nebo online hry. Pro jiné většinou asi převáží nevýhody WebSockets oproti HTTP protokolu.
+Druhým problémem je emulace HTTP požadavků v protokolu WebSocket. Z klienta můžeme odeslat HTTP dotaz na server a dostaneme k němu přiřazenou odpověď. V protokolu WebSocket pošleme serveru zprávu a za nějaký čas můžeme dostat zprávu od serveru jako odpověď. Párování došlých zpráv z odeslanými zprávami --- požadavky --- ale musíme implementovat sami, například pomocí unikátních identifikátorů v těle zprávy. Naše implementace navíc musí umět řešit situaci, kdy žádná odpověď ze serveru nedojde. Například nastavením timeoutu pro čekání na odpověď.
+
+Řešení pomocí protokolu WebSocket využijí zejména aplikace, které potřebují komunikovat obousměrně mezi klientem a serverem, nebo je pro ně důležitá nízká latence získání odpovědi. Takovými aplikacemi mohou být chatovací služby, nebo online hry. Pro většinu ostatních aplikací budou zatím spíše převažovat nevýhody obtížnějšího technického řešení nad přínosy technologie WebSockets.
 
 \section{Shrnutí}
 
-Architektura je shrnuta na diagramu XX. Aplikace má backend napsaný v jazyce Ruby a frameworku Ruby on Rails. Data jsou uložená v databázi Elasticsearch. Backend komunikuje s frontendem i databází pomocí REST API, data jsou přenášena ve formátu JSON.
+
+Architektura je zobrazena na obrázku \ref{fig:architecture}. Část aplikace, která se stará extrakci klíčových slov a textové vyhledávání obrázků je napsána v jazyce Ruby a frameworku Ruby on Rails. Frontend dále komunikuje se službou pro vyhledávání podobných obrázků, která je napsána v jazyce Go. Data jsou uložená v databázi Elasticsearch. Komunikace mezi všemi komponentami probíhá pomocí HTTP REST API, data jsou přenášena ve formátu JSON.
 
 
 
