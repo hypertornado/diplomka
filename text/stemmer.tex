@@ -1,13 +1,13 @@
 \chapter{Stemmer}
 \label{chap:stemmer}
 
-Důležitou vlastností systémů na vyhledávání v textu je, aby dokázali najít i v jiných tvarech slova. Pokud uživatel hledá slovo \uv{praha}, většinou očekává, že se mu zobrazí i výsledky obsahující slovo \uv{praze}. Je tedy potřeba mít nějaký algoritmus, který k sobě slova jako \uv{praha} a \uv{praze}.
+Důležitou vlastností systémů na vyhledávání v textu je prohledávání ve více tvarech hledaného slova. Pokud uživatel hledá slovo \uv{praha}, ve většině případů očekává, že se mu zobrazí i výsledky obsahující slovo \uv{praze}. Je tedy potřeba mít nějaký algoritmus, který k sobě slova \uv{praha} a \uv{praze} přiřadí.
 
 První možností je použít lemmatizér. Úkolem lemmatizéru je ke každému slovu přiřadit jeho základní tvar. U podstatných jmen je to většinou první pád jednotného čísla (\uv{praha}), u sloves infinitiv.
 
-Alternativou lemmatizátoru může být stemmer. Ten většinou používá jednoduché heuristiky k odstranění koncovek slov. Stemmer nemusí vrátit regulérní slovo jazyka, například pro slova \uv{praha} a \uv{praze} může stemmer vrátit slovo \uv{prah}. Výhodou stemmeru oproti lemmatizéru je, že většinou používá pouze jednoduché heuristiky. Je tedy většinou rychlejší a méně náročný na zdroje než lemmatizér. Ve vyhledávacích aplikacích je stemmer dostačující.
+Alternativou lemmatizátoru může být stemmer. Stemmer nemusí, na rozdíl od lemmatizéru, nemusí vrátit regulérní slovo jazyka. Například pro slova \uv{praha} a \uv{praze} může stemmer vrátit slovo \uv{prah}. Výhodou stemmeru oproti lemmatizéru je, že většinou používá pouze jednoduché heuristiky. Je tedy často rychlejší a méně náročný na zdroje než lemmatizér. Ve vyhledávacích aplikacích je stemmer dostačující.
 
-Pro angličtinu je nejznámějším stemmerem pro angličtinu je Porterův stemmer popsaný\cite{porter1980algorithm} Martinem Porterem již v roce 1980. Kromě oficiální implementace existují porty do různých jazyků včetně Ruby. Tato aplikace využívá implementaci z Ruby Gemu \uv{stemmify}\footnote{\url{https://rubygems.org/gems/stemmify}} v licenci MIT.
+Pro angličtinu je nejznámějším stemmerem pro angličtinu je Porterův stemmer\cite{porter80} popsaný Martinem Porterem již v roce 1980. Kromě oficiální implementace existují porty do různých jazyků včetně Ruby. Aplikace využívá implementaci z Ruby Gemu \uv{stemmify}\footnote{\url{https://rubygems.org/gems/stemmify}} v licenci MIT.
 
 
 \section{Český stemmer}

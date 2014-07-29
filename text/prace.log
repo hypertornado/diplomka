@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  28 JUL 2014 21:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  29 JUL 2014 17:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -603,11 +603,11 @@ Overfull \hbox (14.22638pt too wide) in paragraph at lines 13--14
 
 
 
-] [9]
+]
 
-LaTeX Warning: Command \' invalid in math mode on input line 78.
+LaTeX Warning: Command \' invalid in math mode on input line 74.
 
-) [10]
+[9]) [10]
 \openout2 = `preklad.aux'.
 
  (./preklad.tex
@@ -619,7 +619,7 @@ Kapitola 4.
 ]
 File: translate.eps Graphic file (type eps)
  <translate.eps>
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 37--38
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 34--35
  [][] 
  []
 
@@ -629,8 +629,10 @@ Overfull \hbox (14.22638pt too wide) in paragraph at lines 37--38
  (./stemmer.tex
 Kapitola 5.
 
-LaTeX Warning: Citation `porter1980algorithm' on page 15 undefined on input lin
-e 10.
+Overfull \hbox (18.1292pt too wide) in paragraph at lines 10--11
+[]\IL2/cmr/m/n/12 Pro an-g-li^^e8-ti-nu je nej-zn^^e1-m^^ecj-^^b9^^edm stem-me-
+rem pro an-g-li^^e8-ti-nu je Por-te-r^^f9v stemmer[[]]
+ []
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
@@ -657,9 +659,6 @@ File: detekce_jazyka.eps Graphic file (type eps)
 
  (./similar.tex
 Kapitola 7.
-
-LaTeX Warning: Citation `caffe' on page 18 undefined on input line 7.
-
 File: similar_images.eps Graphic file (type eps)
 <similar_images.eps>
 Overfull \hbox (14.22638pt too wide) in paragraph at lines 38--39
@@ -755,7 +754,7 @@ Overfull \hbox (4.50294pt too wide) in paragraph at lines 108--109
 \IL2/cmr/m/n/12 mo-c^^ed API el-sa-tic-search na ad-re-se [][][][]. 
  []
 
-) [35] [36]
+) [35]
 \openout2 = `anotacni_rozhrani.aux'.
 
  (./anotacni_rozhrani.tex
@@ -774,11 +773,11 @@ Overfull \hbox (24.30417pt too wide) in paragraph at lines 30--31
 ][][].
  []
 
-[37
+[36
 
 
 
-] [38]
+] [37]
 Overfull \hbox (1.3919pt too wide) in paragraph at lines 86--87
 [][][][][][][][][]\IL2/cmr/m/n/12 . Po-kud te-dy im-por-to-va-n^^fd sou-
  []
@@ -789,62 +788,21 @@ Overfull \hbox (14.22638pt too wide) in paragraph at lines 92--93
  [][] 
  []
 
-[39]) [40]
+[38]) [39]
 \openout2 = `evaluace.aux'.
 
  (./evaluace.tex
 Kapitola 12.
-[41
+[40
 
 
 
-]
-! Misplaced \noalign.
-\hline ->\noalign 
-                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
-l.25   \hline
-             
-? 
-! You can't use `\hrule' here except with leaders.
-\hline ->\noalign {\ifnum 0=`}\fi \hrule 
-                                         \@height \arrayrulewidth \futurelet...
-l.25   \hline
-             
-? 
-! Missing number, treated as zero.
-<to be read again> 
-                   \futurelet 
-l.25   \hline
-             
-? 
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \futurelet 
-l.25   \hline
-             
-? 
-
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.41 \caption
-             {P^^c5^^99ehled v^^c3^^bdsledk^^c5^^af u^^c5^^beivatelsk^^c3^^a...
-
-? 
-
-Overfull \hbox (87.75964pt too wide) in paragraph at lines 23--43
-[][] 
- []
-
-[42]) [43]
+] [41]) [42]
 \openout2 = `zaver.aux'.
 
  (./zaver.tex
 Kapitola 13.
-) [44
+) [43
 
 
 
@@ -880,7 +838,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--46
 2006. Do-stup-n^^e9 z:
  []
 
-[45
+[44
 
 
 
@@ -941,15 +899,15 @@ Overfull \hbox (207.65172pt too wide) in paragraph at lines 119--122
 [][][][]\IL2/cmr/m/n/12 . 
  []
 
-) [46] [47
+) [45] [46
 
 
-] [48
+] [47
 
-] (./annotation_results.txt [49
+] (./annotation_results.txt [48
 
-] [50] [51] [52] [53] [54])
-[55]
+] [49] [50] [51] [52] [53])
+[54]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
  (./prace.aux (./uvod.aux) (./data.aux) (./teorie.aux) (./preklad.aux)
@@ -960,19 +918,15 @@ Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 345.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
 Package rerunfilecheck Info: File `prace.out' has not changed.
 (rerunfilecheck)             Checksum: 2D97932F6C69A9B97B105555DDDB2890;11856.
-
-
-LaTeX Warning: There were undefined references.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 345.
  ) 
 Here is how much of TeX's memory you used:
- 11455 strings out of 494923
- 154532 string characters out of 6180164
- 290330 words of memory out of 5000000
- 14560 multiletter control sequences out of 15000+600000
+ 11453 strings out of 494923
+ 154503 string characters out of 6180164
+ 289298 words of memory out of 5000000
+ 14558 multiletter control sequences out of 15000+600000
  21878 words of font info for 64 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  34i,14n,49p,1220b,1801s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (59 pages, 408944 bytes).
+Output written on prace.dvi (58 pages, 406952 bytes).

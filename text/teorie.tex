@@ -16,7 +16,7 @@
 \end{figure}
 
 
-Aplikace poskytuje uživateli dvě možnosti vyhledávání. Základní uživatelským scénářem je vložit do rozhraní text. Aplikace by v takovém případě měla poskytnout relevantní obrázky k danému textu. V dalším uživatelským scénářem je přímý požadavek na klíčová slova obrázku. Uživatel by měl mít možnost zadat přímo klíčová slova, které nalezené obrázky musí obsahovat. Oba scénáře by mělo navím být možné propojit pomocí nápovědy klíčových slov -- uživatel zadá do rozhraní text, dostane výsledné obrázky a nápovědu klíčových slov, kterými může množinu nalezených obrázků více omezit. Klíčová slova ze vstupního textu se dále používají jako nápověda uživateli, který jimi může množinu hledaných obrázků dále omezit. Celý proces hledání vhodných obrázků popisuje diagram \ref{fig:dataflow}.
+Aplikace poskytuje uživateli dvě možnosti vyhledávání. Základním uživatelským scénářem je vložit do rozhraní text. Aplikace by v takovém případě měla poskytnout relevantní obrázky k danému textu. V dalším uživatelském scénáři je přímý požadavek na klíčová slova obrázku. Uživatel by měl mít možnost zadat přímo klíčová slova, které metadata k nalezeným obrázkům musí obsahovat. Oba scénáře by mělo navíc být možné propojit pomocí nápovědy klíčových slov -- uživatel zadá do rozhraní text, dostane výsledné obrázky a nápovědu klíčových slov, kterými může množinu nalezených obrázků více omezit. Celý proces hledání vhodných obrázků popisuje diagram \ref{fig:dataflow}.
 
 \section{Extrakce klíčových slov}
 
@@ -24,17 +24,17 @@ Extrakce klíčových slov je velmi důležitou složkou celého vyhledávání.
 
 \section{TF-IDF}
 
-TF-IDF je jeden ze základních vyhledávacích algoritmů. Algoritmus využívá korpusu dokumentů $D$ a dvou složek $TF$ a $IDF$, lze ho vyjádřit jako rovnost: 
+TF-IDF je jeden ze základních vyhledávacích algoritmů. Algoritmus využívá korpusu dokumentů $D$ a dvou složek $TF$ a $IDF$, lze ho vyjádřit jako rovnost
 
 \begin{equation}
-  TFIDF(t,d,n,N)= TF(t,d)\times IDF(n,N)
+  TFIDF(t,d,n,N)= TF(t,d)\times IDF(n,N).
 \end{equation}
 
 Složka $TF$ znamená $TERM\ FREQUENCY$ a pokud $t$ je slovo a $d \in D$ je dokument, je $TF$
 
 \begin{equation}
  TF(t,d) = \sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}\ slovo = t \\
-  0 & \mathrm{jinak} \end{array}
+  0 & \mathrm{jinak} \end{array}.
 \end{equation}
 
 Jedná se tedy o frekvenci slova v dokumentu.
@@ -42,32 +42,28 @@ Jedná se tedy o frekvenci slova v dokumentu.
 Složka $IDF$, tedy $INVERSE\ DOCUMENT\ FREQUENCY$ vyjadřuje, jak moc daný termín popisuje dokument. Pokud je $N$ počet všech dokumentů v $D$, tedy $N = |D|$ a $n$ je počet dokumentů, ve kterých se vyskytuje slovo $t$, je $IDF$ tohoto slova
 
 \begin{equation}
-IDF(n,N) = \log \left(\frac{N}{n}\right)
+IDF(n,N) = \log \left(\frac{N}{n}\right).
 \end{equation}
 
-\begin{equation}
-IDF(n,N) = \log \left(\frac{N - n}{n}\right)
-\end{equation}
+Čím je tedy slovo v korpusu častější, tím více se s logaritmem snižuje jeho informační hodnota. Slova, která jsou velmi běžná, většinou klíčovými slovy nejsou.
 
-Čím je tedy slovo v korpusu častější, tím více se s logaritmem snižuje jeho informační hodnota. Slova, která jsou velmi běžná většinou klíčovými slovy nejsou.
-
-Výsledný vzorec pak jde shrnout jako:
+Výsledný vzorec pak jde shrnout jako
 
 \begin{equation}
 TFIDF(t,d,n,N)= \left(\sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}\ slovo = t \\
   0 & \mathrm{jinak} \end{array}\right)
   \times
-  \log \left(\frac{N - n}{n}\right)
+  \log \left(\frac{N - n}{n}\right).
 \end{equation}
 
 \section{TF-IDF pro extrakci klíčových slov}
 \label{sec:keywords_extraction}
 
-Algortimus TF-IDF můžeme použít pro extrakci klíčových slov z textu. Všechna znaky vstupního textu převedeme na malá písmena a text rozdělíme na slova. Dále nás nezajímá diakritika a různé speciální znaky, které může text obsahovat. Všechna slova převedeme na stemy. O převodu slov na stemmy se podrobněji píše v Kapitole \ref{chap:stemmer}.
+Algortimus TF-IDF můžeme použít pro extrakci klíčových slov z textu. Všechna znaky vstupního textu převedeme na malá písmena a text rozdělíme na slova. Dále nás nezajímá diakritika a různé speciální znaky, které může text obsahovat. Všechna slova převedeme na stemy. O převodu slov na stemy se podrobněji píše v Kapitole \ref{chap:stemmer}.
 
-Algoritmus TF-IDF pak použijeme na každé slovo vstupního textu a získáme tak skóre jeho významnosti v textu. Slova s nejvyšším skóre pak označíme za klíčová. Algoritmus musíme upravit pro naše účely. Zaprvé nás zajímají pouze taková slova, která existují v datasetu Profimedie. Slova která se v korpusu nenachází dostanou skóre 0. Část TF v algoritmu znamená četnost slova v textu.
+Algoritmus TF-IDF pak použijeme na každé slovo vstupního textu a získáme tak skóre jeho významnosti v textu. Slova s nejvyšším skóre pak označíme za klíčová. Algoritmus musíme upravit pro naše účely. Zaprvé nás zajímají pouze taková slova, která existují v datasetu Profimedie. Slova, která se v korpusu nenachází, dostanou skóre $0$. Část TF v algoritmu znamená četnost slova v textu.
 
-Složitější je situace s IDF. Nabízí se použít frekvenci slov z datasetu Profimedie. Ukázalo se, že klíčová slova obrázků z datasetu nejsou pro tento účel vhodná. Klíčová slova totiž obsahují mnoho názvů a obecně méně běžných slov. Naopak obsahují velmi málo běžných slov. To pak způsobuje, že algoritmus nad tímto datasetem dává vysoké skóre běžným slovům. Tato slova ale typicky nejsou vhodnými klíčovými slovy daného textu. Je tedy potřeba použít pro vzorec DF jiný korpus. V naší aplikaci jsme použili korpus Wikipedie, jejíž data jsou volně dostupná pro mnoho jazyků pod otevřenou licencí.
+Složitější je situace s $IDF$. Nabízí se použít frekvenci slov z datasetu Profimedie. Ukázalo se, že klíčová slova obrázků z datasetu nejsou pro tento účel vhodná. Klíčová slova totiž obsahují mnoho názvů a obecně méně běžných slov. Naopak obsahují velmi málo běžných slov. To pak způsobuje, že algoritmus na tomto datasetu přiřazuje vysoké skóre běžným slovům. Tato slova ale typicky nejsou vhodnými klíčovými slovy daného textu. Je tedy potřeba použít pro vzorec $DF$ jiný korpus. V naší aplikaci jsme použili korpus Wikipedie, jejíž data jsou volně dostupná pro mnoho jazyků pod otevřenou licencí.
 
 Pokud je $w$ slovo vstupního textu, $Freq(w)$ je četnost slova ve vstupním textu a $Wiki(w)$ je četnost slova v korpusu Wikipedie, můžeme každému slovu vstupního slova přířadit $Score$:
 
@@ -80,7 +76,7 @@ Pokud je $w$ slovo vstupního textu, $Freq(w)$ je četnost slova ve vstupním te
   \right.
 \end{equation}
 
-$C$ je experimentálně zjištěná konstanta. V našem případě je její hodnota $10 000 000$.
+$C$ je experimentálně zjištěná konstanta. V našem případě je její hodnota $10\ 000\ 000$.
 
 Nyní tedy máme skóre udávající význam slova pro každé slovo vstupního textu. Slova s nejvyšším skóre vrátíme uživateli jako nápovědu pro explicitní požadavek obrázků s klíčovými slovy.
 

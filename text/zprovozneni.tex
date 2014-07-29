@@ -1,7 +1,7 @@
 \chapter{Instalace a zprovoznění}
 \label{chap:implementace}
 
-Celé anotační rozhraní je webová aplikace napsaná v jazyce Ruby a frameworku Ruby on Rails. Je k dispozici pod svobodnou licencí MIT. K jejímu spuštění potřebujete ruby verze alepoň 2.0 (nižší verze nejsou otestované), javu a ke stažení zdrojového kódu git. Program jde spustit na Linuxu a Macu.
+Backend aplikace je webová aplikace napsaná v jazyce Ruby a frameworku Ruby on Rails. Je k dispozici pod svobodnou licencí MIT. K jejímu spuštění potřebujete ruby verze alepoň 2.0 (nižší verze nejsou otestované), Javu a ke stažení zdrojového kódu git. Aplikaci jde spustit na platformách Linux a Mac.
 
 \section{Instalace}
 
@@ -17,9 +17,9 @@ Tento příkaz vytvoří adresář diplomka. Závislosti aplikace nainstalujete 
 bundle install
 \end{lstlisting}
 
-Instalace může vyžadovat přístup administrátora. Dále je potřeba stáhnout knihovnu elasticsearch\footnote{\url{http://www.elasticsearch.org/downloads/1-0-3/}} do adresáře bin/elasticsearch. Stačí verze 1.0 a vyšší. Ve verzi 1.2.1 jsme objevili menší chybu\footnote{\url{https://github.com/elasticsearch/elasticsearch/issues/6611}}, která je způsobena chybou v Javě a jde obejít nastavením delšího hostname počítače.
+Instalace může vyžadovat přístup administrátora. Dále je potřeba stáhnout knihovnu Elasticsearch\footnote{\url{http://www.elasticsearch.org/downloads/1-0-3/}} do adresáře bin/elasticsearch. Stačí verze 1.0 a vyšší.
 
-Nyní je možné celý projekt spustit. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale veškeré AJAXové dotazy skončí chybou. V databázi nejsou importována data.
+Nyní je možné celý projekt spustit pomocí Bash příkazů. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale veškeré AJAXové dotazy skončí chybou. V databázi nejsou importována data.
 
 \section{Práce s metadaty k obrázkům}
 

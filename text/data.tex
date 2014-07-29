@@ -6,7 +6,7 @@ Tato kapitola popisuje data, která slouží jako vstup projektu.
 
 Společnost Profimedia poskytla pro výzkumné účely korpus více než dvaceti milionů ilustračních obrázků spolu s jejich textovým popisem.
 
-Textové popisky byly dále očištěny\cite{brno} a poskytnuty pro tento projekt ve formě souboru \lstinline{profi-text-cleaned.csv}. Soubor je ve formátu CSV a obsahuje $20\ 014\ 394$ řádků. Každý řádek obsahuje 4 složky:
+Textové popisky byly očištěny\cite{brno} a poskytnuty pro tento projekt ve formě souboru \lstinline{profi-text-cleaned.csv}. Soubor je ve formátu CSV a obsahuje $20\ 014\ 394$ řádků. Každý řádek obsahuje 4 složky:
 
 \begin{description}
 
@@ -30,7 +30,7 @@ Textové popisky byly dále očištěny\cite{brno} a poskytnuty pro tento projek
 "0000000980","hradec kings holy ghost cathedral","", "outdoors nobody urban scenes architecture houses towers czech czech republic europe buildings build history historical churches church fronts holy ghost cathedral spirit ceska republika cathedrals sv hradec kralove"^M
 \end{lstlisting}
 
-Na příkladu jsou vidět některé problémy, které data z datasetu Profimedie mají. Některá klíčová slova, jako například \uv{czech republic} k sobě patří a tvoří frázi. V souboru ovšem tyto víceslovné fráze nejsou vyznačené. Některým slovům chybí diakritika, například \uv{ceska}. Některé fráze vznikly asi strojovým překladem z cizího jazyka do angličtiny. To je vidět na frázi \uv{hradec kings}, která zřejmě původně byla názvem českého města \uv{Hradec Králové}. Všechna slova v souboru obsahují pouze malá písmena, což například znesnadňuje detekci názvů.
+Na příkladu jsou vidět některé problémy, které data z datasetu Profimedie mají. Některá klíčová slova, jako například \uv{czech republic}, k sobě patří a tvoří frázi. V souboru ovšem tyto víceslovné fráze nejsou vyznačené. Některým slovům chybí diakritika, například \uv{ceska}. Některé fráze vznikly nejspíše strojovým překladem z cizího jazyka do angličtiny. To je vidět na frázi \uv{hradec kings}, která zřejmě původně byla názvem českého města \uv{Hradec Králové}. Všechna slova v souboru obsahují pouze malá písmena, což například znesnadňuje detekci názvů.
 
 Všechny popsané nedostatky dat negativně ovlivňují možnosti pro kvalitní vyhledávání v poskytnutých datech. Jedním z cílů práce je co nejvíce těchto nedostatků opravit.
 
