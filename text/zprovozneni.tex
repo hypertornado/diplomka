@@ -3,7 +3,7 @@
 
 Backend aplikace je webová aplikace napsaná v jazyce Ruby a frameworku Ruby on Rails. Je k dispozici pod svobodnou licencí MIT. K jejímu spuštění potřebujete ruby verze alepoň 2.0 (nižší verze nejsou otestované), Javu a ke stažení zdrojového kódu git. Aplikaci jde spustit na platformách Linux a Mac.
 
-\section{Instalace}
+\section{Instalace aplikace}
 
 Zdrojový kód je volně dostupný na webu GitHubu\footnote{\url{https://github.com/hypertornado/diplomka}}. Stáhnou tedy lze příkazem
 
@@ -19,97 +19,162 @@ bundle install
 
 Instalace může vyžadovat přístup administrátora. Dále je potřeba stáhnout knihovnu Elasticsearch\footnote{\url{http://www.elasticsearch.org/downloads/1-0-3/}} do adresáře bin/elasticsearch. Stačí verze 1.0 a vyšší.
 
-Nyní je možné celý projekt spustit pomocí Bash příkazů. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale veškeré AJAXové dotazy skončí chybou. V databázi nejsou importována data.
+Nyní je možné celý projekt spustit pomocí Bash příkazů. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale AJAXové dotazy skončí chybou. V databázi nejsou importována data.
 
-\section{Práce s metadaty k obrázkům}
+\section{Vložení vstupních dat}
 
-Metadata k obrázkům a obrázky samotné jsou poskytovány firmou Profimedia a nejsou volně dostupné. Ke zprovoznění aplikace je nutné vložit CSV soubor \lstinline{keyword-cleaned-phrase-export.csv} do adresáře data.
+Metadata k obrázkům a obrázky samotné jsou poskytovány firmou Profimedia a nejsou volně dostupné. Ke zprovoznění aplikace je nutné vložit CSV soubor \lstinline{profi-text-cleaned.csv} obsahující dataset Profimedie do adresáře \lstinline{data}. Dále potřebujeme do adresáře \lstinline{data} vložit soubor \lstinline{keyword-cleaned-phrase-export.csv} z bakalářské práce Jana Botorka, který obsahuje dataset Profimedie s detekovanými frázemi.
 
-\section{Překlad metadat}
-Soubor obsahuje metadata k obrázkům v angličtině. Jedním z úkolů této práce je poskytnout doporučování obrázků i v jiných jazycích, primárně v českém jazyce. Bylo tedy nutné metadata přeložit. Pokoušeli jsme se použít volný nástroj na překlad Moses. Ve verzi 2.1\footnote{\url{http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/}} nabízí volně dostupné modely pro překlad z češtiny do angličtiny. I na SSD disku trvá několik hodin, než se překladový model načte do paměti. Překlad jednoho segmentu s tímto modelem byl poměrně pomalý (překlad metadat k jednomu obrázku trval zhruba 3 sekundy) a také dosti nepřesný. Například řádek
 
-\begin{lstlisting}
-"0000000003","little baby smiling","","child children baby babies infants kids childhood single faces body naked nake facial expressions smile smiling viewing watching laying fun amusing amusement amused amuse dallying frolicing playing wantoning open"^M
+\section{Překlad}
+\label{subsec:zprovozneni_preklad}
+
+Pro překlad použijeme metodu popsanou v Kapitole \ref{chap:preklad}. K překladu budeme potřebovat frázovou tabulku pro anglicko-český překlad. Použijeme tu, která je vydána s překladovým nástrojem Moses verze 2.1\footnote{\url{http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/}}.
+
+Nyní můžeme použít příkaz
+
+\begin{lstlisting}[language=bash]
+rake data:export_profimedia_words_for_translation
 \end{lstlisting}
 
-byl do čestiny přeložen takto:
+který vytvoří soubor \lstinline{word_list.txt} s $352\ 862$ slovy. Nyní je potřeba vytvořit soubor s překladem všech slov. Pro naší aplikaci jsme využili překladový nástroj Překladač Google. Při tak velkém objemu dat jsme byly nuceni použít přístup přes placené API, které společnost Google poskytuje. Překladové API jsme použili skrz překladový nástroj firmy Memsource. Tímto strojovým překladem jsme získali soubor \lstinline{word_list_translated_cs.txt} se všemi slovy z datasetu Profimedia přeloženými do češtiny. Příkazem
 
-\begin{lstlisting}
-"0000000003","little|UNK|UNK|UNK dítě smiling","","child|UNK|UNK|UNK dětí , dětské děti kojence děti dětství jednotného čelí orgán nahé nake|UNK|UNK|UNK pořídili vyjádření usmívat usmívá odůvodněním , která zábavné sledovat zábavné zábavných i pobavena tím amuse|UNK|UNK|UNK dallying|UNK|UNK|UNK frolicing|UNK|UNK|UNK hrát wantoning|UNK|UNK|UNK open"^M|UNK|UNK|UNK
+\begin{lstlisting}[language=bash]
+rake data:create_word_dictionary
 \end{lstlisting}
 
-Je vidět poměrně velké množství nepřeložených slov (koncovky \lstinline{|UNK}) a překlad je relativně nepřesný. Je pravděpodobné, že by s lepšími daty šel natrénovat lepší překladový a jazykový model. Strojový překlad není hlavním tématem této práce, takže bylo jednodušší komerční automatický překlad Google Translate, který přeloží ukázková metadata takto:
+můžeme seznam anglických a českých slov spárovat do jednoho souboru \lstinline{word_dictionary_en_cs.txt}.
 
-\begin{lstlisting}
-"0000000003", "malé dítě s úsměvem", "", "dítě děti dítě děti kojenci děti dětství jednotlivé plochy těla nahá nake výrazy obličeje, úsměvu, usměvavý sledování sledování kterým zábava zábavné zábavní pobavený pobavit laškoval frolicing hrát wantoning otevřený" ^ M
+Kvůli lepší kvalitě překladu jsme se snažili přeložit i detekované fráze z datasetu Profimedie. Ze souboru \lstinline{keyword-cleaned-phrase-export.csv} se fráze exportují příkazem
+
+\begin{lstlisting}[language=bash]
+rake data:export_profimedia_phrases_for_translation
 \end{lstlisting}
 
-I z této ukázky je zřejmé, že Google poskytuje kvalitnější překlad, než anglicko-český překladový model v releasu Mosese. Google poskytuje překlad zdarma přes webové rozhraní. Pokud se ale do překladového formuláře nahraje nespecifikované větší množství dat, přestane překlad fungovat. Google pro překlad poskytuje placené API. Platí se XX amerických dollarů za přeložené slovo. Korpus Profimedie obsahuje zhruba (wc vystup 20119222 347129204 4811998848), takze by cely překlad stál XX dollaru. Jelikož se slova v textu opakuji, lze použít překlad slovo po slovu. Ještě lepší by bylo překládat přímo klíčové fráze. Bohužel korpus Profimedie jednotlivé fráze neodděluje. Je ale možné použít učící algoritmus a klíčové fráze detekovat.
+do souboru \lstinline{phrases_list.txt}. Příkaz
 
-\subsection{Export slov a frází}
-Nejprve příkazem \lstinline{rake data:export_profimedia_words_for_translation} vyexportujeme do souboru \lstinline{data/word_list.txt} seznam všech slov použitých v metadatech k obrázkům. Tento příkaz běží několik hodin i na moderním počítači s SSD diskem. Z Profimedia dat získáme seznam 352862 slov. Tento soubor je nutné přeložit z angličtiny do dalších podporovaných jazyků, v našem případě češtiny.
+\begin{lstlisting}[language=bash]
+rake data:translate_phrases
+\end{lstlisting}
+
+pak tyto exportované fráze porovná s frázemi přítomnými v překladovém modelu Mosese. Fráze, které se v překladovém modelu nachází jsou pak i s překladem uloženy v souboru \lstinline{phrase_table_en_cs.txt}.
+
+Získali jsme tedy překladový slovník pro slova (\lstinline{word_dictionary_en_cs.txt}) i fráze (\lstinline{phrase_table_en_cs.txt}). Algoritmy, které tato data používají jsou implementovány v souboru \lstinline{language_tool.rb}.
 
 \section{Jazykový korpus}
-Tato práce potřebuje jazykové korpusy pro podporované jazyky ze dvou důvodů. První je potřeba pro určení relativní jazykové frekvence slov v algoritmu TF-IDF. Zadruhé je potřeba jazykový korpus pro rozpoznávání jazyků. Přirozeným jazykovým korpusem by mohla být samotná Profimedia data, ale pro oba účely jsou tato data nepoužitelná. Klíčová slova a názvy obrázků jsou odlišnými druhy textů, než je průměrný článek. Je tedy potřeba jazyková data získat jinde.
+\label{subsec:zprovozneni_korpus}
 
-Wikipedia se jako korpus velmi hodí. Textový obsah je pod licencí Creative Commons a jeho struktura je velmi podobná běžnému publicistickému článku. Data se dají získat stažením přímo ze serverů wikipedie (pro češtinu zde), nebo pomocí sdílených torrentů. Práce wiki dumpy všech podporovaných jazyků v adresáři data pod názvem typu \lstinline{wiki_dump_jazyk.xml}. Pro práci s daty z wikipedie je potřeba nejprve převést XML data do textového formátu. K tomu slouží python skript \lstinline{lib/WikiExtractor.py} od Wikipedie. Pro převod anglických dat lze použít příkaz:
+Aplikace potřebuje jazykový korpus pro podporované jazyky ze dvou důvodů. Zaprvé je korpus potřeba pro správné fungování algoritmu TF-IDF popsaném v Kapitole \ref{chap:teorie}. Zadruhé je potřeba jazykový korpus pro získání nejfrekventovanějších trigramů jazyka. Tato data se pak využívají v algoritmu pro detekci jazyka, který je popsán v Kapitole \ref{chap:detekce_jazyka}.
+
+
+
+Samotný dataset Profimedie se jako korpus pro naše účely nehodí. Struktura textů v datasetu neodpovídá běžnému textu a navíc je dataset pouze v angličtině. Jako korpus jsme použili data z Wikipedie. Ta jdou stáhnout jako databázový dump ve formátu XML a pod licencí Creative Commons. Stáhli jsme tedy soubory \lstinline{wiki_dump_cs.xml} a \lstinline{wiki_dump_en.xml}. Wikipedie nabízí pro převod z XML do obyčejného textu vlastní pythonovský skript \lstinline{lib/WikiExtractor.py}\cite{wikiextractor}. Pro extrakci dat z englického XML souboru lze použít příkaz
 
 \begin{lstlisting}
 rake wiki:extract_words_from_wiki en
 \end{lstlisting}
 
-Stejný příkaz je potřeba spustit i pro ostatní podporované jazyky. Příkaz vytvorí v \lstinline{data/wiki_en} adresářovou strukturu. Není potřeba převést všechna data, pouze tolik, abychom dostali reprezentativní korpus. Pro angličtinu stačí převést zhruba 10000 článků, pro podobné množství českých dat je potřeba převést zhruba 20000 článků (údaj o exportovaných článcích je průběžně vypisován na konzoli).
+který vytvoří adresářovou strukturu s textovými soubory. Není potřeba převést všechna data, pouze tolik, abychom dostali reprezentativní korpus. Pro angličtinu stačí převést zhruba $10\ 000$ článků, pro podobné množství českých dat je potřeba převést zhruba $20\ 000$ článků (údaj o exportovaných článcích je průběžně vypisován na konzoli).
 
-Nyní je možné vytvořit seznam slov v korpusu s frekvencemi. Ve skutečnosti nás zajímají pouze stemy slov, ne jednotlivé tvary. Příkaz
+Nyní je možné vytvořit frekvenční seznam slov z korpusu Wikipedie. Ve skutečnosti potřebujeme frekvenční seznam stemů slov. Ten získáme příkazem
 
 \begin{lstlisting}
 rake wiki:frequency_list_from_wiki
 \end{lstlisting}
 
-vytvoří seznam slov a jejich frekvencí s cestou \lstinline{data/wiki_freq_list_count.en}. Ve skutečnosti nás nezajímají všechna slova z korpusu wikipedie, ale pouze ta, která se vyskytují mezi klíčovými slovy v Profimedia korpusu. Příkazem
+Nyní příkazem
 
 \begin{lstlisting}
 rake data:create_tf_df_list
 \end{lstlisting}
 
-se z korpusu profimedia dat exportují stemy všech slov v profimedia korpusu spolu z hodnotami udávajícími frekvenci termínu v celém korpusu (TF) a frekvenci toho, v kolika popiskách obrázků se slovo objevilo (DF). Pro angličtinu jsou tato data uložena do souboru \lstinline{data/tf_df_list_en.txt}. Nyní můžeme spárovat informaci o stemech z wikipedie a nahrát je do databáze. Párování se provede příkazem:
+získáme pro každý stem v Profimeda datasetu jejich celkovou četnost (TF) a četnost metadat obrázků, kde se stem nachází.
+
+Nakonec spárujeme frekvenční informace o stemech z Profimedia datasetu a korpusu Wikipedie příkazem
 
 \begin{lstlisting}
 rake data:pair_profimedia_and_wiki_data
 \end{lstlisting}
 
-který vytvoří soubor \lstinline{data/paired_wiki_and_profimedia.txt} se statistikami všech stemů z Profimedia korpusu.
-
-
-\section{Příprava dat pro detekci jazyků}
-
-Automatická detekce jazyka probíhá ve frontendové části. Ke svému chodu ale potřebuje data z korpusu, konkrétně seznam nejčastějších trigramů pro každý podporovaný jazyk. Příkaz
-
-\begin{lstlisting}
-rake trigrams:extract_most_frequent_trigrams
-\end{lstlisting}
-
-vytvoří pro každý jazyk seznam padesáti nejčastějších trigramů. Seznam pro angličtinu je uložen v souboru \lstinline{data/most_frequent_trigrams_en.txt}. Příkaz
-
-\begin{lstlisting}
-rake trigrams:trigrams_to_javascript_classes
-\end{lstlisting}
-
-pracuje se seznamy nejčastějších trigramů ze kterých vytvoří javascriptovou třídu \lstinline{oo.diplomka.Languages.Data} v notaci Google Closure. Ta je uložena v souboru \lstinline{public/js/js/diplomka/languages/data.js}.
+Získali jsme dva soubory --- \lstinline{paired_wiki_and_profimedia_cs.txt} pro češtinu a \lstinline{paired_wiki_and_profimedia_en.txt} pro angličtinu. Soubory obsahují tabulátorem odsazené statistiky četnosti pro všechny stemy v datasetu Profimedie.
 
 \section{Import dat do databáze}
+\label{subsec:zprovozneni_import}
 
-Veškerá data jsou importována do databáze elasticsearch. Aplikace očekává Elasticsearch připojený na portu 9200. Samotná data se importují příkazem:
+Nyní máme připravená všechna data pro nahrání do databáze. Jako databáze nám slouží Elasticsearch, který musí být připojen na portu 9200. Pro práci s Elasticsearch se velmi hodí plugin elascticsearch-head, který umožňuje prohlížení databáze ve webovém prohlížeči.
+
+Nejprve importujeme frekvenční data pro všechny stemy příkazem
+
+\begin{lstlisting}
+rake es:import_word_data
+\end{lstlisting}
+
+Pro každý z podporovaných jazyků takový import trvá zhruba jednu hodinu.
+
+Dále příkazem
 
 \begin{lstlisting}
 rake es:import_image_metadata
 \end{lstlisting}
 
-Tento vytvoří v elasticsearch index diplomka. Poté nastaví explicitní mapování v celém indexu. Pokud se mapování explicitně nenastaví, elasticsearch se snaží data namapovat podle jednoduchých heuristik. Například text rozdělí na slova, která pak převede na malá písmena a upraví defaultním stemmerem. Aplikace se však o stemming a převedení na malá písmena stará sama, mapování tedy říká, aby nahraný text oddělil pouze pomocí mezer na slova a dále nezpracovával. Vyhledávací dotaz je pak rozdělen také pouze pomocí mezer. Nastavené mapování lze ověřit pomocí API elsaticsearch na adrese \url{http://localhost:9200/diplomka/_mapping/}.
+importujeme metadata pro všechny obrázky z datasetu Profimedia. Data jsou importována pro všechny podporované jazyky. Pro neanglické jazyky jsou použity na překlad slovníky slov a frází vytvořené v Sekci \label{subsec:zprovozneni_preklad}. Nahrání těchto dat do databáze může trvat několik hodin. Nahrávací skript zobrazuje odhad zbývajícího času.
 
-Po vytvoření indexu může začít samotný import dat. Data z každého řádku Profimedia dat je převeden do formátu JSON. Data obsahují položky locator, title 
+\section{Data pro detekci jazyků}
+\label{subsec:zprovozneni_detekce}
 
-\section{Import metadat obrázků}
+Algoritmus pro automatickou detekci jazyka, popsaný v Kapitole \ref{chap:detekce_jazyka} potřebuje ke své práci seznam nejfrekventovanějších trigramů pro každý jazyk. Tento seznam $300$ nefrekventovanějších slov pro každý jazyk získáme z korpusu Wikipedie příkazem
+
+\begin{lstlisting}
+rake trigrams:extract_most_frequent_trigrams
+\end{lstlisting}
+
+Detekce jazyka probíhá ve frontendové části aplikace (viz Kapitola \cite{chap:frontend}). Příkaz
+
+\begin{lstlisting}
+rake trigrams:trigrams_to_javascript_classes
+\end{lstlisting}
+
+vytvoří ze seznamů nejfrekventovanějších seznamů javascriptovou třídu \lstinline{oo.diplomka.Languages.Data} v notaci Google Closure. Ta je uložena v souboru \lstinline{public/js/js/diplomka/languages/data.js}. Tuto třídu pak využívá frontend pro automatickou detekci jazyka vloženého textu.
+
+\section{Vyhledávání podobných obrázků}
+\label{subsec:zprovozneni_podobne}
+
+Služba vyhledávání obrázků je nezávislá na zbytku aplikace. Princip jejího fungování je popsán v Kapitole \ref{chap:similar}. Zdrojový kód služby je v jazyce go a je dostupný na GitHubu\footnote{\url{https://github.com/hypertornado/similar_img_finder}}. Pro kompilaci služby je potřeba go alespoň verze 1.2. Příkaz \lstinline{go build} v adresáři se zdrojovými kódy služby zkompiluje program do souboru \lstinline{similar_img_finder}.
+
+Pro zprovoznění služby je nejprve nutné naimportovat data do databáze příkazem
+
+\begin{lstlisting}
+  ./similar_img_finder -a import -n 1000000 -e 9200 -k 500 -f data.gz
+\end{lstlisting}
+
+Parametr \lstinline{-n} určuje, kolik dat se má naimportovat, parametr \lstinline{-e} určuje na kterém portu běží databáze Elasticsearch (můžeme použít stejnou instanci databáze na které běží hlavní aplikace), parametr \lstinline{-k} odpovídá hodnotě $K$ z Kapitoly \ref{chap:similar} a parametr \lstinline{-f} je cesta ke komprimovanému souboru s importovanými deskriptory.
+
+Nyní můžeme spustit službu hledání podobných obrázků na portu $8585$ příkazem
+
+\begin{lstlisting}
+  ./similar_img_finder -a server -p 8585 -l 100 -e 9200
+\end{lstlisting}
+
+Parametr \lstinline{-l} odpovídá hodnotě $L$ z Kapitoly \ref{chap:similar}.
+
+Pokud nyní chceme získat id podobných obrázků k obrázku s id \uv{0000000003}, můžeme využít JSON HTTP API a získat výsledky na adrese \lstinline{localhost:8585/similar?id=0000000003}. Služba vrátí pole obsahující id podobných obrázků a míru $Similarity$ pro každý vrácený obrázek.
+
+\section{Podpora dalších jazyků}
+
+Popsaný postup vytvoří aplikaci, která funguje pro anglický a český vstupní text. Aplikace je ale navržena tak, aby rozšíření do dalších jazyků nebylo obtížné. Popíšeme postup pro přidání dalšího jazyka --- francouzštiny. Podle standardu ISO 639-1 je kód francouzštiny \uv{fr}. Upravíme tedy konstantní pole aplikace v souboru \lstinline{application.rb} --- do pole \lstinline{SUPPORTED_LANGUAGES} přidáme řetězec \uv{fr} a jako název jazyka přidáme do pole \lstinline{LANGUAGE_NAMES} řetězec \uv{french}.
+
+Pro každý přidaný jazyk potřebujeme implementovat stemmer. Pro podporu francouzského stemmeru budeme muset rozšířit metodu \lstinline{stem_word} v souboru \lstinline{language_tool.rb}. Pro francouzštinu je v Ruby volně dostupných několik knihoven pro převod slov na stemy. Dále ve stejné třídě můžeme pro nově přidaný jazyk rozšířit datovou strukturu \lstinline{@stopwords} o další stop-slova.
+
+Dále pro francouzštinu stáhneme dump Wikipedie jako soubor \lstinline{wiki_dump_fr.xml} a zopakujeme celý postup ze Sekcí \ref{subsec:zprovozneni_preklad}, \ref{subsec:zprovozneni_korpus}, \ref{subsec:zprovozneni_import} a \ref{subsec:zprovozneni_detekce} této kapitoly.
+
+Podobnými kroky můžeme implementovat poměrně přímočaře i podporu pro další jazyky vstupních článků.
+
+\section{Demo aplikace ve virtuálním stroji}
+
+Na přiloženém DVD se nachází virtuální stroj s demoverzí aplikace. Demoverze z důvodů licence datasetu Profimedie a také omezené kapacitě DVD pracuje pouze s prvními 1000 obrázky v Datasetu. Podrobnosti o datech na přiloženém DVD obsahuje příloha 
+
+
+
 
 
 

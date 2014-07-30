@@ -1,34 +1,5 @@
 namespace :data do
 
-  task :csv => :environment do
-
-    path = "/Volumes/ondra_zaloha/profi-neuralnet-20M.data.gz"
-
-    limit = 100
-
-    i = 0
-    Zlib::GzipReader.open(path) do |gz|
-
-      until (gz.eof? or i >= limit) do
-        i += 1
-        header = gz.readline
-        vec = gz.readline
-
-        #puts header
-
-        header.chomp!
-        line = "\"#{header.split(" ")[2]}\",\""
-
-        vec.chomp!
-        vec = vec.split(" ").join("\",\"")
-        line = "#{line}#{vec}\""
-        puts line
-      end
-
-    end
-
-  end
-
   task :export_profimedia_phrases_for_translation => :environment do
     path = "#{File.dirname(__FILE__)}/../../data/keyword-clean-phrase-export.csv"
 

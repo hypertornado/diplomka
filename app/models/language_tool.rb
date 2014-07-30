@@ -3,7 +3,7 @@ class LanguageTool
   @@supported_languages = SUPPORTED_LANGUAGES
 
   def initialize language
-    raise Exception.new "Language '#{language}' not supported" unless ["en","cs"].include? language
+    raise Exception.new "Language '#{language}' not supported" unless SUPPORTED_LANGUAGES.include? language
     @language = language
     @dictionaries_path = {
       ["en","cs"] => "#{File.dirname(__FILE__)}/../../data/word_dictionary_en_cs.txt"

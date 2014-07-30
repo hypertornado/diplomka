@@ -54,28 +54,30 @@
 \contentsline {subsection}{\numberline {9.4.2}Rozhran\IeC {\'\i } pro detail obr\IeC {\'a}zku}{31}{subsection.9.4.2}
 \contentsline {section}{\numberline {9.5}Z\IeC {\'a}v\IeC {\v e}r}{31}{section.9.5}
 \contentsline {chapter}{\numberline {10}Instalace a zprovozn\IeC {\v e}n\IeC {\'\i }}{32}{chapter.10}
-\contentsline {section}{\numberline {10.1}Instalace}{32}{section.10.1}
-\contentsline {section}{\numberline {10.2}Pr\IeC {\'a}ce s metadaty k obr\IeC {\'a}zk\IeC {\r u}m}{32}{section.10.2}
-\contentsline {section}{\numberline {10.3}P\IeC {\v r}eklad metadat}{32}{section.10.3}
-\contentsline {subsection}{\numberline {10.3.1}Export slov a fr\IeC {\'a}z\IeC {\'\i }}{33}{subsection.10.3.1}
-\contentsline {section}{\numberline {10.4}Jazykov\IeC {\'y} korpus}{34}{section.10.4}
-\contentsline {section}{\numberline {10.5}P\IeC {\v r}\IeC {\'\i }prava dat pro detekci jazyk\IeC {\r u}}{35}{section.10.5}
-\contentsline {section}{\numberline {10.6}Import dat do datab\IeC {\'a}ze}{35}{section.10.6}
-\contentsline {section}{\numberline {10.7}Import metadat obr\IeC {\'a}zk\IeC {\r u}}{35}{section.10.7}
-\contentsline {chapter}{\numberline {11}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{36}{chapter.11}
-\contentsline {section}{\numberline {11.1}Instalace rozhran\IeC {\'\i }}{36}{section.11.1}
-\contentsline {section}{\numberline {11.2}P\IeC {\v r}id\IeC {\'a}n\IeC {\'\i } u\IeC {\v z}ivatel\IeC {\r u}}{36}{section.11.2}
-\contentsline {section}{\numberline {11.3}Import anota\IeC {\v c}n\IeC {\'\i }ch dat}{36}{section.11.3}
-\contentsline {section}{\numberline {11.4}Export anota\IeC {\v c}n\IeC {\'\i }ch dat}{37}{section.11.4}
-\contentsline {section}{\numberline {11.5}Import obr\IeC {\'a}zk\IeC {\r u} a text\IeC {\r u}}{38}{section.11.5}
-\contentsline {section}{\numberline {11.6}Anota\IeC {\v c}n\IeC {\'\i } proces}{38}{section.11.6}
-\contentsline {chapter}{\numberline {12}Testov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{40}{chapter.12}
-\contentsline {section}{\numberline {12.1}Vylou\IeC {\v c}en\IeC {\'\i } naru\IeC {\v s}itele (o\_test1)}{40}{section.12.1}
-\contentsline {section}{\numberline {12.2}Detekce spr\IeC {\'a}vn\IeC {\'e}ho obr\IeC {\'a}zku (o\_test2)}{41}{section.12.2}
-\contentsline {section}{\numberline {12.3}Shrnut\IeC {\'\i }}{42}{section.12.3}
-\contentsline {chapter}{\numberline {13}Z\IeC {\'a}v\IeC {\v e}r}{43}{chapter.13}
-\contentsline {chapter}{Z\IeC {\'a}v\IeC {\v e}r}{43}{chapter.13}
-\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{44}{chapter*.2}
-\contentsline {chapter}{Seznam tabulek}{46}{chapter*.3}
-\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{47}{chapter*.4}
-\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }loha 1}{48}{chapter*.5}
+\contentsline {section}{\numberline {10.1}Instalace aplikace}{32}{section.10.1}
+\contentsline {section}{\numberline {10.2}Vlo\IeC {\v z}en\IeC {\'\i } vstupn\IeC {\'\i }ch dat}{32}{section.10.2}
+\contentsline {section}{\numberline {10.3}P\IeC {\v r}eklad}{32}{section.10.3}
+\contentsline {section}{\numberline {10.4}Jazykov\IeC {\'y} korpus}{33}{section.10.4}
+\contentsline {section}{\numberline {10.5}Import dat do datab\IeC {\'a}ze}{34}{section.10.5}
+\contentsline {section}{\numberline {10.6}Data pro detekci jazyk\IeC {\r u}}{35}{section.10.6}
+\contentsline {section}{\numberline {10.7}Vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } podobn\IeC {\'y}ch obr\IeC {\'a}zk\IeC {\r u}}{35}{section.10.7}
+\contentsline {section}{\numberline {10.8}Podpora dal\IeC {\v s}\IeC {\'\i }ch jazyk\IeC {\r u}}{36}{section.10.8}
+\contentsline {section}{\numberline {10.9}Demo aplikace ve virtu\IeC {\'a}ln\IeC {\'\i }m stroji}{36}{section.10.9}
+\contentsline {chapter}{\numberline {11}Anota\IeC {\v c}n\IeC {\'\i } rozhran\IeC {\'\i }}{37}{chapter.11}
+\contentsline {section}{\numberline {11.1}Instalace rozhran\IeC {\'\i }}{37}{section.11.1}
+\contentsline {section}{\numberline {11.2}P\IeC {\v r}id\IeC {\'a}n\IeC {\'\i } u\IeC {\v z}ivatel\IeC {\r u}}{37}{section.11.2}
+\contentsline {section}{\numberline {11.3}Import anota\IeC {\v c}n\IeC {\'\i }ch dat}{37}{section.11.3}
+\contentsline {section}{\numberline {11.4}Export anota\IeC {\v c}n\IeC {\'\i }ch dat}{38}{section.11.4}
+\contentsline {section}{\numberline {11.5}Import obr\IeC {\'a}zk\IeC {\r u} a text\IeC {\r u}}{39}{section.11.5}
+\contentsline {section}{\numberline {11.6}Anota\IeC {\v c}n\IeC {\'\i } proces}{39}{section.11.6}
+\contentsline {chapter}{\numberline {12}Testov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{41}{chapter.12}
+\contentsline {section}{\numberline {12.1}Vylou\IeC {\v c}en\IeC {\'\i } naru\IeC {\v s}itele (o\_test1)}{41}{section.12.1}
+\contentsline {section}{\numberline {12.2}Detekce spr\IeC {\'a}vn\IeC {\'e}ho obr\IeC {\'a}zku (o\_test2)}{42}{section.12.2}
+\contentsline {section}{\numberline {12.3}Shrnut\IeC {\'\i }}{43}{section.12.3}
+\contentsline {chapter}{\numberline {13}Z\IeC {\'a}v\IeC {\v e}r}{44}{chapter.13}
+\contentsline {chapter}{Z\IeC {\'a}v\IeC {\v e}r}{44}{chapter.13}
+\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{45}{chapter*.2}
+\contentsline {chapter}{Seznam tabulek}{47}{chapter*.3}
+\contentsline {chapter}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{48}{chapter*.4}
+\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }loha 1}{49}{chapter*.5}
+\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }loha 2}{56}{chapter*.6}

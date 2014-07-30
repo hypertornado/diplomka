@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  29 JUL 2014 17:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=cslatex 2014.4.6)  30 JUL 2014 12:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -476,8 +476,12 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 ))
 (./prace.aux (./uvod.aux) (./data.aux) (./teorie.aux) (./preklad.aux)
 (./stemmer.aux) (./detekce_jazyka.aux) (./similar.aux) (./backend.aux)
-(./frontend.aux) (./zprovozneni.aux) (./anotacni_rozhrani.aux) (./evaluace.aux)
-(./zaver.aux) (./literatura.aux))
+(./frontend.aux) (./zprovozneni.aux
+
+LaTeX Warning: Label `subsec:zprovozneni_preklad' multiply defined.
+
+) (./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux) (./literatura.aux)
+(./priloha_dvd.aux))
 \openout1 = `prace.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
@@ -595,7 +599,7 @@ nut sou-bor [][][][][][][][][][][],
 Kapitola 3.
 File: dataflow.eps Graphic file (type eps)
 <dataflow.eps>
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 13--14
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 14--15
  [][] 
  []
 
@@ -603,11 +607,11 @@ Overfull \hbox (14.22638pt too wide) in paragraph at lines 13--14
 
 
 
-]
+] [9]
 
-LaTeX Warning: Command \' invalid in math mode on input line 74.
+LaTeX Warning: Command \' invalid in math mode on input line 75.
 
-[9]) [10]
+) [10]
 \openout2 = `preklad.aux'.
 
  (./preklad.tex
@@ -619,7 +623,7 @@ Kapitola 4.
 ]
 File: translate.eps Graphic file (type eps)
  <translate.eps>
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 34--35
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 35--36
  [][] 
  []
 
@@ -680,13 +684,7 @@ File: geohash_use.eps Graphic file (type eps)
 
 LaTeX Warning: Command \textellipsis invalid in math mode on input line 85.
 
-[21]
-Overfull \hbox (122.09193pt too wide) in paragraph at lines 107--108
-\IL2/cmr/m/n/12 m^^f9-^^bee-me vy-u-^^be^^edt JSON HTTP API a z^^eds-kat v^^fd-
-sled-ky na ad-re-se [][][][][][][][]. 
- []
-
-) [22]
+[21]) [22]
 \openout2 = `backend.aux'.
 
  (./backend.tex
@@ -713,14 +711,14 @@ Kapitola 9.
 ] [29]
 File: ui1.eps Graphic file (type eps)
  <ui1.eps>
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 57--58
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 58--59
  [][] 
  []
 
 [30]
 File: ui2.eps Graphic file (type eps)
  <ui2.eps>
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 76--77
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 77--78
  [][] 
  []
 
@@ -734,27 +732,52 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
-) [32
+)
+Overfull \hbox (13.17755pt too wide) in paragraph at lines 26--27
+\IL2/cmr/m/n/12 po-t^^f8e-bu-je-me do ad-re-s^^e1-^^f8e [][][] vlo-^^beit sou-b
+or [][][][][][][][][][][]
+ []
+
+[32
 
 
 
 ]
-Overfull \hbox (0.32433pt too wide) in paragraph at lines 50--51
-\IL2/cmr/m/n/12 Nejprve p^^f8^^ed-ka-zem [][][][][][][][] vy-
+Overfull \hbox (122.37561pt too wide) in paragraph at lines 46--47
+[]\IL2/cmr/m/n/12 m^^f9^^beeme se-znam an-g-lic-k^^fdch a ^^e8es-k^^fdch slov s
+p^^e1-ro-vat do jed-no-ho sou-bo-ru [][][][][]. 
  []
 
-[33]
-Overfull \hbox (10.93391pt too wide) in paragraph at lines 69--70
-[]\IL2/cmr/m/n/12 vytvo^^f8^^ed se-znam slov a je-jich frek-ven-c^^ed s ces-tou
- [][][][][][][].
+[33] [34]
+
+LaTeX Warning: Citation `chap:frontend' on page 35 undefined on input line 131.
+
+
+
+Overfull \hbox (125.54787pt too wide) in paragraph at lines 137--138
+[]\IL2/cmr/m/n/12 vytvo^^f8^^ed ze se-zna-m^^f9 nej-frek-ven-to-va-n^^ecj-^^b9^
+^edch se-zna-m^^f9 ja-vascrip-to-vou t^^f8^^ed-du [][][][][][][][][]
  []
 
-[34]
-Overfull \hbox (4.50294pt too wide) in paragraph at lines 108--109
-\IL2/cmr/m/n/12 mo-c^^ed API el-sa-tic-search na ad-re-se [][][][]. 
+
+Overfull \hbox (77.8298pt too wide) in paragraph at lines 137--138
+\IL2/cmr/m/n/12 v no-ta-ci Go-o-gle Clo-su-re. Ta je ulo-^^bee-na v sou-bo-ru [
+][][][][][][][][][][][][][][].
  []
 
-) [35]
+
+Overfull \hbox (122.09193pt too wide) in paragraph at lines 160--161
+\IL2/cmr/m/n/12 m^^f9-^^bee-me vy-u-^^be^^edt JSON HTTP API a z^^eds-kat v^^fd-
+sled-ky na ad-re-se [][][][][][][][].
+ []
+
+[35]
+Overfull \hbox (18.84831pt too wide) in paragraph at lines 168--169
+[]\IL2/cmr/m/n/12 D^^e1le pro fran-couz-^^b9ti-nu st^^e1h-ne-me dump Wi-ki-pe-d
+ie ja-ko sou-bor [][][][][]
+ []
+
+) [36]
 \openout2 = `anotacni_rozhrani.aux'.
 
  (./anotacni_rozhrani.tex
@@ -773,11 +796,11 @@ Overfull \hbox (24.30417pt too wide) in paragraph at lines 30--31
 ][][].
  []
 
-[36
+[37
 
 
 
-] [37]
+] [38]
 Overfull \hbox (1.3919pt too wide) in paragraph at lines 86--87
 [][][][][][][][][]\IL2/cmr/m/n/12 . Po-kud te-dy im-por-to-va-n^^fd sou-
  []
@@ -788,21 +811,21 @@ Overfull \hbox (14.22638pt too wide) in paragraph at lines 92--93
  [][] 
  []
 
-[38]) [39]
+[39]) [40]
 \openout2 = `evaluace.aux'.
 
  (./evaluace.tex
 Kapitola 12.
-[40
+[41
 
 
 
-] [41]) [42]
+] [42]) [43]
 \openout2 = `zaver.aux'.
 
  (./zaver.tex
 Kapitola 13.
-) [43
+) [44
 
 
 
@@ -810,123 +833,137 @@ Kapitola 13.
 \openout2 = `literatura.aux'.
 
  (./literatura.tex
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 []\IL2/cmr/m/n/12 BRAY, Tim, et al. \IL2/cmr/m/it/12 Ex-tensi-ble mar-kup lan-g
 u-age (XML)\IL2/cmr/m/n/12 . World
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 \IL2/cmr/m/n/12 Wi-de Web Con-sor-ti-um Re-com-men-dati-on REC-xml-19980210.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--42
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
 []\IL2/cmr/m/n/12 COUCHBASE. \IL2/cmr/m/it/12 Cou-chbase 2.5.1 \IL2/cmr/m/n/12 
 [soft-ware]. 2014. Do-stup-n^^e9 z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--46
+Underfull \hbox (badness 10000) in paragraph at lines 48--50
 []\IL2/cmr/m/n/12 CROCKFORD, Dou-glas. \IL2/cmr/m/it/12 The ap-pli-cati-on/j-so
 n me-dia ty-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--46
+Underfull \hbox (badness 10000) in paragraph at lines 48--50
 \IL2/cmr/m/it/12 pe for ja-vascript ob-ject no-tati-on (json)\IL2/cmr/m/n/12 . 
 2006. Do-stup-n^^e9 z:
  []
 
-[44
+[45
 
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 71--73
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
 []\IL2/cmr/m/n/12 HARTER, Mark. \IL2/cmr/m/it/12 Ma-na-ging No-de.js Call-back 
 Hell wi-th Pro-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--73
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
 \IL2/cmr/m/it/12 mi-ses, Ge-ne-ra-tors and Other Ap-pro-a-ches\IL2/cmr/m/n/12 .
  2014. Do-stup-n^^e9 z:
  []
 
 
-Overfull \hbox (80.47665pt too wide) in paragraph at lines 71--73
+Overfull \hbox (80.47665pt too wide) in paragraph at lines 75--77
 [][][][]\IL2/cmr/m/n/12 . 
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 107--109
+Underfull \hbox (badness 1502) in paragraph at lines 111--113
 []\IL2/cmr/m/n/12 RAILS CO-RE TE-AM. \IL2/cmr/m/it/12 Ru-by on Rails \IL2/cmr/m
 /n/12 [soft-ware]. 2014. Do-stup-n^^e9 z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--117
+Underfull \hbox (badness 10000) in paragraph at lines 118--121
 []\IL2/cmr/m/n/12 WIKIPEDIA \IL2/cmr/m/it/12 Ge-o-ha-sh --- Wi-ki-pe-dia, The F
 ree En-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--117
+Underfull \hbox (badness 10000) in paragraph at lines 118--121
 \IL2/cmr/m/it/12 cyclo-pe-dia \IL2/cmr/m/n/12 [on-li-ne]. 2014 [cit. 2014-07-24
 ] Do-stup-n^^e9 z:
  []
 
 
-Overfull \hbox (16.22662pt too wide) in paragraph at lines 114--117
+Overfull \hbox (16.22662pt too wide) in paragraph at lines 118--121
 [][][][]\IL2/cmr/m/n/12 . 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--122
+Underfull \hbox (badness 10000) in paragraph at lines 123--126
 []\IL2/cmr/m/n/12 WIKIPEDIA \IL2/cmr/m/it/12 Mo-del{view{controller --- Wi-ki-p
 e-dia, The Free
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--122
+Underfull \hbox (badness 10000) in paragraph at lines 123--126
 \IL2/cmr/m/it/12 En-cyclo-pe-dia \IL2/cmr/m/n/12 [on-li-ne]. 2014 [cit. 2014-07
 -28] Do-stup-n^^e9 z:
  []
 
 
-Overfull \hbox (207.65172pt too wide) in paragraph at lines 119--122
+Overfull \hbox (207.65172pt too wide) in paragraph at lines 123--126
 [][][][]\IL2/cmr/m/n/12 . 
  []
 
-) [45] [46
+) [46] [47
 
 
-] [47
+] [48
 
-] (./annotation_results.txt [48
+] (./annotation_results.txt [49
 
-] [49] [50] [51] [52] [53])
-[54]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
- (./prace.aux (./uvod.aux) (./data.aux) (./teorie.aux) (./preklad.aux)
-(./stemmer.aux) (./detekce_jazyka.aux) (./similar.aux) (./backend.aux)
-(./frontend.aux) (./zprovozneni.aux) (./anotacni_rozhrani.aux) (./evaluace.aux)
-(./zaver.aux) (./literatura.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 345.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
+] [50] [51] [52] [53] [54])
+[55]
+\openout2 = `priloha_dvd.aux'.
+
+ (./priloha_dvd.tex) [56
+
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 348.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 348.
+ (./prace.aux (./uvod.aux) (./data.aux)
+(./teorie.aux) (./preklad.aux) (./stemmer.aux) (./detekce_jazyka.aux)
+(./similar.aux) (./backend.aux) (./frontend.aux) (./zprovozneni.aux)
+(./anotacni_rozhrani.aux) (./evaluace.aux) (./zaver.aux) (./literatura.aux)
+(./priloha_dvd.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 348.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 348.
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 2D97932F6C69A9B97B105555DDDB2890;11856.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 345.
+(rerunfilecheck)             Checksum: 910B5CEC9DB4A5E3C46D384E4D144691;12175.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 348.
  ) 
 Here is how much of TeX's memory you used:
- 11453 strings out of 494923
- 154503 string characters out of 6180164
- 289298 words of memory out of 5000000
- 14558 multiletter control sequences out of 15000+600000
+ 11416 strings out of 494923
+ 154484 string characters out of 6180164
+ 289350 words of memory out of 5000000
+ 14514 multiletter control sequences out of 15000+600000
  21878 words of font info for 64 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 34i,14n,49p,1220b,1801s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,14n,49p,1220b,1845s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on prace.dvi (58 pages, 406952 bytes).
+Output written on prace.dvi (60 pages, 410768 bytes).

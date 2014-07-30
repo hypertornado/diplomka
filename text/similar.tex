@@ -88,23 +88,7 @@ V našem řešení používáme jinou metodu. Seřadíme složky vektorů podle 
 
 \section{Implementace}
 
-Celá služba je implementována nezávisle na zbytku projektu. Jedná se o program \lstinline{similar_img_finder} napsaný v jazyce go. Jako databáze je použita Elasticsearch. Nejprve je nutné naimportovat data příkazem
-
-\begin{lstlisting}
-  similar_img_finder import -n 1000000 -e 9200 -k 500 -f data.gz
-\end{lstlisting}
-
-Parametr \lstinline{-n} určuje, kolik dat se má naimportovat, parametr \lstinline{-e} určuje na kterém portu běží Elasticsearch, parametr \lstinline{-k} odpovídá hodnotě $K$ a parametr \lstinline{-f} je cesta k souboru s importovanými daty.
-
-Nyní můžeme spustit server na portu $8585$ příkazem
-
-\begin{lstlisting}
-  similar_img_finder server -p 8585 -l 100 -e 9200
-\end{lstlisting}
-
-Parametr \lstinline{-l} odpovídá hodnotě $L$.
-
-Pokud nyní chceme získat id podobných obrázků k obrázku s id \uv{0000000003}, můžeme využít JSON HTTP API a získat výsledky na adrese \lstinline{localhost:8585/similar?id=0000000003}.
+Celá služba je implementována nezávisle na zbytku projektu. Jedná se o program \lstinline{similar_img_finder} napsaný v jazyce go. Jako databáze je použita Elasticsearch. Technické detaily služby vyhledávání podobných obrázků jsou uvedeny v Sekci \ref{subsec:zprovozneni_podobne}.
 
 
 

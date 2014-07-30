@@ -1,4 +1,5 @@
 \chapter{Vyhledávání relevantních obrázků}
+\label{chap:teorie}
 
 % \section{Teoretické cíle}
 
@@ -59,7 +60,7 @@ TFIDF(t,d,n,N)= \left(\sum_{slovo\,\in\,d} \begin{array}{l l} 1 & \mathrm{pokud}
 \section{TF-IDF pro extrakci klíčových slov}
 \label{sec:keywords_extraction}
 
-Algortimus TF-IDF můžeme použít pro extrakci klíčových slov z textu. Všechna znaky vstupního textu převedeme na malá písmena a text rozdělíme na slova. Dále nás nezajímá diakritika a různé speciální znaky, které může text obsahovat. Všechna slova převedeme na stemy. O převodu slov na stemy se podrobněji píše v Kapitole \ref{chap:stemmer}.
+Algortimus TF-IDF můžeme použít pro extrakci klíčových slov z textu. Všechna znaky vstupního textu převedeme na malá písmena a text rozdělíme na slova. Odstraníme slova ze stop-slovníku, který obsahuje nejběžnější slova pro každý z podporovaných jazyků\footnote{Seznam slov ve stopslovnících je převzat z knihovny Lucene.}. Dále nás nezajímá diakritika a různé speciální znaky, které může text obsahovat.  Slova převedeme na stemy. O převodu slov na stemy se podrobněji píše v Kapitole \ref{chap:stemmer}.
 
 Algoritmus TF-IDF pak použijeme na každé slovo vstupního textu a získáme tak skóre jeho významnosti v textu. Slova s nejvyšším skóre pak označíme za klíčová. Algoritmus musíme upravit pro naše účely. Zaprvé nás zajímají pouze taková slova, která existují v datasetu Profimedie. Slova, která se v korpusu nenachází, dostanou skóre $0$. Část TF v algoritmu znamená četnost slova v textu.
 

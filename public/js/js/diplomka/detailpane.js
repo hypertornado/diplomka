@@ -10,7 +10,7 @@ oo.diplomka.DetailPane = function(events) {
 
   this.events_.listen(oo.diplomka.EventType.SHOW_IMG_DETAIL, this.render_, this);
 
-  this.render_("0000007013");
+  //this.render_("0000007013");
 }
 
 oo.diplomka.DetailPane.prototype.render_ = function(id) {
