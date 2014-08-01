@@ -1,11 +1,11 @@
 \chapter{Instalace a zprovoznění}
 \label{chap:implementace}
 
-Backend aplikace je webová aplikace napsaná v jazyce Ruby a frameworku Ruby on Rails. Je k dispozici pod svobodnou licencí MIT. K jejímu spuštění potřebujete ruby verze alepoň 2.0 (nižší verze nejsou otestované), Javu a ke stažení zdrojového kódu git. Aplikaci jde spustit na platformách Linux a Mac.
+Backend aplikace je webová aplikace napsaná v~jazyce Ruby a frameworku Ruby on Rails. Je k~dispozici pod svobodnou licencí MIT. k~jejímu spuštění je nutná instalace jazyka Ruby verze alepoň 2.0 (nižší verze nejsou otestované) a Javy 7. Aplikaci lze spustit na platformách Linux a Mac.
 
 \section{Instalace aplikace}
 
-Zdrojový kód je volně dostupný na webu GitHubu\footnote{\url{https://github.com/hypertornado/diplomka}}. Stáhnou tedy lze příkazem
+Zdrojový kód je volně dostupný na webu GitHub\footnote{\url{https://github.com/hypertornado/diplomka}}, nebo na přiloženém DVD. Stáhnou aplikaci lze příkazem
 
 \begin{lstlisting}[language=bash]
 git clone https://github.com/hypertornado/diplomka
@@ -17,19 +17,19 @@ Tento příkaz vytvoří adresář diplomka. Závislosti aplikace nainstalujete 
 bundle install
 \end{lstlisting}
 
-Instalace může vyžadovat přístup administrátora. Dále je potřeba stáhnout knihovnu Elasticsearch\footnote{\url{http://www.elasticsearch.org/downloads/1-0-3/}} do adresáře bin/elasticsearch. Stačí verze 1.0 a vyšší.
+Instalace může vyžadovat přístup administrátora. Dále je nutné stáhnout knihovnu Elasticsearch\footnote{\url{http://www.elasticsearch.org/downloads/1-0-3/}} do~adresáře bin/elasticsearch. Stačí verze 1.0 a vyšší.
 
-Nyní je možné celý projekt spustit pomocí Bash příkazů. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale AJAXové dotazy skončí chybou. V databázi nejsou importována data.
+Nyní je možné celý projekt spustit pomocí Bash příkazů. Nejprve se spustí elasticsearch databáze pomocí příkazu \lstinline{rake es:start}, poté je možné spustit samotnou aplikaci příkazem \lstinline{rails server}. Po spuštění severu je uživatelské rozhraní dostupné ve~webovém prohlížeči na adrese \lstinline{http://localhost:3000}. Po načtení stránky se zobrazí uživatelské rozhraní, ale AJAXové dotazy skončí chybou. v~databázi nejsou importována data.
 
 \section{Vložení vstupních dat}
 
-Metadata k obrázkům a obrázky samotné jsou poskytovány firmou Profimedia a nejsou volně dostupné. Ke zprovoznění aplikace je nutné vložit CSV soubor \lstinline{profi-text-cleaned.csv} obsahující dataset Profimedie do adresáře \lstinline{data}. Dále potřebujeme do adresáře \lstinline{data} vložit soubor \lstinline{keyword-cleaned-phrase-export.csv} z bakalářské práce Jana Botorka, který obsahuje dataset Profimedie s detekovanými frázemi.
+Metadata k~obrázkům a obrázky samotné jsou poskytovány firmou Profimedia a nejsou volně dostupné. Ke zprovoznění aplikace je nutné vložit CSV soubor \lstinline{profi-text-cleaned.csv} obsahující dataset Profimedie do~adresáře \lstinline{data}. Dále potřebujeme do~adresáře \lstinline{data} vložit soubor \lstinline{keyword-cleaned-phrase-export.csv} z~bakalářské práce Jana Botorka, který obsahuje dataset Profimedie s detekovanými frázemi.
 
 
 \section{Překlad}
 \label{subsec:zprovozneni_preklad}
 
-Pro překlad použijeme metodu popsanou v Kapitole \ref{chap:preklad}. K překladu budeme potřebovat frázovou tabulku pro anglicko-český překlad. Použijeme tu, která je vydána s překladovým nástrojem Moses verze 2.1\footnote{\url{http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/}}.
+Pro překlad použijeme metodu popsanou v~Kapitole~\ref{chap:preklad}. k~překladu budeme potřebovat frázovou tabulku pro~anglicko-český překlad. Použijeme tu, která je vydána s překladovým nástrojem Moses verze 2.1\footnote{\url{http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/}}.
 
 Nyní můžeme použít příkaz
 
@@ -37,15 +37,15 @@ Nyní můžeme použít příkaz
 rake data:export_profimedia_words_for_translation
 \end{lstlisting}
 
-který vytvoří soubor \lstinline{word_list.txt} s $352\ 862$ slovy. Nyní je potřeba vytvořit soubor s překladem všech slov. Pro naší aplikaci jsme využili překladový nástroj Překladač Google. Při tak velkém objemu dat jsme byly nuceni použít přístup přes placené API, které společnost Google poskytuje. Překladové API jsme použili skrz překladový nástroj firmy Memsource. Tímto strojovým překladem jsme získali soubor \lstinline{word_list_translated_cs.txt} se všemi slovy z datasetu Profimedia přeloženými do češtiny. Příkazem
+který vytvoří soubor \lstinline{word_list.txt} s $352\ 862$ slovy. Nyní je potřeba vytvořit soubor s překladem všech slov. pro~naší aplikaci jsme využili překladový nástroj Překladač Google. Při tak velkém objemu dat jsme byly nuceni použít přístup přes placené API, které společnost Google poskytuje. Překladové API jsme použili skrz překladový nástroj firmy Memsource. Tímto strojovým překladem jsme získali soubor \lstinline{word_list_translated_cs.txt} se všemi slovy z~datasetu Profimedia přeloženými do~češtiny. Příkazem
 
 \begin{lstlisting}[language=bash]
 rake data:create_word_dictionary
 \end{lstlisting}
 
-můžeme seznam anglických a českých slov spárovat do jednoho souboru \lstinline{word_dictionary_en_cs.txt}.
+můžeme seznam anglických a českých slov spárovat do~jednoho souboru\\\lstinline{word_dictionary_en_cs.txt}.
 
-Kvůli lepší kvalitě překladu jsme se snažili přeložit i detekované fráze z datasetu Profimedie. Ze souboru \lstinline{keyword-cleaned-phrase-export.csv} se fráze exportují příkazem
+Kvůli lepší kvalitě překladu jsme se snažili přeložit i detekované fráze z~datasetu Profimedie. Ze souboru \lstinline{keyword-cleaned-phrase-export.csv} se fráze exportují příkazem
 
 \begin{lstlisting}[language=bash]
 rake data:export_profimedia_phrases_for_translation
@@ -57,26 +57,26 @@ do souboru \lstinline{phrases_list.txt}. Příkaz
 rake data:translate_phrases
 \end{lstlisting}
 
-pak tyto exportované fráze porovná s frázemi přítomnými v překladovém modelu Mosese. Fráze, které se v překladovém modelu nachází jsou pak i s překladem uloženy v souboru \lstinline{phrase_table_en_cs.txt}.
+pak tyto exportované fráze porovná s frázemi přítomnými v~překladovém modelu Mosese. Fráze, které se v~překladovém modelu nachází, jsou pak i s překladem uloženy v~souboru \lstinline{phrase_table_en_cs.txt}.
 
-Získali jsme tedy překladový slovník pro slova (\lstinline{word_dictionary_en_cs.txt}) i fráze (\lstinline{phrase_table_en_cs.txt}). Algoritmy, které tato data používají jsou implementovány v souboru \lstinline{language_tool.rb}.
+Získali jsme tedy překladový slovník pro~slova (\lstinline{word_dictionary_en_cs.txt}) i fráze (\lstinline{phrase_table_en_cs.txt}). Algoritmy, které tato data používají jsou implementovány v~souboru \lstinline{language_tool.rb}.
 
 \section{Jazykový korpus}
 \label{subsec:zprovozneni_korpus}
 
-Aplikace potřebuje jazykový korpus pro podporované jazyky ze dvou důvodů. Zaprvé je korpus potřeba pro správné fungování algoritmu TF-IDF popsaném v Kapitole \ref{chap:teorie}. Zadruhé je potřeba jazykový korpus pro získání nejfrekventovanějších trigramů jazyka. Tato data se pak využívají v algoritmu pro detekci jazyka, který je popsán v Kapitole \ref{chap:detekce_jazyka}.
+Aplikace potřebuje jazykový korpus pro~podporované jazyky ze dvou důvodů. Zaprvé je korpus potřeba pro~správné fungování algoritmu TF-IDF popsaném v~Kapitole~\ref{chap:teorie}. Zadruhé je potřeba jazykový korpus pro~získání nejfrekventovanějších trigramů jazyka. Tato data se pak využívají v~algoritmu pro~detekci jazyka, který je popsán v~Kapitole~\ref{chap:detekce}.
 
 
 
-Samotný dataset Profimedie se jako korpus pro naše účely nehodí. Struktura textů v datasetu neodpovídá běžnému textu a navíc je dataset pouze v angličtině. Jako korpus jsme použili data z Wikipedie. Ta jdou stáhnout jako databázový dump ve formátu XML a pod licencí Creative Commons. Stáhli jsme tedy soubory \lstinline{wiki_dump_cs.xml} a \lstinline{wiki_dump_en.xml}. Wikipedie nabízí pro převod z XML do obyčejného textu vlastní pythonovský skript \lstinline{lib/WikiExtractor.py}\cite{wikiextractor}. Pro extrakci dat z englického XML souboru lze použít příkaz
+Samotný dataset Profimedie se jako korpus pro~naše účely nehodí. Struktura textů v~datasetu neodpovídá běžnému textu a navíc je dataset pouze v~angličtině. Jako korpus jsme použili data z~Wikipedie. Ta je možné stáhnout jako databázový dump ve~formátu XML a pod licencí Creative Commons. Stáhli jsme tedy soubory \lstinline{wiki_dump_cs.xml} a \lstinline{wiki_dump_en.xml}. Wikipedie nabízí pro~převod z~XML do~obyčejného textu vlastní pythonovský skript \lstinline{lib/WikiExtractor.py}\cite{wikiextractor}. pro~extrakci dat z~anglického XML souboru lze použít příkaz
 
 \begin{lstlisting}
 rake wiki:extract_words_from_wiki en
 \end{lstlisting}
 
-který vytvoří adresářovou strukturu s textovými soubory. Není potřeba převést všechna data, pouze tolik, abychom dostali reprezentativní korpus. Pro angličtinu stačí převést zhruba $10\ 000$ článků, pro podobné množství českých dat je potřeba převést zhruba $20\ 000$ článků (údaj o exportovaných článcích je průběžně vypisován na konzoli).
+který vytvoří adresářovou strukturu s textovými soubory. Není potřeba převést všechna data, pouze tolik abychom dostali reprezentativní korpus. pro~angličtinu stačí převést zhruba $10\ 000$ článků, pro~podobné množství českých dat je potřeba převést zhruba $20\ 000$ článků (údaj o exportovaných článcích je průběžně vypisován na konzoli).
 
-Nyní je možné vytvořit frekvenční seznam slov z korpusu Wikipedie. Ve skutečnosti potřebujeme frekvenční seznam stemů slov. Ten získáme příkazem
+Nyní je možné vytvořit frekvenční seznam slov z~korpusu Wikipedie. ve~skutečnosti potřebujeme frekvenční seznam stemů slov. Ten získáme příkazem
 
 \begin{lstlisting}
 rake wiki:frequency_list_from_wiki
@@ -88,28 +88,28 @@ Nyní příkazem
 rake data:create_tf_df_list
 \end{lstlisting}
 
-získáme pro každý stem v Profimeda datasetu jejich celkovou četnost (TF) a četnost metadat obrázků, kde se stem nachází.
+získáme pro~každý stem v~Profimeda datasetu jejich celkovou četnost (TF) a četnost metadat obrázků, kde se stem nachází.
 
-Nakonec spárujeme frekvenční informace o stemech z Profimedia datasetu a korpusu Wikipedie příkazem
+Nakonec spárujeme frekvenční informace o stemech z~Profimedia datasetu a korpusu Wikipedie příkazem
 
 \begin{lstlisting}
 rake data:pair_profimedia_and_wiki_data
 \end{lstlisting}
 
-Získali jsme dva soubory --- \lstinline{paired_wiki_and_profimedia_cs.txt} pro češtinu a \lstinline{paired_wiki_and_profimedia_en.txt} pro angličtinu. Soubory obsahují tabulátorem odsazené statistiky četnosti pro všechny stemy v datasetu Profimedie.
+Získali jsme dva soubory --- \lstinline{paired_wiki_and_profimedia_cs.txt} pro~češtinu a \lstinline{paired_wiki_and_profimedia_en.txt} pro~angličtinu. Soubory obsahují tabulátorem odsazené statistiky četnosti pro~všechny stemy v~datasetu Profimedie.
 
-\section{Import dat do databáze}
+\section{Import dat do~databáze}
 \label{subsec:zprovozneni_import}
 
-Nyní máme připravená všechna data pro nahrání do databáze. Jako databáze nám slouží Elasticsearch, který musí být připojen na portu 9200. Pro práci s Elasticsearch se velmi hodí plugin elascticsearch-head, který umožňuje prohlížení databáze ve webovém prohlížeči.
+Nyní máme připravená všechna data pro~nahrání do~databáze. Jako databáze nám slouží Elasticsearch, který musí být připojen na portu 9200. pro~práci s~Elasticsearch se velmi hodí plugin elascticsearch-head, který umožňuje prohlížení databáze ve~webovém prohlížeči.
 
-Nejprve importujeme frekvenční data pro všechny stemy příkazem
+Nejprve importujeme frekvenční data pro~všechny stemy příkazem
 
 \begin{lstlisting}
 rake es:import_word_data
 \end{lstlisting}
 
-Pro každý z podporovaných jazyků takový import trvá zhruba jednu hodinu.
+Pro každý z~podporovaných jazyků takový import trvá zhruba jednu hodinu.
 
 Dále příkazem
 
@@ -117,37 +117,37 @@ Dále příkazem
 rake es:import_image_metadata
 \end{lstlisting}
 
-importujeme metadata pro všechny obrázky z datasetu Profimedia. Data jsou importována pro všechny podporované jazyky. Pro neanglické jazyky jsou použity na překlad slovníky slov a frází vytvořené v Sekci \label{subsec:zprovozneni_preklad}. Nahrání těchto dat do databáze může trvat několik hodin. Nahrávací skript zobrazuje odhad zbývajícího času.
+importujeme metadata pro~všechny obrázky z~datasetu Profimedia. Data jsou importována pro~všechny podporované jazyky. pro~neanglické jazyky jsou použity pro~překlad slovníky slov a frází vytvořené v~Sekci~\ref{subsec:zprovozneni_preklad}. Nahrání těchto dat do~databáze může trvat několik hodin. Nahrávací skript zobrazuje odhad zbývajícího času.
 
-\section{Data pro detekci jazyků}
+\section{Data pro~detekci jazyků}
 \label{subsec:zprovozneni_detekce}
 
-Algoritmus pro automatickou detekci jazyka, popsaný v Kapitole \ref{chap:detekce_jazyka} potřebuje ke své práci seznam nejfrekventovanějších trigramů pro každý jazyk. Tento seznam $300$ nefrekventovanějších slov pro každý jazyk získáme z korpusu Wikipedie příkazem
+Algoritmus pro~automatickou detekci jazyka, popsaný v~Kapitole~\ref{chap:detekce} potřebuje ke~své práci seznam nejfrekventovanějších trigramů pro~každý jazyk. Tento seznam $300$ nefrekventovanějších slov pro~každý jazyk získáme z~korpusu Wikipedie příkazem
 
 \begin{lstlisting}
 rake trigrams:extract_most_frequent_trigrams
 \end{lstlisting}
 
-Detekce jazyka probíhá ve frontendové části aplikace (viz Kapitola \cite{chap:frontend}). Příkaz
+Detekce jazyka probíhá ve~frontendové části aplikace (viz Kapitola~\ref{chap:frontend}). Příkaz
 
 \begin{lstlisting}
 rake trigrams:trigrams_to_javascript_classes
 \end{lstlisting}
 
-vytvoří ze seznamů nejfrekventovanějších seznamů javascriptovou třídu \lstinline{oo.diplomka.Languages.Data} v notaci Google Closure. Ta je uložena v souboru \lstinline{public/js/js/diplomka/languages/data.js}. Tuto třídu pak využívá frontend pro automatickou detekci jazyka vloženého textu.
+vytvoří ze seznamů nejfrekventovanějších seznamů javascriptovou třídu\\\lstinline{oo.diplomka.Languages.Data} v~notaci Google Closure. Ta je uložena v~souboru\\\lstinline{public/js/js/diplomka/languages/data.js}. Tuto třídu pak využívá frontend pro~automatickou detekci jazyka vloženého textu.
 
 \section{Vyhledávání podobných obrázků}
 \label{subsec:zprovozneni_podobne}
 
-Služba vyhledávání obrázků je nezávislá na zbytku aplikace. Princip jejího fungování je popsán v Kapitole \ref{chap:similar}. Zdrojový kód služby je v jazyce go a je dostupný na GitHubu\footnote{\url{https://github.com/hypertornado/similar_img_finder}}. Pro kompilaci služby je potřeba go alespoň verze 1.2. Příkaz \lstinline{go build} v adresáři se zdrojovými kódy služby zkompiluje program do souboru \lstinline{similar_img_finder}.
+Služba vyhledávání obrázků je nezávislá na zbytku aplikace. Princip jejího fungování je popsán v~Kapitole~\ref{chap:similar}. Zdrojový kód služby je v~jazyce go a je dostupný na GitHub\footnote{\url{https://github.com/hypertornado/similar_img_finder}}. pro~kompilaci služby je potřeba go alespoň verze 1.2. Příkaz \lstinline{go build} v~adresáři se zdrojovými kódy služby zkompiluje program do~souboru \lstinline{similar_img_finder}.
 
-Pro zprovoznění služby je nejprve nutné naimportovat data do databáze příkazem
+Pro zprovoznění služby je nejprve nutné naimportovat data do~databáze příkazem
 
 \begin{lstlisting}
   ./similar_img_finder -a import -n 1000000 -e 9200 -k 500 -f data.gz
 \end{lstlisting}
 
-Parametr \lstinline{-n} určuje, kolik dat se má naimportovat, parametr \lstinline{-e} určuje na kterém portu běží databáze Elasticsearch (můžeme použít stejnou instanci databáze na které běží hlavní aplikace), parametr \lstinline{-k} odpovídá hodnotě $K$ z Kapitoly \ref{chap:similar} a parametr \lstinline{-f} je cesta ke komprimovanému souboru s importovanými deskriptory.
+Parametr \lstinline{-n} určuje, kolik dat se má naimportovat, parametr \lstinline{-e} určuje na kterém portu běží databáze Elasticsearch (můžeme použít stejnou instanci databáze na které běží hlavní aplikace), parametr \lstinline{-k} odpovídá hodnotě $K$ z~Kapitoly~\ref{chap:similar} a parametr \lstinline{-f} je cesta ke komprimovanému souboru s importovanými deskriptory.
 
 Nyní můžeme spustit službu hledání podobných obrázků na portu $8585$ příkazem
 
@@ -155,23 +155,24 @@ Nyní můžeme spustit službu hledání podobných obrázků na portu $8585$ p�
   ./similar_img_finder -a server -p 8585 -l 100 -e 9200
 \end{lstlisting}
 
-Parametr \lstinline{-l} odpovídá hodnotě $L$ z Kapitoly \ref{chap:similar}.
+Parametr \lstinline{-l} odpovídá hodnotě $L$ z~Kapitoly~\ref{chap:similar}.
 
-Pokud nyní chceme získat id podobných obrázků k obrázku s id \uv{0000000003}, můžeme využít JSON HTTP API a získat výsledky na adrese \lstinline{localhost:8585/similar?id=0000000003}. Služba vrátí pole obsahující id podobných obrázků a míru $Similarity$ pro každý vrácený obrázek.
+Pokud nyní chceme získat id podobných obrázků k~obrázku s id \uv{0000000003}, můžeme využít JSON HTTP API a získat výsledky na adrese\\\lstinline{localhost:8585/similar?id=0000000003}. Služba vrátí pole obsahující id podobných obrázků a míru $Similarity$ pro~každý vrácený obrázek.
 
 \section{Podpora dalších jazyků}
+\label{subsec:zprovozneni_podpora}
 
-Popsaný postup vytvoří aplikaci, která funguje pro anglický a český vstupní text. Aplikace je ale navržena tak, aby rozšíření do dalších jazyků nebylo obtížné. Popíšeme postup pro přidání dalšího jazyka --- francouzštiny. Podle standardu ISO 639-1 je kód francouzštiny \uv{fr}. Upravíme tedy konstantní pole aplikace v souboru \lstinline{application.rb} --- do pole \lstinline{SUPPORTED_LANGUAGES} přidáme řetězec \uv{fr} a jako název jazyka přidáme do pole \lstinline{LANGUAGE_NAMES} řetězec \uv{french}.
+Popsaný postup vytvoří aplikaci, která funguje pro~anglický a český vstupní text. Aplikace je ale navržena tak, aby rozšíření do~dalších jazyků nebylo obtížné. Popíšeme postup pro~přidání dalšího jazyka --- francouzštiny. Podle standardu ISO 639-1 je kód francouzštiny \uv{fr}. Upravíme tedy konstantní pole aplikace v~souboru \lstinline{application.rb} --- do~pole \lstinline{SUPPORTED_LANGUAGES} přidáme řetězec \uv{fr} a jako název jazyka přidáme do~pole \lstinline{LANGUAGE_NAMES} řetězec \uv{french}.
 
-Pro každý přidaný jazyk potřebujeme implementovat stemmer. Pro podporu francouzského stemmeru budeme muset rozšířit metodu \lstinline{stem_word} v souboru \lstinline{language_tool.rb}. Pro francouzštinu je v Ruby volně dostupných několik knihoven pro převod slov na stemy. Dále ve stejné třídě můžeme pro nově přidaný jazyk rozšířit datovou strukturu \lstinline{@stopwords} o další stop-slova.
+Pro každý přidaný jazyk potřebujeme implementovat stemmer. pro~podporu francouzského stemmeru budeme muset rozšířit metodu \lstinline{stem_word} v~souboru \lstinline{language_tool.rb}. pro~francouzštinu je v~Ruby volně dostupných několik knihoven pro~převod slov na stemy. Dále ve~stejné třídě můžeme pro~nově přidaný jazyk rozšířit datovou strukturu \lstinline{@stopwords} o další stop-slova.
 
-Dále pro francouzštinu stáhneme dump Wikipedie jako soubor \lstinline{wiki_dump_fr.xml} a zopakujeme celý postup ze Sekcí \ref{subsec:zprovozneni_preklad}, \ref{subsec:zprovozneni_korpus}, \ref{subsec:zprovozneni_import} a \ref{subsec:zprovozneni_detekce} této kapitoly.
+Dále pro~francouzštinu stáhneme dump Wikipedie jako soubor\\\lstinline{wiki_dump_fr.xml} a zopakujeme celý postup ze Sekcí~\ref{subsec:zprovozneni_preklad},~\ref{subsec:zprovozneni_korpus},~\ref{subsec:zprovozneni_import} a~\ref{subsec:zprovozneni_detekce} této kapitoly.
 
-Podobnými kroky můžeme implementovat poměrně přímočaře i podporu pro další jazyky vstupních článků.
+Podobnými kroky můžeme implementovat poměrně přímočaře i podporu pro~další jazyky vstupních článků.
 
-\section{Demo aplikace ve virtuálním stroji}
+\section{Demo aplikace ve~virtuálním stroji}
 
-Na přiloženém DVD se nachází virtuální stroj s demoverzí aplikace. Demoverze z důvodů licence datasetu Profimedie a také omezené kapacitě DVD pracuje pouze s prvními 1000 obrázky v Datasetu. Podrobnosti o datech na přiloženém DVD obsahuje příloha 
+Na přiloženém DVD se nachází virtuální stroj s demoverzí aplikace. Demoverze z~důvodů licence datasetu Profimedie a také omezené kapacitě DVD pracuje pouze s prvními $1\ 000$ obrázky v~datasetu. Podrobnosti o datech na přiloženém DVD obsahuje příloha 
 
 
 

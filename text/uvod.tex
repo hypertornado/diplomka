@@ -1,37 +1,43 @@
 \chapter{Úvod}
-%\addcontentsline{toc}{chapter}{Úvod}
 
-Cílem diplomové práce je implementovat kompletní webovou aplikaci pro doporučování a vyhledávání ilustračních obrázků v textu. Vytořit takovou aplikaci přináší mnoho rozličných úkolů a problémů. Tato kapitola se bude snažit tyto problémy načrtnout. Další kapitola se bude jednotlivými problémy zabývat podrobně.
+Cílem diplomové práce je implementovat webovou aplikaci pro~doporučování ilustračních obrázků k~danému textu. Název aplikace je je \uv{Stock Photo Finder}. V~této práci ji budeme dále označovat slovem \uv{aplikace}. Vytvořit takovou aplikaci přináší mnoho rozličných úkolů a problémů.
 
 \section{Práce s daty}
+Vstupní data z~datasetu Profimedie obsahují více než 20 milionů anotací obrázků. Základním úkolem je být schopen takové množství dat nahrát do~databáze a v~tak velkých datech vyhledávat. Kapitola~\ref{chap:backend} rozebírá některé moderní programovací jazyky a databáze a jejich vhodnost pro~práci s velkými daty.
 
-Zadaná data obsahují 20 milionů anotací obrázků. Základním úkolem je být schopen takové množství dat vůbec nahrát do databáze a být schopný obsloužit mnoho požadavků za minutu. Bude zmíněn současný stav vývoje databázového software pro práci s velkými daty zejména s ohledem na snadnost hledání a škálovatelnost.
+\section{Vyhledávací algoritmy}
 
-\section{Extrakce klíčových slov}
+Klíčovou součástí aplikace je algoritmus pro~extrakci klíčových slov a algoritmus pro~vyhledávání v~datasetu Profimedie. Tyto algoritmy jsou popsané v~Kapitole~\ref{chap:teorie}. Praktická implementace algoritmů a proces získávání potřebných dat je popsán v~Kapitole~\ref{chap:implementace}.
 
-Extrakce klíčových slov je důležitý podobor NLP. V práci budou rozebrány algoritmy pro extrakci klíčových slov. Bude kladen zejména důraz na rychlost a nenáročnost na zdroje. Z uživatelských testovaní společnosti Google vychází, že rychlost načtení stránky je jedním z klíčových vlastností pro spokojenost uživatele. Klíčová slova budou mít v aplikaci dvě využití. Pokud uživatel zadá pouze text článku, extrahovaná klíčová slova se použijí na vyhledávání relevantních obrázků. Prvních několik klíčových slov bude navíc použita jako nápověda uživateli, ten pak může tato klíčová slova využít k exaktnímu omezení množiny klíčových slov.
 
-\section{Překlad do češtiny}
+\section{Překlad}
 
-Popisky klíčových slov jsou v angličtině. Tato práce řeší překlad množiny klíčových slov do češtiny. Kromě překladu je pro hledání také nutno implementovat algoritmus na stemming. Celá aplikace je navržena tak, aby případný další jazyk mohl být přidán co nejjednodušeji.
+Popisky klíčových slov jsou v~datasetu Profimedie v~anglickém jazyce. Cílem aplikace je umožnit vyhledávání doporučených ilustračních obrázků k~textu i pro~texty v~jiných jazycích, než je angličtina. Kapitola~\ref{chap:preklad} rozebírá překladové problémy z~teoretického i praktického hlediska. Sekce~\ref{subsec:zprovozneni_preklad} ukazuje praktickou při překladu do~češtiny. Sekce~\ref{subsec:zprovozneni_podpora} ukazuje postup pro~zprovoznění aplikace i v~dalších jazycích.
 
-\section{Detekce jazyka}
-
-Jednou z drobností, kterou ocení uživatel aplikace je detekce jazyka. Uživatel bude mít možnost zadat jazyk vstupního článku exaktně, ale aplikace bude také jazyk vstupního textu sama detekovat. Budou prozkoumány možnosti detekce jazyka. Opět se nejedná o nějakou klíčovou funkci aplikace. Výstup detekce bude moci být uživatelem měněn (podobně jako funguje Google Translate\footnote{https://translate.google.com/}), důraz bude tedy kladen na rychlost a jednoduchost.
 
 \section{Webová aplikace}
 
-Všechny předchozí komponenty se spojí v jedné webové aplikaci. Webový vývoj zažívá bouřlivý rozvoj. Na backendu jsou nové zejména způsoby práce s velkým množstvím dat v distribuovaném prostředí. Ve frontendové části probíhá rozvoj pomocí implementace nových technologií, známých pod hlavičkou HTML5, do moderních prohlížečů. Práce bude rozebírat všechny možnosti tvorby moderních webových aplikací.
+Výsledná aplikace je webovou aplikací. Kapitola~\ref{chap:backend} popisuje problémy při vývoji backendové části. Kapitola~\ref{chap:frontend} popisuje moderní technologie pro~vývoj frontendové části webových aplikací.
+
+
+\section{Vyhledávání podobných obrázků}
+
+Aplikace umožňuje kromě textového vyhledávání hledat ilustrační obrázky i podle vizuální podobnosti. Kapitola~\ref{chap:similar} popisuje algoritmy, které toto vyhledávání umožňují.
 
 \section{Testování}
 
-Aplikace bude otestována na několika úrovních. Extrakce klíčových slov bude otestována pomocí korpusu článků a klíčových slov. Bude vytvořena komplexní webová aplikace pro testování doporučených obrázků. Tato aplikace bude vydělena ze samotné webové aplikace a bude používána i nezávisle.
+Výsledky detekce algoritmu byly testovány na uživatelích. pro~testování byla vyvinuta speciální webová aplikace popsaná v~Kapitole~\ref{chap:rozhrani}. Samotné testování algoritmu a jeho výsledky jsou popsány v~Kapitole~\ref{chap:evaluace}.
+
+
+\section{Ostatní problémy}
+
+Při práci na aplikaci bylo řešeno množství drobnějších problémů. Kapitola~\ref{chap:stemmer} popisuje stemming a vlastní implementaci stemmeru pro~český jazyk. Kapitola~\ref{chap:detekce} popisuje algoritmus pro~automatickou detekci jazyka textu. Kapitola~\ref{chap:rozhrani} popisuje anotační rozhraní, které bylo vytvořeno pro~testování výsledků této aplikace.
 
 % \chapter{Zadání}
 
-% Většina zpravodajských serverů často opatřuje publikované články tzv. ilustračními snímky, jejichž úkolem je vizuálně dokreslovat obsah článku a upoutat na něj čtenářovu pozornost. Ilustrační snímky většinou pocházejí z rozsáhlých fotografických databází, jsou vybírány autory článku a s obsahem článku souvisejí jen relativně volně. Výběr ilustračních snímků probíhá nejčastěji na základě porovnávání klíčových slov specifikovaných autorem textu a popisků, kterými jsou obrázky v databázi opatřeny (typicky svými autory). 
+% Většina zpravodajských serverů často opatřuje publikované články tzv. ilustračními snímky, jejichž úkolem je vizuálně dokreslovat obsah článku a upoutat na něj čtenářovu pozornost. Ilustrační snímky většinou pocházejí z~rozsáhlých fotografických databází, jsou vybírány autory článku a s obsahem článku souvisejí jen relativně volně. Výběr ilustračních snímků probíhá nejčastěji na základě porovnávání klíčových slov specifikovaných autorem textu a popisků, kterými jsou obrázky v~databázi opatřeny (typicky svými autory). 
 
-% Proces výběru ilustračních snímků (dotazování ve fotografické databázi) je obtížný jednak pro samotný vyhledávací systém (hledání relevantních fotografií na základě uživatelských dotazů), jednak pro autory, kteří musí dotazy vytvářet. Konstrukce dotazů spočívá v několika krocích: uživatel nejdříve musí identifikovat ústřední téma (či témata) článku, které chce ilustrovat vhodnou fotografií, a ta potom popsat vhodnými klíčovými slovy, zvolit a zkombinovat je tak, aby vedla k nalezení vhodného obrázku. Tento proces by mohl být zjednodušen tím, že konstrukce dotazů pro vyhledávání bude prováděna automaticky pouze na základě textu článku. 
+% Proces výběru ilustračních snímků (dotazování ve~fotografické databázi) je obtížný jednak pro~samotný vyhledávací systém (hledání relevantních fotografií na základě uživatelských dotazů), jednak pro~autory, kteří musí dotazy vytvářet. Konstrukce dotazů spočívá v~několika krocích: uživatel nejdříve musí identifikovat ústřední téma (či témata) článku, které chce ilustrovat vhodnou fotografií, a ta potom popsat vhodnými klíčovými slovy, zvolit a zkombinovat je tak, aby vedla k~nalezení vhodného obrázku. Tento proces by mohl být zjednodušen tím, že konstrukce dotazů pro~vyhledávání bude prováděna automaticky pouze na základě textu článku. 
 
-% Cílem diplomové práce je navržení a implementace komfortní webové aplikace pro automatické navrhování ilustračních snímků na základě textu článku, bez nutnosti explicitně konstruovat vyhledávací dotazy. Součástí práce bude i uživatelská evaluace celého systému. Pro experimenty bude použita kolekce ilustračních snímků od společnosti Profimedia.
+% Cílem diplomové práce je navržení a implementace komfortní webové aplikace pro~automatické navrhování ilustračních snímků na základě textu článku, bez nutnosti explicitně konstruovat vyhledávací dotazy. Součástí práce bude i uživatelská evaluace celého systému. pro~experimenty bude použita kolekce ilustračních snímků od společnosti Profimedia.
 

@@ -1,6 +1,6 @@
 %%% Hlavní soubor. Zde se definují základní parametry a odkazuje se na ostatní části. %%%
 
-%% Verze pro jednostranný tisk:
+%% Verze pro~jednostranný tisk:
 % Okraje: levý 40mm, pravý 25mm, horní a dolní 25mm
 % (ale pozor, LaTeX si sám přidává 1in)
 \documentclass[12pt,a4paper]{report}
@@ -45,10 +45,10 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{url}
 
-%% Balíček hyperref, kterým jdou vyrábět klikací odkazy v PDF,
-%% ale hlavně ho používáme k uložení metadat do PDF (včetně obsahu).
+%% Balíček hyperref, kterým jdou vyrábět klikací odkazy v~PDF,
+%% ale hlavně ho používáme k~uložení metadat do~PDF (včetně obsahu).
 %% POZOR, nezapomeňte vyplnit jméno práce a autora.
-\usepackage[ps2pdf,unicode]{hyperref}   % Musí být za všemi ostatními balíčky
+\usepackage[ps2pdf,unicode]{hyperref}   % Musí být za~všemi ostatními balíčky
 \hypersetup{pdftitle=Název práce}
 \hypersetup{pdfauthor=Bc. Ondřej Odcházel}
 
@@ -71,7 +71,7 @@
 }}
 \makeatother
 
-% Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v obsahu.
+% Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v~obsahu.
 \def\chapwithtoc#1{
 \chapter*{#1}
 \addcontentsline{toc}{chapter}{#1}
@@ -93,11 +93,14 @@
    rulecolor=\color{black},
    framesep=10pt,
    basicstyle=\ttfamily,
-   aboveskip=10pt
+   aboveskip=10pt,
+   columns=flexible,texcl
 }
 
+
+%\lstinline{breaklines=true,breakatwhitespace=true}
+
 \renewcommand\lstlistingname{Ukázka}
-%\lstinline{breaklines=true, breakatwhitespace=true}
 
 %\definecolor{codebg}{HTML}{DFDED4}
 
@@ -146,7 +149,7 @@
 
 \large
 
-Univerzita Karlova v Praze
+Univerzita Karlova v~Praze
 
 \medskip
 
@@ -205,11 +208,11 @@ Praha 2014
 \openright
 
 \noindent
-Děkuji svému vedoucímu, RNDr. Pavlovi Pecinovi, Ph.D. za pomoc a cenné připomínky v průběhu celého vývoje projektu. Také bych rád poděkoval své rodině a přítelkyni, hlavně za velkou trpělivost.
+Děkuji svému vedoucímu, RNDr. Pavlovi Pecinovi, Ph.D. za~pomoc a cenné připomínky v~průběhu celého vývoje projektu. Také bych rád poděkoval své rodině, přítelkyni a kamarádům za~pomoc a trpělivost.
 
 \newpage
 
-%%% Strana s čestným prohlášením k diplomové práci
+%%% Strana s čestným prohlášením k~diplomové práci
 
 \vglue 0pt plus 1fill
 
@@ -220,7 +223,7 @@ s~použitím citovaných pramenů, literatury a dalších odborných zdrojů.
 \medskip\noindent
 Beru na~vědomí, že se na moji práci vztahují práva a povinnosti vyplývající
 ze zákona č. 121/2000 Sb., autorského zákona v~platném znění, zejména skutečnost,
-že Univerzita Karlova v Praze má právo na~uzavření licenční smlouvy o~užití této
+že Univerzita Karlova v~Praze má právo na~uzavření licenční smlouvy o~užití této
 práce jako školního díla podle §60 odst. 1 autorského zákona.
 
 \vspace{10mm}
@@ -256,7 +259,8 @@ RNDr. Pavel Pecina, Ph.D., Ústav formální a aplikované lingvistiky
 % dle Organizační struktury MFF UK, případně plný název pracoviště mimo MFF UK
 
 Abstrakt:
-% abstrakt v rozsahu 80-200 slov; nejedná se však o opis zadání diplomové práce
+% abstrakt v~rozsahu 80-200 slov; nejedná se však o opis zadání diplomové práce
+Cílem této práce je implementace webové aplikace určené k~doporučování ilustračních obrázků. Aplikace dostane na vstupu novinový článek v~češtině nebo angličtině a na základě textu sama doporučí vhodné ilustrační obrázky. Implementovaná aplikace také vyhledává obrázky dle vizuální podobnosti. Práce se věnuje teoretickým aspektům extrakce klíčových slov, nebo detekce jazyka textu. Dále jsou rozebrány některé možnosti efektivního hledání podobných vektorů, které jsou využity v~komponentě pro~vyhledávání vizuálně podobných obrázků. Práce dále popisuje moderní možnosti vývoje webového frontendu i backendu. Algoritmus doporučování obrázků je v~rámci práce otestován na uživatelích. 
 
 Klíčová slova:
 % 3 až 5 klíčových slov
@@ -267,7 +271,7 @@ vyhledávání obrazových informací
 \setlength\parskip{5mm}
 
 Title:
-% přesný překlad názvu práce v angličtině
+% přesný překlad názvu práce v~angličtině
 Automatic suggestion of illustrative images
 
 Author:
@@ -275,19 +279,20 @@ Bc. Ondřej Odcházel
 
 Department:
 Institute of Formal and Applied Linguistics
-% dle Organizační struktury MFF UK v angličtině
+% dle Organizační struktury MFF UK v~angličtině
 
 Supervisor:
 RNDr. Pavel Pecina, Ph.D., Institute of Formal and Applied Linguistics
 % dle Organizační struktury MFF UK, případně plný název pracoviště
-% mimo MFF UK v angličtině
+% mimo MFF UK v~angličtině
 
 Abstract:
-% abstrakt v rozsahu 80-200 slov v angličtině; nejedná se však o překlad
+% abstrakt v~rozsahu 80-200 slov v~angličtině; nejedná se však o překlad
 % zadání diplomové práce
+The objective of this thesis is to implement a web application designed for recommendation of stock photos. The application gets the input from newspaper articles in Czech or English and, based on the text itself, suggests appropriate stock photos. The implemented application also searches images according to visual similarity. The thesis deals with theoretical aspects of keywords extraction and language of text detection. Further it analyzes possibilities of efficient search for similar vectors that are used in the search component for visually similar images. It also describes the possibilities in development of modern web frontend and backend. The quality of algorithm for recommending stock photos is tested on users.
 
 Keywords:
-% 3 až 5 klíčových slov v angličtině
+% 3 až 5 klíčových slov v~angličtině
 information retrieval, image retrieval
 
 \vss}
@@ -303,7 +308,7 @@ information retrieval, image retrieval
 \setcounter{page}{1}
 \tableofcontents
 
-%%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
+%%% Jednotlivé kapitoly práce jsou pro~přehlednost uloženy v~samostatných souborech
 \include{uvod}
 \include{data}
 \include{teorie}
@@ -327,20 +332,21 @@ information retrieval, image retrieval
 %%% Seznam použité literatury
 \include{literatura}
 
-%%% Tabulky v diplomové práci, existují-li.
-\chapwithtoc{Seznam tabulek}
+%%% Tabulky v~diplomové práci, existují-li.
+%\chapwithtoc{Seznam tabulek}
+\listoftables
 
-%%% Použité zkratky v diplomové práci, existují-li, včetně jejich vysvětlení.
-\chapwithtoc{Seznam použitých zkratek}
+%%% Použité zkratky v~diplomové práci, existují-li, včetně jejich vysvětlení.
+%\chapwithtoc{Seznam použitých zkratek}
 
-%%% Přílohy k diplomové práci, existují-li (různé dodatky jako výpisy programů,
-%%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního
+
+
+
+%%% Přílohy k~diplomové práci, existují-li (různé dodatky jako výpisy programů,
+%%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z~vlastního
 %%% textu práce. Přílohy se číslují.
-\chapwithtoc{Příloha 1}
-\label{app:testing}
-\lstinputlisting[]{annotation_results.txt}
 
-
+\include{priloha_1}
 \include{priloha_dvd}
 
 

@@ -2,23 +2,23 @@
 
 \section{Frontend: AJAXová aplikace na zobrazování obrázků}
 
-Jaké jsou dnešní možnosti vývoje frontendu. Single page aplikace. Možnosti moderních prohlížečů. JavaScriptové knihovny. Proč to nedělám v jQuery, ale používám Google Closure. Google Closure Library, Templates, Compiler.
+Jaké jsou dnešní možnosti vývoje frontendu. Single page aplikace. Možnosti moderních prohlížečů. JavaScriptové knihovny. Proč to nedělám v~jQuery, ale používám Google Closure. Google Closure Library, Templates, Compiler.
 
 Návrh rozhraní bez jediného tlačítka. Responzivní webdesign.
 
 \section{Anotační rozhraní}
 
-Jak lze v Ruby on Rails vyrobit jednoduše anotační rozhraní s uživateli a s ukládáním do databáze.
+Jak lze v~Ruby on Rails vyrobit jednoduše anotační rozhraní s uživateli a s ukládáním do~databáze.
 
-\section{Návod k použití}
+\section{Návod k~použití}
 
 Popis prvků. Screenshoty aplikace.
 
 \section{Preklad}
 
-Dva postupy jak pouzit anglicka data v jinych jazycich. Bud je mozne prelozit vzdy zadany cesky dotaz do ciloveho jazyka. Nebo je mozne prelozit vsechna data u fotek. Pak je nutne pouzit pro kazdy jazyk nejaky lemmatizer, nebo stemmer. Pro cestinu jsme nakonec zvolili druhou variantu.
+Dva postupy jak pouzit anglicka data v~jinych jazycich. Bud je mozne prelozit vzdy zadany cesky dotaz do~ciloveho jazyka. Nebo je mozne prelozit vsechna data u fotek. Pak je nutne pouzit pro~kazdy jazyk nejaky lemmatizer, nebo stemmer. pro~cestinu jsme nakonec zvolili druhou variantu.
 
-Jak prelozit 20 milionu popisku? Jednou moznosti je preklad slovo od slova. Pouzit pouze slovnik. Preklad pomoci google je drahy. Stalo to zhruba 1300Kc. Preklad celych frazi by byl lepsi (automaticky objevi fraze), ale pomoci google velmi drahy. Rozchodil jsem tedy prekladovy nastroj Moses s modelem prilozenym ve verzi 2.1 (http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/). Po nekolikahodinovem nacitani se model nacetl (i kdyz mam SSD disk). Preklady v prolozenem modelu jsou velmi pomale (jeden segment trva priblizne 3s). Preklad neni idealni a mam spustu |UNK slov.
+Jak prelozit 20 milionu popisku? Jednou moznosti je preklad slovo od slova. Pouzit pouze slovnik. Preklad pomoci google je drahy. Stalo to zhruba 1300Kc. Preklad celych frazi by byl lepsi (automaticky objevi fraze), ale pomoci google velmi drahy. Rozchodil jsem tedy prekladovy nastroj Moses s modelem prilozenym ve~verzi 2.1 (http://www.statmt.org/moses/RELEASE-2.1/models/en-cs/model/). Po nekolikahodinovem nacitani se model nacetl (i kdyz mam SSD disk). Preklady v~prolozenem modelu jsou velmi pomale (jeden segment trva priblizne 3s). Preklad neni idealni a mam spustu |UNK slov.
 
 Google:
 %"0000000003", "malé dítě s úsměvem", "", "dítě děti dítě děti kojenci děti dětství jednotlivé plochy těla nahá nake výrazy obličeje, úsměvu, usměvavý sledování sledování kterým zábava zábavné zábavní pobavený pobavit laškoval frolicing hrát wantoning otevřený" ^ M
@@ -43,7 +43,7 @@ Google Translate:
 % export frazi bez omezeni:
 %  wc phrases\_list.txt 
 %  1143513 5151831 37131575 phrases_list.txt
-% - take se neda prelozit rozumne v google
+% - take se neda prelozit rozumne v~google
 
 % omezeni na maximalni delku 4 slova:
 %  wc phrases_list.txt
@@ -55,29 +55,29 @@ Google Translate:
 
 
 % detektor jazyka:
-% trigramy, nefunguje na frazi "hello world", chce to dlouha data, ale pro bezne clanky to funguje dobře
+% trigramy, nefunguje na frazi "hello world", chce to dlouha data, ale pro~bezne clanky to funguje dobře
 
 % \section{Poznamky}
 
-% Pouziji data z wiki dumpu.
+% Pouziji data z~wiki dumpu.
 
 
 % Cesky dump:
 % http://dumps.wikimedia.org/cswiki/20140612/ a cswiki-20140612-pages-articles-multistream.xml.bz2
 % /data/wiki_dump_cs.xml
 % rake es:extract_words_from_wiki[cs]
-% extrakce do id 50000 > 60 MB textu
+% extrakce do~id 50000 > 60 MB textu
 % cestina obsahuje na zacatku hodne kratkych vygenerovanych clanku typu >1. leden<
 
 % Anglicky dump:
-% torrent z piratebay http://thepiratebay.se/torrent/8114722/Wikipedia_2013_English_DUMP
+% torrent z~piratebay http://thepiratebay.se/torrent/8114722/Wikipedia_2013_English_DUMP
 % /data/wiki_dump_en.xml
 % rake es:extract_words_from_wiki[en]
-% extrakce do id 10000 > 70 MB textu
+% extrakce do~id 10000 > 70 MB textu
 
 % application.rb obsahuje konstanty aplikace
 
-% vyrobim nejcastejsi trigramy pro cestinu a anglictinu z wiki dat pomoci:
+% vyrobim nejcastejsi trigramy pro~cestinu a anglictinu z~wiki dat pomoci:
 % rake es:extract_most_frequent_trigrams
 
 % Language data jsem stahnul z:

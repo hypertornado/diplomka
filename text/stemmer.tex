@@ -1,25 +1,25 @@
 \chapter{Stemmer}
 \label{chap:stemmer}
 
-Důležitou vlastností systémů na vyhledávání v textu je prohledávání ve více tvarech hledaného slova. Pokud uživatel hledá slovo \uv{praha}, ve většině případů očekává, že se mu zobrazí i výsledky obsahující slovo \uv{praze}. Je tedy potřeba mít nějaký algoritmus, který k sobě slova \uv{praha} a \uv{praze} přiřadí.
+Důležitou vlastností systémů na vyhledávání v~textu je prohledávání ve~více tvarech hledaného slova. Pokud uživatel hledá slovo \uv{praha}, ve~většině případů očekává, že se mu zobrazí i výsledky obsahující slovo \uv{praze}. Je tedy potřeba mít nějaký algoritmus, který k~sobě slova \uv{praha} a \uv{praze} přiřadí.
 
-První možností je použít lemmatizér. Úkolem lemmatizéru je ke každému slovu přiřadit jeho základní tvar. U podstatných jmen je to většinou první pád jednotného čísla (\uv{praha}), u sloves infinitiv.
+První možností je použít lemmatizér\cite{manning}. Úkolem lemmatizéru je ke každému slovu přiřadit jeho základní tvar. U podstatných jmen je to většinou první pád jednotného čísla (\uv{praha}), u sloves infinitiv.
 
-Alternativou lemmatizátoru může být stemmer. Stemmer nemusí, na rozdíl od lemmatizéru, nemusí vrátit regulérní slovo jazyka. Například pro slova \uv{praha} a \uv{praze} může stemmer vrátit slovo \uv{prah}. Výhodou stemmeru oproti lemmatizéru je, že většinou používá pouze jednoduché heuristiky. Je tedy často rychlejší a méně náročný na zdroje než lemmatizér. Ve vyhledávacích aplikacích je stemmer dostačující.
+Alternativou lemmatizátoru může být stemmer. Stemmer nemusí, na rozdíl od lemmatizéru, nemusí vrátit regulérní slovo jazyka. Například pro~slova \uv{praha} a \uv{praze} může stemmer vrátit slovo \uv{prah}. Výhodou stemmeru oproti lemmatizéru je, že většinou používá pouze jednoduché heuristiky. Je tedy často rychlejší a méně náročný na zdroje než lemmatizér. ve~vyhledávacích aplikacích je stemmer dostačující.
 
-Pro angličtinu je nejznámějším stemmerem pro angličtinu je Porterův stemmer\cite{porter80} popsaný Martinem Porterem již v roce 1980. Kromě oficiální implementace existují porty do různých jazyků včetně Ruby. Aplikace využívá implementaci z Ruby Gemu \uv{stemmify}\footnote{\url{https://rubygems.org/gems/stemmify}} v licenci MIT.
+Pro angličtinu je nejznámějším stemmerem pro~angličtinu je Porterův stemmer\cite{porter80} popsaný Martinem Porterem již v~roce 1980. Kromě oficiální implementace existují porty do~různých jazyků včetně Ruby\cite{ruby}. Aplikace využívá implementaci z~Ruby Gemu \uv{stemmify}\footnote{\url{https://rubygems.org/gems/stemmify}} v~licenci MIT\footnote{\url{http://opensource.org/licenses/MIT}}.
 
 
 \section{Český stemmer}
-Pro jazyky jako je čeština, která má bohatší morfologii než angličtina, je tvorba stemmeru náročnější. Testovali jsme několik implementací českých stemmerů. Jako nejkvalitnější byla nakonec vybrána implementace českého stemmeru v knihovně Lucene. Tuto implementaci využívá i Elasticsearch.
+Pro jazyky jako je čeština, která má bohatší morfologii než angličtina, je tvorba stemmeru náročnější. Testovali jsme několik implementací českých stemmerů. Jako nejkvalitnější byla nakonec vybrána implementace českého stemmeru v~knihovně Lucene\cite{lucene}. Tuto implementaci využívá i Elasticsearch\cite{elasticsearch}.
 
-V rámci této práce byl portován soubor \lstinline{CzechStemmer.java} ze zdrojového kódu knihovny Lucene do jazyka Ruby. Výsledkem je Ruby Gem pod licencí MIT, který lze použít nezávisle na zbytku aplikace. Instaluje se příkazem
+V rámci této práce byl portován soubor \lstinline{CzechStemmer.java} ze zdrojového kódu knihovny Lucene do~jazyka Ruby. Výsledkem je Ruby Gem\footnote{\url{https://rubygems.org/gems/czech-stemmer}} pod licencí MIT, který lze použít nezávisle na zbytku aplikace. Instaluje se příkazem
 
 \begin{lstlisting}
 gem install czech-stemmer
 \end{lstlisting}
 
-Knihovna obsahuje pouze jednu třídu CzechStemmer s funkcí stem, která přijímá i vrací řetězec:
+Knihovna obsahuje pouze jednu třídu \lstinline{CzechStemmer} s funkcí \lstinline{stem}, která přijímá i vrací řetězec:
 
 \begin{lstlisting}[language=ruby]
 require 'czech-stemmer'

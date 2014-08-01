@@ -1,4 +1,29 @@
 \chapwithtoc{Příloha 2}
 \label{app:priloha_dvd}
 
-Tato příloha obsahuje informace o datech na přiloženém DVD.
+Tato příloha obsahuje informace o datech na přiloženém DVD. Přiložené DVD obsahuje dva soubory komprimované formátem ZIP --- \lstinline{zdrojove_kody.zip} a \lstinline{demo.vdi.zip}.
+
+\section{Zdrojové kódy}
+
+Po rozbalení souboru \lstinline{zdrojove_kody.zip} získáme čtyři adresáře obsahující zdrojové soubory. Adresář \lstinline{czech-stemmer} je knihovna jazyka Ruby (Gem) pro~stemmování českých slov popsané v~Kapitole~\ref{chap:stemmer}. Adresář \lstinline{similar_img_finder} obsahuje zdrojové kódy služby pro~vyhledávání podpobných obrázků. Adresář\\\lstinline{stock_photo_finder} obsahuje aplikaci se všemi pomocnými skripty. Adresář \lstinline{cemi_anotace} obsahuje zdrojové kódy k~webové aplikaci anotačního rozhraní popsaném v~Kapitole~\ref{chap:rozhrani}.
+
+\section{Demo}
+
+Po rozbalení souboru \lstinline{demo.vdi.zip} získáme soubor \lstinline{diplomka.vdi}, což je virtuální stroj s operačním systémem Ubuntu 14.04 LTS\footnote{\url{http://www.ubuntu.com/}}. Tento stroj lze spustit například programem VirtualBox\footnote{\url{https://www.virtualbox.org/wiki/Downloads}}.
+
+Na stroj se lze přihlásit s uživatelským jménem \uv{odchazel} a heslem \uv{odchazel}. pro~nastartování dema aplikace je nutné mít najednou spuštěné Bash scripty:
+
+\begin{lstlisting}[language=bash]
+bash start_elasticsearch.bash #spusti databazi elasticsearch
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash]
+bash start_app.bash #spusti webovou aplikaci
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash]
+bash start_similar.bash #spusti sluzbu pro~doporucovani podobnych obrazku
+\end{lstlisting}
+
+
+Nyni lze ve~webovém prohlížeči otevřít aplikaci na adrese \lstinline{http://localhost:3000}. Demo obsahuje pouze prvních $1 000$ obrázků z~datasetu Profimedia. pro~získání alespoň minimálních výsledků je dobré použít texty s klíčovými slovy \uv{smile}, nebo \uv{children}.
