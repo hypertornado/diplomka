@@ -26,12 +26,6 @@ sudo apt-get install nginx-extras passenger
 
 #Edit /etc/nginx/nginx.conf and uncomment passenger_root and passenger_ruby
 
-#Stop apache2 if necessary
-sudo service apache2 stop
-
-#Restart Nginx
-sudo service nginx restart
-
 #install Ruby with RVM https://rvm.io/rvm/install
 sudo apt-get install curl
 gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
@@ -42,15 +36,30 @@ curl -sSL https://get.rvm.io | bash -s stable --rails
 sudo apt-get install git
 git clone https://github.com/hypertornado/diplomka.git stock_photo_finder
 cd stock_photo_finder
-gem install sqlite3
 bundle install
 
-#nginx configuration
+RAILS_ENV=production bundle exec rake db:migrate
+
+#get rvm ruby path for nginx
+which passenger-config
+/usr/bin/passenger-config --ruby-command
+#> To use in Nginx : passenger_ruby /home/odchazel/.rvm/gems/ruby-2.2.0/wrappers/ruby
+
+#nginx configuration (delete content of sites-enabled)
 server {
         listen 80 default_server;
         server_name  _;
         passenger_enabled on;
         root /webs/stock_photo_finder/public;
 }
+
+passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
+passenger_ruby /home/odchazel/.rvm/gems/ruby-2.2.0/wrappers/ruby
+
+#Stop apache2 if necessary
+sudo service apache2 stop
+
+#restart nginx
+sudo service nginx restart
 
 ```
