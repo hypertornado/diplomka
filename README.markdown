@@ -62,4 +62,18 @@ sudo service apache2 stop
 #restart nginx
 sudo service nginx restart
 
+#download elasticsearch-1.4.4 into /webs/stock_photo_finder/bin
+
+#start elasticsearch
+nohup /webs/stock_photo_finder/bin/elasticsearch-1.4.4/bin/elasticsearch &
+
+#import data
+bundle exec rake es:import_word_data
+bundle exec rake es:import_image_metadata
+
+#thats all
+#server sould be running at http://quest.ms.mff.cuni.cz:3380/
+
+
 ```
+
