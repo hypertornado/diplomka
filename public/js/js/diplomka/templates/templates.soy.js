@@ -36,7 +36,7 @@ oo.diplomka.templates.skeleton = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 oo.diplomka.templates.imageDetails = function(opt_data, opt_ignored) {
-  return '<div class="img-info" id="img-info"><div id="img-info-meta"><h3><small>' + soy.$$escapeHtml(opt_data.id) + '</small></h3></div><a target="_blank" class="btn btn-default" href="http://www.profimedia.cz/image/detail/' + soy.$$escapeHtml(opt_data.id) + '">Detail na Profimedia.cz</a><a href="#" class="btn btn-default" id="close-img-window">Zavřít</a></div><div class="img"><img src="http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(opt_data.id) + '"></div><div class="img-similar" id="img-similar"></div>';
+  return '<div class="img-info" id="img-info"><div id="img-info-meta"><h3><small>' + soy.$$escapeHtml(opt_data.id) + '</small></h3></div><a target="_blank" class="btn btn-default" href="http://www.profimedia.cz/' + soy.$$escapeHtml(opt_data.id) + '">Detail na Profimedia.cz</a><a href="#" class="btn btn-default" id="close-img-window">Zavřít</a></div><div class="img"><img src="http://mufin.fi.muni.cz/profimedia/bigImages/' + soy.$$escapeHtml(opt_data.id) + '"></div><div class="img-similar" id="img-similar"></div>';
 };
 
 
